@@ -15,4 +15,4 @@ async def read_root():
 
 if __name__ == "__main__":
     # Keyword argument [ reload = True ] ONLY IN DEBUGGING
-    uvicorn.run("backend.app.api:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("api.main:app", host="0.0.0.0", port=8000, reload=True)
