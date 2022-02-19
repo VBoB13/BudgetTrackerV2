@@ -24,3 +24,6 @@ archive.zip
 # vim temporary files
 *~
 .*.sw?
+
+# Personal
+/db/__init__.py
