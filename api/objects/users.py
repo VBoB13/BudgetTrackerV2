@@ -1,4 +1,6 @@
-from typing import AnyStr
+from typing import AnyStr, Dict
+
+from api.db.controller import query_db
 from ..Utils.exceptions import UsersError
 
 class User(object):
@@ -27,6 +29,11 @@ class User(object):
     def __str__(self):
         return "{}({})".format(self.username, self.name)
 
+    def __iter__(self) -> Dict:
+        yield "username", self.username
+        yield "name", self.name
+        yield "email", self.email
+
     def register(self) -> AnyStr:
         sql = None
         if self.username and self.password:
@@ -42,8 +49,20 @@ class User(object):
             else:
                 sql = sql.replace('[cols]', '')
                 sql = sql.replace('[vals]', '')
+            return sql
         else:
             raise UsersError("Could not properly set attributes into SQL query!")
 
+    def login(self) -> AnyStr:
+        """
+        Builds SQL query to get a user by the username and password provided.
+        """
+        sql = None
+        if self.username and self.password:
+            sql = """
+                SELECT username, name, email FROM "USERS" WHERE username='{}' AND password='{}' LIMIT 1
+            """.format(self.username, self.password)
+        else:
+            raise UsersError("Cannot login without username and/or password!")
         return sql
 

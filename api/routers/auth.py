@@ -26,9 +26,23 @@ async def register(
         raise HTTPException(500, "Could not register user!") from err
     else:
         if results == True:
-            return {
-                "username": user.username,
-                "name": user.name,
-                "email": user.email
-            }
+            return dict(user)
         raise HTTPException(500, "Something went wront when trying to register user!")
+
+@router.post("/login", response_model=UserOut)
+async def login(
+    username: str = Form(..., title="Username.", description="The username with which you registered."),
+    password: str = Form(..., title="Password.", description="The password with which you registered.")
+):
+    user = User(username=username, password=encrypt_password(password))
+    sql = user.login()
+    try:
+        results = query_db(sql)
+    except ControllerError as err:
+        raise HTTPException(500, "SQL Error! Could not login user!")
+    else:
+        user.name = results[0][1]
+        user.email = results[0][2]
+    
+    return dict(user)
+    
