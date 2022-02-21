@@ -27,3 +27,4 @@ archive.zip
 
 # Personal
 /db/__init__.py
+db/
