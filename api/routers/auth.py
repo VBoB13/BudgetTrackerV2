@@ -39,13 +39,14 @@ async def register(
     sql = user.register()
     try:
         results = query_db(sql, True)
+        if results == True:
+            sql = user.get_user_by_username()
+            results = query_db(sql)
+            user.id = results[0][0]
     except ControllerError as err:
         raise HTTPException(500, "Could not register user!") from err
     else:
-        if results == True:
-            return dict(user)
-        raise HTTPException(
-            500, "Something went wront when trying to register user!")
+        return dict(user)
 
 
 @router.post("/login", response_model=UserOut)
