@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from ..objects.categories import Category
-from ..typing.models import CategoryOut, CategoriesOut
+from ..typing.models import CategoriesOut, CategoryIn
 from ..db.controller import query_db, ControllerError
 
 router = APIRouter(
@@ -21,3 +21,16 @@ async def get_all_categories():
         output_list.append(dict(Category(category)))
 
     return {"categories": output_list}
+
+
+@router.post("/add", description="Add a category.")
+async def add_category(category: CategoryIn):
+    sql = Category.add_category(category.name, category.color)
+    try:
+        results = query_db(sql, True)
+        if results:
+            return {
+                "message": "Success!"
+            }
+    except Exception as err:
+        raise HTTPException(500, str(err))

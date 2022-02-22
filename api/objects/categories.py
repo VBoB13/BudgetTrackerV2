@@ -1,4 +1,4 @@
-from typing import AnyStr, List, Dict
+from typing import AnyStr
 
 from ..Utils.exceptions import CategoriesError
 
@@ -10,9 +10,9 @@ class Category(object):
         self.color = None
 
         if row:
-            self.name = row[0]
-            self.color = row[1]
-            self.id = int(row[2])
+            self.id = int(row[0])
+            self.name = row[1]
+            self.color = row[2]
 
         if kwargs.pop("id", None):
             try:
@@ -37,3 +37,12 @@ class Category(object):
         Returns a SQL that gets all categories from the DB.
         """
         return 'SELECT * FROM "CATEGORIES"'
+
+    @staticmethod
+    def add_category(name: str, color: str):
+        """
+        Returns a SQL query string that inserts a new category into DB.
+        """
+        return """
+            INSERT INTO "CATEGORIES" (name, color) VALUES ('{}', '{}')
+        """.format(name, color)

@@ -18,6 +18,11 @@ class UserLogin(BaseModel):
     password: AnyStr
 
 
+class CategoryIn(BaseModel):
+    name: AnyStr
+    color: AnyStr
+
+
 class CategoryOut(BaseModel):
     id: int
     name: AnyStr
