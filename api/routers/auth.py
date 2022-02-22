@@ -62,7 +62,9 @@ async def login(
     except ControllerError as err:
         raise HTTPException(500, "SQL Error! Could not login user!")
     else:
-        user.name = results[0][1]
-        user.email = results[0][2]
+        user.id = results[0][0]
+        user.username = results[0][1]
+        user.name = results[0][2]
+        user.email = results[0][3]
 
     return dict(user)
