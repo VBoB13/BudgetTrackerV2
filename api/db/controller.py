@@ -10,7 +10,7 @@ connection_str = " ".join('{}={}'.format(key, value)
                           for key, value in budtra_conn.items())
 
 
-def query_db(sql: str, insert=False) -> List[Tuple] or bool:
+def query_db(sql: str, insert=False) -> List[Tuple] or Tuple or bool:
     results = None
     conn = psycopg2.connect(connection_str)
     try:

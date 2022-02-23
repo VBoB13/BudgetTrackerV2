@@ -22,6 +22,12 @@ class StoresError(Exception):
     """
 
 
+class TransactionsError(Exception):
+    """
+    Error raised by the api.objects.transactions module.
+    """
+
+
 class AuthError(Exception):
     """
     Error raised by the api.routers.auth module.

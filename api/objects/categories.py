@@ -1,5 +1,3 @@
-from typing import AnyStr
-
 from ..Utils.exceptions import CategoriesError
 
 
@@ -32,17 +30,31 @@ class Category(object):
         yield "color", self.color
 
     @staticmethod
-    def get_all() -> AnyStr:
+    def get_all() -> str:
         """
         Returns a SQL that gets all categories from the DB.
         """
         return 'SELECT * FROM "CATEGORIES"'
 
     @staticmethod
-    def add_category(name: str, color: str):
+    def add_category(name: str, color: str) -> str:
         """
         Returns a SQL query string that inserts a new category into DB.
         """
         return """
             INSERT INTO "CATEGORIES" (name, color) VALUES ('{}', '{}')
         """.format(name, color)
+
+    @staticmethod
+    def get_category_by_id(cat_id: int) -> str:
+        return """
+            SELECT * FROM "CATEGORIES"
+            WHERE id={}
+        """.format(cat_id)
+
+    @staticmethod
+    def get_category_by_name(cat_name: int) -> str:
+        return """
+            SELECT * FROM "CATEGORIES"
+            WHERE name='{}'
+        """.format(cat_name)

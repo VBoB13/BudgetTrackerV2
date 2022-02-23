@@ -4,7 +4,7 @@ import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import auth, categories, stores
+from .routers import auth, categories, stores, transactions
 
 sys.dont_write_bytecode = True
 
@@ -26,6 +26,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(categories.router)
 app.include_router(stores.router)
+app.include_router(transactions.router)
 
 
 @app.get("/")

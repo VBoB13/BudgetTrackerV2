@@ -1,4 +1,3 @@
-import json
 from typing import Tuple
 from ..Utils.exceptions import StoresError
 

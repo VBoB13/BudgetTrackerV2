@@ -67,6 +67,12 @@ class User(object):
             raise UsersError("Cannot login without username and/or password!")
         return sql
 
+    @staticmethod
+    def get_user_by_id(user_id: int) -> str:
+        return """
+            SELECT id, username, name, email FROM "USERS" WHERE id={}
+        """.format(user_id)
+
     def get_user_by_username(self):
         """
         Builds SQL query to get a user its the username.
