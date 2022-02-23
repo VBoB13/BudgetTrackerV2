@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from fastapi import APIRouter, HTTPException
 
 from ..objects.transactions import Transaction
@@ -45,5 +43,4 @@ async def add_Transaction(transaction: TransactionIn):
             raise HTTPException(
                 500, "Could not retrieve the newly added Transaction ({}) from database!".format(Transaction.name)) from err
         else:
-            pprint(result_Transactions)
             return {"transactions": result_Transactions}

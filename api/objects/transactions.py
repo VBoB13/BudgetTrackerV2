@@ -81,7 +81,9 @@ class Transaction(object):
             FROM "TRANSACTIONS" AS tra
             JOIN "CATEGORIES" AS cat ON tra.category_id = cat.id
             JOIN "USERS" AS u ON tra.user_id = u.id
-            ORDER BY t_date DESC;
+            ORDER BY
+                tra.t_date DESC,
+                tra.id ASC;
         """
 
     @staticmethod
