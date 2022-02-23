@@ -1,11 +1,11 @@
-from typing import AnyStr, List, SupportsInt
+from typing import List
 from pydantic import BaseModel, EmailStr
 
 
 class UserOut(BaseModel):
     id: int
-    username: AnyStr
-    name: AnyStr
+    username: str
+    name: str
     email: EmailStr
 
 
@@ -14,20 +14,37 @@ class UsersOut(BaseModel):
 
 
 class UserLogin(BaseModel):
-    username: AnyStr
-    password: AnyStr
+    username: str
+    password: str
 
 
 class CategoryIn(BaseModel):
-    name: AnyStr
-    color: AnyStr
+    name: str
+    color: str
 
 
 class CategoryOut(BaseModel):
     id: int
-    name: AnyStr
-    color: AnyStr
+    name: str
+    color: str
 
 
 class CategoriesOut(BaseModel):
     categories: List[CategoryOut]
+
+
+class StoreOut(BaseModel):
+    id: int
+    name: str
+
+
+class StoresOut(BaseModel):
+    stores: List[StoreOut]
+
+
+class StoreIn(BaseModel):
+    name: str
+
+
+class StoresIn(BaseModel):
+    stores: List[StoreIn]

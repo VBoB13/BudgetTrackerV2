@@ -16,6 +16,12 @@ class CategoriesError(Exception):
     """
 
 
+class StoresError(Exception):
+    """
+    Error raised by the api.objects.stores module.
+    """
+
+
 class AuthError(Exception):
     """
     Error raised by the api.routers.auth module.

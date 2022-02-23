@@ -4,7 +4,7 @@ import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import auth, categories
+from .routers import auth, categories, stores
 
 sys.dont_write_bytecode = True
 
@@ -25,11 +25,12 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(categories.router)
+app.include_router(stores.router)
 
 
 @app.get("/")
 async def read_root():
-    return {"Hi": "Babe <3"}
+    return {"Hi Babe!": "I wuuuve you <3"}
 
 
 if __name__ == "__main__":
