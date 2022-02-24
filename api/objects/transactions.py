@@ -102,5 +102,8 @@ class Transaction(object):
             JOIN "CATEGORIES" AS cat ON tra.category_id = cat.id
             JOIN "USERS" AS u ON tra.user_id = u.id
             WHERE tra.t_date = date '{}'
-            ORDER BY t_date DESC;
+            ORDER BY
+                t_date DESC,
+                tra.id ASC,
+                u.id ASC;
         """.format(date)
