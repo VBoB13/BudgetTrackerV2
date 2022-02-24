@@ -46,16 +46,13 @@ class StoreIn(BaseModel):
     name: str
 
 
-class StoresIn(BaseModel):
-    stores: List[StoreIn]
-
-
 class TransactionOut(BaseModel):
     id: int
     date: str
     amount: float
     currency: str
     user: str
+    store: str
 
 
 class TransactionsOut(BaseModel):
@@ -68,3 +65,4 @@ class TransactionIn(BaseModel):
     currency: str
     category: str
     user_id: int
+    store: str

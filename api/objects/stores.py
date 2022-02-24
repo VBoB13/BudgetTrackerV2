@@ -40,3 +40,9 @@ class Store(object):
         return """
             SELECT * FROM "STORES" WHERE name='{}';
         """.format(name)
+
+    @staticmethod
+    def get_store_by_id(store_id: int):
+        return """
+            SELECT * FROM "STORES" WHERE id={}
+        """.format(store_id)
