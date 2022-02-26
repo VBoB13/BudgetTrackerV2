@@ -110,17 +110,17 @@ class Transaction(object):
     def add_transaction(date: str, amount: float, currency: str, category: str, user_id: int, store_name: str):
         return """
             INSERT INTO "TRANSACTIONS"
-            (t_date, amount, currency, category_id, user_id)
+            (t_date, amount, currency, category_id, user_id, store_id)
             VALUES (date '{}', {}, '{}',
                     (SELECT (cat.id) FROM "CATEGORIES" AS cat WHERE cat.name='{}'),
                     {},
-                    (SELECT (st.id FROM "STORES" WHERE s_name='{}')))
+                    (SELECT (st.id) FROM "STORES" AS st WHERE s_name='{}'))
         """.format(date, amount, currency, category, user_id, store_name)
 
     @staticmethod
     def get_transactions_by_date(date: str):
         return """
-            SELECT tra.id, tra.t_date, tra.amount, tra.currency, cat.name, u.id, st.s_name
+            SELECT tra.id, tra.t_date, tra.amount, tra.currency, cat.name, u.id, st.id
             FROM "TRANSACTIONS" AS tra
             JOIN "CATEGORIES" AS cat ON tra.category_id = cat.id
             JOIN "USERS" AS u ON tra.user_id = u.id
