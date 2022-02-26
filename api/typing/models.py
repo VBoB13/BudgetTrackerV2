@@ -53,6 +53,7 @@ class TransactionOut(BaseModel):
     currency: str
     user: str
     store: str
+    comment: str
 
 
 class TransactionsOut(BaseModel):
@@ -66,3 +67,4 @@ class TransactionIn(BaseModel):
     category: str
     user_id: int
     store: str
+    comment: str

@@ -32,13 +32,13 @@ class Store(object):
     @staticmethod
     def add_store(name: str):
         return """
-            INSERT INTO "STORES" (name) VALUES ('{}')
+            INSERT INTO "STORES" (s_name) VALUES ('{}')
         """.format(name)
 
     @staticmethod
     def get_store(name: str):
         return """
-            SELECT * FROM "STORES" WHERE name='{}';
+            SELECT * FROM "STORES" WHERE s_name='{}';
         """.format(name)
 
     @staticmethod

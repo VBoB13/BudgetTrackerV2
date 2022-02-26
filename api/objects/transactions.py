@@ -22,6 +22,7 @@ class Transaction(object):
         self.category = None
         self.user = None
         self.store = None
+        self.comment = None
 
         if row is not None:
             self.id = int(row[0])
@@ -32,6 +33,7 @@ class Transaction(object):
             self.category = self._fetch_category(row[4])
             self.user = self._fetch_user(int(row[5]))
             self.store = self._fetch_store(row[6])
+            self.comment = row[7]
 
     def __str__(self):
         if self.id:
@@ -46,6 +48,7 @@ class Transaction(object):
             yield "currency", self.currency
             yield "user", str(self.user)
             yield "store", str(self.store)
+            yield "comment", self.comment
         else:
             raise TransactionsError(
                 "Not iterable: no 'id'! id:{} & date:{}".format(self.id, self.date))
@@ -95,7 +98,7 @@ class Transaction(object):
     @staticmethod
     def get_all_transactions():
         return """
-            SELECT tra.id, tra.t_date, tra.amount, tra.currency, cat.name, u.id, st.s_name
+            SELECT tra.id, tra.t_date, tra.amount, tra.currency, cat.name, u.id, st.id, tra.comment
             FROM "TRANSACTIONS" AS tra
             JOIN "CATEGORIES" AS cat ON tra.category_id = cat.id
             JOIN "USERS" AS u ON tra.user_id = u.id
@@ -107,10 +110,10 @@ class Transaction(object):
         """
 
     @staticmethod
-    def add_transaction(date: str, amount: float, currency: str, category: str, user_id: int, store_name: str):
+    def add_transaction(date: str, amount: float, currency: str, category: str, user_id: int, store_name: str, comment: str):
         return """
             INSERT INTO "TRANSACTIONS"
-            (t_date, amount, currency, category_id, user_id, store_id)
+            (t_date, amount, currency, category_id, user_id, store_id, comment)
             VALUES (date '{}', {}, '{}',
                     (SELECT (cat.id) FROM "CATEGORIES" AS cat WHERE cat.name='{}'),
                     {},
@@ -120,7 +123,7 @@ class Transaction(object):
     @staticmethod
     def get_transactions_by_date(date: str):
         return """
-            SELECT tra.id, tra.t_date, tra.amount, tra.currency, cat.name, u.id, st.id
+            SELECT tra.id, tra.t_date, tra.amount, tra.currency, cat.name, u.id, st.id, tra.comment
             FROM "TRANSACTIONS" AS tra
             JOIN "CATEGORIES" AS cat ON tra.category_id = cat.id
             JOIN "USERS" AS u ON tra.user_id = u.id

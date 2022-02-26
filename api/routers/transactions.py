@@ -27,7 +27,7 @@ async def get_all_Transactions():
 @router.post("/add_Transaction", description="Add a single Transaction to the database.", response_model=TransactionsOut)
 async def add_Transaction(transaction: TransactionIn):
     sql = Transaction.add_transaction(
-        transaction.date, transaction.amount, transaction.currency, transaction.category, transaction.user_id, transaction.store)
+        transaction.date, transaction.amount, transaction.currency, transaction.category, transaction.user_id, transaction.store, transaction.comment)
     try:
         query_db(sql, True)
     except ControllerError as err:
