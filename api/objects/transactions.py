@@ -1,5 +1,9 @@
+from pprint import pprint
 from typing import Tuple
 from datetime import date
+import json
+import pandas as pd
+
 
 from ..objects.categories import Category
 from ..objects.users import User
@@ -33,7 +37,7 @@ class Transaction(object):
             self.category = self._fetch_category(row[4])
             self.user = self._fetch_user(int(row[5]))
             self.store = self._fetch_store(row[6])
-            self.comment = row[7]
+            self.comment = row[7] if row[7] else ""
 
     def __str__(self):
         if self.id:
@@ -46,6 +50,7 @@ class Transaction(object):
             yield "date", self.date.strftime("%Y-%m-%d")
             yield "amount", self.amount
             yield "currency", self.currency
+            yield "category", str(self.category)
             yield "user", str(self.user)
             yield "store", str(self.store)
             yield "comment", self.comment
@@ -134,3 +139,55 @@ class Transaction(object):
                 u.id ASC,
                 tra.id ASC;
         """.format(date)
+
+
+class TransactionList(list):
+    def __init__(self, trans_list: list = None):
+        super().__init__()
+        self.id = []
+        self.date = []
+        self.amount = []
+        self.currency = []
+        self.category = []
+        self.user = []
+        self.store = []
+        self.comment = []
+
+        if trans_list:
+            for transaction in trans_list:
+                self.append(transaction)
+
+    def __iter__(self):
+        for transaction in super().__iter__():
+            if isinstance(transaction, Transaction):
+                yield transaction
+                continue
+            raise TransactionsError("Item is not a Transaction instance!")
+
+    def append(self, obj) -> None:
+        if isinstance(obj, Transaction):
+            return super().append(obj)
+        raise TransactionsError(
+            "Can't append anyhing other than Transaction instances!")
+
+    def extend(self, obj):
+        if isinstance(obj, self.__class__):
+            return super().extend(obj)
+        raise TransactionsError(
+            "Can't extend any other list than [Transactions] lists.")
+
+    def _generate_col_data(self):
+        index = []
+        cols = ["date", "amount", "currency",
+                "category", "user", "store", "comment"]
+        data = []
+        for tr in self.__iter__():
+            index.append(tr.id)
+            data.append([tr.date, tr.amount, tr.currency, str(
+                tr.category), str(tr.user), str(tr.store), tr.comment])
+
+        return index, cols, data
+
+    def generate_df(self):
+        index, cols, data = self._generate_col_data()
+        return pd.DataFrame(data, columns=cols, index=index)

@@ -22,7 +22,7 @@ class Category(object):
                     "Could not load category attributes despite finding an 'id' in **kwargs!") from err
 
     def __str__(self):
-        return "{} - {}".format(self.name, self.color)
+        return "{}".format(self.name)
 
     def __iter__(self):
         yield "id", self.id

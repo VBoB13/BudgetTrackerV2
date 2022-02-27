@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from ..objects.transactions import Transaction
+from ..objects.transactions import Transaction, TransactionList
 from ..typing.models import TransactionIn, TransactionOut, TransactionsOut
 from ..db.controller import query_db, ControllerError
 
@@ -16,12 +16,16 @@ router = APIRouter(
 async def get_all_Transactions():
     sql = Transaction.get_all_transactions()
     try:
-        transactions = [dict(Transaction(item)) for item in query_db(sql)]
+        transactions = TransactionList(
+            [Transaction(item) for item in query_db(sql)])
     except ControllerError as err:
         raise HTTPException(
             500, "Could not retrieve Transactions from database!") from err
+    else:
+        df = transactions.generate_df()
+        print(df)
 
-    return {"transactions": transactions}
+    return {"transactions": [transaction for transaction in transactions]}
 
 
 @router.post("/add_Transaction", description="Add a single Transaction to the database.", response_model=TransactionsOut)

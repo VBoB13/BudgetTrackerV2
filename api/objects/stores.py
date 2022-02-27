@@ -12,7 +12,7 @@ class Store(object):
 
     def __str__(self):
         if self.id:
-            return "{} (#{})".format(self.name, self.id)
+            return "{}".format(self.name)
         return "No real store.(No id detected.)"
 
     def __iter__(self):

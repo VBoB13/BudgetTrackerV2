@@ -25,7 +25,7 @@ class User(object):
                     "Could not extract username or password values to register!") from err
 
     def __str__(self):
-        return "{}({})".format(self.username, self.name)
+        return "{}".format(self.name)
 
     def __iter__(self) -> Dict:
         yield "id", self.id
