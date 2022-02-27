@@ -190,4 +190,8 @@ class TransactionList(list):
 
     def generate_df(self):
         index, cols, data = self._generate_col_data()
-        return pd.DataFrame(data, columns=cols, index=index)
+        try:
+            return pd.DataFrame(data, columns=cols, index=index)
+        except Exception as err:
+            raise TransactionsError(
+                "Could not convert Transactions into DF!") from err
