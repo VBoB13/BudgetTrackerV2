@@ -169,13 +169,13 @@ class TransactionList(list):
         if isinstance(obj, Transaction):
             return super().append(obj)
         raise TransactionsError(
-            "Can't append anyhing other than Transaction instances!")
+            "Can't append anyhing other than Transaction instances, not even {}.".format(type(obj).__name__))
 
     def extend(self, obj):
         if isinstance(obj, self.__class__):
             return super().extend(obj)
         raise TransactionsError(
-            "Can't extend any other list than [Transactions] lists.")
+            "Can't extend any other list than TransactionLists [Transaction], not {}.".format(type(obj).__name__))
 
     def _generate_col_data(self):
         index = []
