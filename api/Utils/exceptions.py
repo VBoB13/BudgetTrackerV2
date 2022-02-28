@@ -28,6 +28,12 @@ class TransactionsError(Exception):
     """
 
 
+class SubscriptionError(Exception):
+    """
+    Error raised by the api.objects.subscriptions module.
+    """
+
+
 class AuthError(Exception):
     """
     Error raised by the api.routers.auth module.

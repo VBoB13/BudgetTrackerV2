@@ -1,7 +1,5 @@
-from pprint import pprint
 from typing import Tuple
 from datetime import date
-import json
 import pandas as pd
 
 
