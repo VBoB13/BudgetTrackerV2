@@ -122,8 +122,9 @@ class Transaction(object):
             VALUES (date '{}', {}, '{}',
                     (SELECT (cat.id) FROM "CATEGORIES" AS cat WHERE cat.name='{}'),
                     {},
-                    (SELECT (st.id) FROM "STORES" AS st WHERE s_name='{}'))
-        """.format(date, amount, currency, category, user_id, store_name)
+                    (SELECT (st.id) FROM "STORES" AS st WHERE s_name='{}'),
+                    '{}')
+        """.format(date, amount, currency, category, user_id, store_name, comment)
 
     @staticmethod
     def get_transactions_by_date(date: str):

@@ -28,8 +28,8 @@ async def get_all_Transactions():
     return {"transactions": [transaction for transaction in transactions]}
 
 
-@router.post("/add_Transaction", description="Add a single Transaction to the database.", response_model=TransactionsOut)
-async def add_Transaction(transaction: TransactionIn):
+@router.post("/add_transaction", description="Add a single Transaction to the database.", response_model=TransactionsOut)
+async def add_transaction(transaction: TransactionIn):
     sql = Transaction.add_transaction(
         transaction.date, transaction.amount, transaction.currency, transaction.category, transaction.user_id, transaction.store, transaction.comment)
     try:
@@ -41,10 +41,10 @@ async def add_Transaction(transaction: TransactionIn):
     else:
         sql = Transaction.get_transactions_by_date(transaction.date)
         try:
-            result_Transactions = [dict(Transaction(item))
+            result_transactions = [dict(Transaction(item))
                                    for item in query_db(sql)]
         except ControllerError as err:
             raise HTTPException(
                 500, "Could not retrieve the newly added Transaction ({}) from database!".format(Transaction.name)) from err
         else:
-            return {"transactions": result_Transactions}
+            return {"transactions": result_transactions}
