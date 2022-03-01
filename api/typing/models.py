@@ -53,6 +53,7 @@ class TransactionOut(BaseModel):
     date: str
     amount: float
     currency: str
+    category: str
     user: str
     store: str
     comment: str
