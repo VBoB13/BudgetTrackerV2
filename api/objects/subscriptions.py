@@ -28,9 +28,9 @@ class Subscription(object):
             self.id = int(row[0])
             self.name = str(row[1])
             self.start_date = row[2] if isinstance(
-                row[1], date) else str_to_date(row[2])
+                row[2], date) else str_to_date(row[2])
             self.end_date = row[3] if isinstance(
-                row[1], date) else str_to_date(row[3])
+                row[3], date) else str_to_date(row[3])
             self.cost = str(row[4])
             self.currency = str(row[5])
             self.auto_resub = row[6]
@@ -39,7 +39,7 @@ class Subscription(object):
     def __str__(self):
         if self.id:
             return "{} - {} {}".format(self.date, self.amount, self.currency)
-        return "No real subscription period.(No id detected.)"
+        return "No real subscription.(No id detected.)"
 
     def __iter__(self):
         if self.id:
@@ -50,7 +50,7 @@ class Subscription(object):
             yield "cost", self.cost
             yield "currency", self.currency
             yield "auto_resub", "Y" if self.auto_resub else "N"
-            yield "period", repr(self.period)
+            yield "period", str(self.period).split(", ")[0]
         else:
             raise Exception(
                 "Not iterable: no 'id'! id:{} & name:{}".format(self.id, self.name))
@@ -65,26 +65,66 @@ class Subscription(object):
         """
         re_match = re.match("^(?P<amount>[1-9])(?P<unit>[ymwd])$", timedelta)
         if re_match:
-            return subscription_period_dict[re_match.group('unit')] * re_match.group('amount')
+            return subscription_period_dict[re_match.group('unit')] * int(re_match.group('amount'))
         raise SubscriptionError(
             "Could not decipher the subscription period string!")
+
+    @staticmethod
+    def add_subscription(name: str, s_date: date, e_date: date,
+                         cost: float, currency: str, auto_resub: bool, period: str):
+        """
+            Method that produces the SQL which inserts a new Subscription into the DB.
+        """
+
+        sql = """
+            INSERT INTO "SUBSCRIPTIONS"
+            (name, start_date, end_date, cost, auto_resub, currency, period)
+            VALUES ('{}', date '{}', date '{}', {}, {}, '{}', '{}')
+        """
+        return sql.format(name, s_date, e_date, cost, currency, auto_resub, period)
+
+    @staticmethod
+    def get_all():
+        """
+        Method that returns the SQL which gets all Subscriptions from the DB.
+        """
+
+        sql = """
+            SELECT id, name, start_date, end_date, cost, currency, auto_resub, period FROM "SUBSCRIPTIONS"
+            ORDER BY start_date DESC
+        """
+        return sql
+
+    @staticmethod
+    def get_subscription_by_name(name: str):
+        """
+        Method that returns the SQL which gets a Subscription from DB by name.
+        """
+        sql = """
+            SELECT * FROM "SUBSCRIPTIONS"
+            WHERE name='{}'
+        """
+        return sql.format(name)
 
 
 class SubscriptionList(list):
     def __init__(self, trans_list: list = None):
         super().__init__()
         self.id = []
-        self.date = []
-        self.amount = []
+        self.name = []
+        self.start_date = []
+        self.end_date = []
+        self.cost = []
         self.currency = []
-        self.category = []
-        self.user = []
-        self.store = []
-        self.comment = []
+        self.auto_resub = []
+        self.period = []
 
         if trans_list:
             for subscription in trans_list:
                 self.append(subscription)
+
+    def __dict__(self):
+        return {"subscriptions": [sub for sub in self.__iter__()]}
 
     def __iter__(self):
         for subscription in super().__iter__():
@@ -107,13 +147,13 @@ class SubscriptionList(list):
 
     def _generate_col_data(self):
         index = []
-        cols = ["date", "amount", "currency",
-                "category", "user", "store", "comment"]
+        cols = ["name", "s_date", "e_date",
+                "cost", "currency", "auto_resub", "period"]
         data = []
         for tr in self.__iter__():
             index.append(tr.id)
-            data.append([tr.date, tr.amount, tr.currency, str(
-                tr.category), str(tr.user), str(tr.store), tr.comment])
+            data.append([tr.name, tr.start_date.strftime("%Y-%m-%d"), tr.end_date.strftime(
+                "%Y-%m-%d"), tr.cost, tr.currency, tr.auto_resub, tr.period])
 
         return index, cols, data
 

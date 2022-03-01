@@ -1,5 +1,7 @@
-from typing import List
+from typing import Dict, List
 from pydantic import BaseModel, EmailStr
+
+from api.objects import subscriptions
 
 
 class UserOut(BaseModel):
@@ -68,3 +70,21 @@ class TransactionIn(BaseModel):
     user_id: int
     store: str
     comment: str
+
+
+class SubscriptionIn(BaseModel):
+    name: str
+    start_date: str
+    end_date: str
+    cost: float
+    currency: str
+    auto_resub: bool
+    period: str
+
+
+class SubscriptionOut(SubscriptionIn):
+    id: int
+
+
+class SubscriptionsOut(BaseModel):
+    subscriptions: List[SubscriptionOut]
