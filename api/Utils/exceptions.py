@@ -34,6 +34,12 @@ class SubscriptionError(Exception):
     """
 
 
+class StatsError(Exception):
+    """
+    Error raised by the api.objects.stats module.
+    """
+
+
 class AuthError(Exception):
     """
     Error raised by the api.routers.auth module.
