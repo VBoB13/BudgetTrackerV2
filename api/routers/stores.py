@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/all", description="Show all the registered stores in the database.", response_model=StoresOut)
+@router.get("/get_all", description="Show all the registered stores in the database.", response_model=StoresOut)
 async def get_all_stores():
     sql = Store.get_all_stores()
     try:
@@ -24,7 +24,7 @@ async def get_all_stores():
     return {"stores": stores}
 
 
-@router.post("/add_store", description="Add a single store to the database.", response_model=StoreOut)
+@router.post("/add", description="Add a single store to the database.", response_model=StoreOut)
 async def add_store(store: StoreIn):
     sql = Store.add_store(store.name)
     try:

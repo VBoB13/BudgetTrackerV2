@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/all", description="Show all the registered subscriptions in the database.", response_model=SubscriptionsOut)
+@router.get("/get_all", description="Show all the registered subscriptions in the database.", response_model=SubscriptionsOut)
 async def get_all_subscriptions():
     sql = Subscription.get_all()
     try:
@@ -28,7 +28,7 @@ async def get_all_subscriptions():
     return subscriptions.__dict__()
 
 
-@router.post("/add_subscription", description="Add a single Transaction to the database.")
+@router.post("/add", description="Add a single Transaction to the database.")
 async def add_subscription(subscription: SubscriptionIn):
     sql = Subscription.add_subscription(
         subscription.name, subscription.s_date, subscription.e_date, subscription.cost, subscription.currency, subscription.auto_resub, subscription.period)

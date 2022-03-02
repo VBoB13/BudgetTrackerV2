@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/all", response_model=CategoriesOut)
+@router.get("/get_all", response_model=CategoriesOut)
 async def get_all_categories():
     sql = Category.get_all()
     results = query_db(sql)

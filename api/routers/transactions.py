@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/all", description="Show all the registered transactions in the database.", response_model=TransactionsOut)
+@router.get("/get_all", description="Show all the registered transactions in the database.", response_model=TransactionsOut)
 async def get_all_Transactions():
     sql = Transaction.get_all_transactions()
     try:
@@ -28,7 +28,7 @@ async def get_all_Transactions():
     return {"transactions": [transaction for transaction in transactions]}
 
 
-@router.post("/add_transaction", description="Add a single Transaction to the database.", response_model=TransactionsOut)
+@router.post("/add", description="Add a single Transaction to the database.", response_model=TransactionsOut)
 async def add_transaction(transaction: TransactionIn):
     sql = Transaction.add_transaction(
         transaction.date, transaction.amount, transaction.currency, transaction.category, transaction.user_id, transaction.store, transaction.comment)
