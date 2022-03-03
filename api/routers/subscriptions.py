@@ -20,7 +20,7 @@ async def get_all_subscriptions():
             [Subscription(item) for item in query_db(sql)])
     except ControllerError as err:
         raise HTTPException(
-            500, "Could not retrieve Transactions from database!") from err
+            500, "Could not retrieve Subscriptions from database!") from err
     else:
         df = subscriptions.generate_df()
         print(df)
@@ -28,7 +28,7 @@ async def get_all_subscriptions():
     return subscriptions.__dict__()
 
 
-@router.post("/add", description="Add a single Transaction to the database.")
+@router.post("/add", description="Add a single Subscription to the database.", response_model=SubscriptionOut)
 async def add_subscription(subscription: SubscriptionIn):
     sql = Subscription.add_subscription(
         subscription.name, subscription.s_date, subscription.e_date, subscription.cost, subscription.currency, subscription.auto_resub, subscription.period)
@@ -41,9 +41,9 @@ async def add_subscription(subscription: SubscriptionIn):
     else:
         sql = Subscription.get_subscription_by_name(subscription.name)
         try:
-            sub = Subscription(query_db(sql))
+            sub = Subscription(query_db(sql)[0])
         except ControllerError as err:
             raise HTTPException(
-                500, "Could not retrieve the newly added Transaction ({}) from database!".format(Transaction.name)) from err
+                500, "Could not retrieve the newly added Subscription ({}) from database!".format(subscription.name)) from err
         else:
-            return
+            return sub
