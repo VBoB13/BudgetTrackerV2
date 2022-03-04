@@ -1,16 +1,14 @@
-from ..Utils.exceptions import StatsError
-from ..objects.categories import Category
-from ..db.controller import query_db, ControllerError
 from datetime import date, timedelta
 from typing import List, Tuple
 from pprint import pprint
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 import io
-from base64 import b64encode
-import urllib
+
+from ..Utils.exceptions import StatsError
+from ..objects.categories import Category
+from ..db.controller import query_db, ControllerError
 
 
 class Stats(object):
