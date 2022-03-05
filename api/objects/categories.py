@@ -6,20 +6,30 @@ class Category(object):
         self.id = None
         self.name = None
         self.color = None
+        self.sum = None
 
         if row:
             self.id = int(row[0])
             self.name = row[1]
             self.color = row[2]
 
-        if kwargs.pop("id", None):
+        if kwargs.pop("color", None):
             try:
                 self.id = kwargs.pop("id")
                 self.name = kwargs.pop("name")
                 self.color = kwargs.pop("color")
             except KeyError as err:
                 raise CategoriesError(
-                    "Could not load category attributes despite finding an 'id' in **kwargs!") from err
+                    "Could not load category attributes despite finding a 'color' in **kwargs!") from err
+
+        if kwargs.pop("sum", None):
+            try:
+                self.id = kwargs.pop("id")
+                self.name = kwargs.pop("name")
+                self.sum = kwargs.pop("sum")
+            except KeyError as err:
+                raise CategoriesError(
+                    "Could not load category attributes despite finding a 'sum' in **kwargs!")
 
     def __str__(self):
         return "{}".format(self.name)
@@ -27,7 +37,10 @@ class Category(object):
     def __iter__(self):
         yield "id", self.id
         yield "name", self.name
-        yield "color", self.color
+        if self.sum is not None:
+            yield "sum", self.sum
+        if self.color is not None:
+            yield "color", self.color
 
     @staticmethod
     def get_all() -> str:

@@ -17,8 +17,18 @@ router = APIRouter(
 @router.post("/get_daily_category_sum", description="Shows sums of all transactions for each category each day.")
 async def get_daily_category_sums(img: StatsImage):
     stats = Stats()
+    stats.get_category_sums_per_date()
+    if img.yes:
+        graph_bytes = stats.create_bytes_categories(plot="line")
+        return StreamingResponse(graph_bytes, media_type="image/png")
+    return json.loads(stats.df.to_json())
+
+
+@router.post("/get_category_sum_ratio", description="Shows a piechart of how much the sum for each category is.")
+async def get_category_sum_ratio(img: StatsImage):
+    stats = Stats()
     stats.get_category_sums()
     if img.yes:
-        graph_bytes = stats.create_bytes()
+        graph_bytes = stats.create_bytes_categories(plot="pie")
         return StreamingResponse(graph_bytes, media_type="image/png")
     return json.loads(stats.df.to_json())

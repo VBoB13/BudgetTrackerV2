@@ -120,7 +120,7 @@ class Transaction(object):
                 "Got a few too many dashes '-' in the date, don't ya?")
         try:
             new_date = datetime.date(
-                year=date_vals[0], month=date_vals[1], day=date_vals[2])
+                year=int(date_vals[0]), month=int(date_vals[1]), day=int(date_vals[2]))
         except Exception as err:
             raise TransactionsError(
                 "Could not convert the sent date into datetime.date object!") from err
