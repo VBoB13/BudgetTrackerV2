@@ -45,7 +45,7 @@ class Stats(object):
         sns.lineplot(data=self.df, x="Date", y="Sum", hue="Category")
         plt.setp(axes.get_xticklabels(), rotation=45,
                  ha="right", rotation_mode="anchor")
-        axes.set_title("Daily sums per categoriy")
+        axes.set_title("Daily sums per category")
         plt.tight_layout()
 
         buf = io.BytesIO()
