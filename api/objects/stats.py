@@ -63,6 +63,7 @@ class Stats(object):
         # Initiate plot figure
         fig, axes = plt.subplots()
         plt.style.use("dark_background")
+        sns.set_style('darkgrid')
 
         if self.df is None:
             raise StatsError(
@@ -70,7 +71,6 @@ class Stats(object):
 
         # Check plot type & settings
         if plot == "line":
-            sns.set_style(style='darkgrid')
             sns.lineplot(data=self.df, x="Date", y="Sum", hue="Category")
             axes.set_title("Daily sums per category")
             plt.setp(axes.get_xticklabels(), rotation=45,
