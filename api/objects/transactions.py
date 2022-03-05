@@ -1,5 +1,5 @@
 from typing import Tuple
-from datetime import date
+import datetime
 import pandas as pd
 
 
@@ -29,7 +29,7 @@ class Transaction(object):
         if row is not None:
             self.id = int(row[0])
             self.date = row[1] if isinstance(
-                row[1], date) else str_to_date(row[1])
+                row[1], datetime.date) else str_to_date(row[1])
             self.amount = float(row[2])
             self.currency = str(row[3])
             self.category = self._fetch_category(row[4])
@@ -114,6 +114,17 @@ class Transaction(object):
 
     @staticmethod
     def add_transaction(date: str, amount: float, currency: str, category: str, user_id: int, store_name: str, comment: str):
+        date_vals = date.split("-")
+        if len(date_vals) > 3:
+            raise TransactionsError(
+                "Got a few too many dashes '-' in the date, don't ya?")
+        try:
+            new_date = datetime.date(
+                year=date_vals[0], month=date_vals[1], day=date_vals[2])
+        except Exception as err:
+            raise TransactionsError(
+                "Could not convert the sent date into datetime.date object!") from err
+
         return """
             INSERT INTO "TRANSACTIONS"
             (t_date, amount, currency, category_id, user_id, store_id, comment)
@@ -122,7 +133,7 @@ class Transaction(object):
                     {},
                     (SELECT (st.id) FROM "STORES" AS st WHERE s_name='{}'),
                     '{}')
-        """.format(date, amount, currency, category, user_id, store_name, comment)
+        """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment)
 
     @staticmethod
     def get_transactions_by_date(date: str):
