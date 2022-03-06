@@ -59,7 +59,7 @@ class Stats(object):
 
         return results
 
-    def create_bytes_categories(self, plot: str):
+    def create_bytes_categories(self, plot: str) -> io.BytesIO:
         # Initiate plot figure
         fig, axes = plt.subplots()
         plt.style.use("dark_background")
@@ -84,7 +84,7 @@ class Stats(object):
             axes.set_title("Sums per category")
         else:
             raise StatsError(
-                "No valid entry for 'plot' argument: '{}'".format(plot))
+                "Not valid entry for 'plot' argument: '{}'".format(plot))
 
         plt.tight_layout()
 
