@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from typing import List, Tuple
+from decimal import Decimal
 from pprint import pprint
 import pandas as pd
 import numpy as np
@@ -17,22 +18,6 @@ class Stats(object):
         self.df = None
         if df is not None:
             self.df = df
-
-    def _get_category_sums_per_date(self) -> List[Tuple[date, str, float]]:
-        sql = """
-        SELECT DISTINCT(tr.t_date), ca.name, SUM(tr.amount) AS "Sum" FROM "TRANSACTIONS" tr
-        JOIN "CATEGORIES" ca ON ca.id = tr.category_id
-        GROUP BY tr.t_date, ca.name
-        ORDER BY
-            tr.t_date ASC,
-            "Sum" DESC;
-        """
-        try:
-            results = query_db(sql)
-        except ControllerError as err:
-            raise StatsError(
-                "Something went wrong when querying the database!") from err
-        return results
 
     def _get_all_categories(self) -> List[Category]:
         sql = """
@@ -59,6 +44,35 @@ class Stats(object):
 
         return results
 
+    def _get_category_sums_per_date(self) -> List[Tuple[date, str, float]]:
+        sql = """
+        SELECT DISTINCT(tr.t_date), ca.name, SUM(tr.amount) AS "Sum" FROM "TRANSACTIONS" tr
+        JOIN "CATEGORIES" ca ON ca.id = tr.category_id
+        GROUP BY tr.t_date, ca.name
+        ORDER BY
+            tr.t_date ASC,
+            "Sum" DESC;
+        """
+        try:
+            results = query_db(sql)
+        except ControllerError as err:
+            raise StatsError(
+                "Something went wrong when querying the database!") from err
+        return results
+
+    def _get_meal_avgs(self) -> List[Tuple[str, float]]:
+        sql = """
+        SELECT tra.comment AS "Meal", CAST(tra.amount AS real) AS "Amount" FROM "TRANSACTIONS" tra
+        WHERE tra.category_id=1 AND tra.comment in ('Breakfast', 'Lunch', 'Dinner')
+        ORDER BY "Amount";
+        """
+        try:
+            results = query_db(sql)
+        except ControllerError as err:
+            raise StatsError(
+                "Something went wrong when querying the database!") from err
+        return results
+
     def create_bytes_categories(self, plot: str) -> io.BytesIO:
         # Initiate plot figure
         fig, axes = plt.subplots()
@@ -82,6 +96,13 @@ class Stats(object):
             axes.pie(x=self.df["Sum"], colors=colors, labels=labels, textprops={"color": "black"}, labeldistance=1.15,
                      radius=4, center=(7, 7), frame=True, wedgeprops={"linewidth": 1.5, "edgecolor": "white"})
             axes.set_title("Sums per category")
+        elif plot == "bar":
+            axes = sns.barplot(x="Meal", y="Amount",
+                               data=self.df)
+            axes.set_title("Sums per category")
+            axes.bar_label(
+                axes.containers[0], labels=self.df["Meal"].unique(), label_type='center', )
+            self.show_values_on_bars(axes)
         else:
             raise StatsError(
                 "Not valid entry for 'plot' argument: '{}'".format(plot))
@@ -112,6 +133,26 @@ class Stats(object):
         self.df = df
         self.df.sort_values("Category", inplace=True)
         print(df)
+
+    def get_meal_avgs(self):
+        data = self._get_meal_avgs()
+        self.df = pd.DataFrame(data, columns=["Meal", "Amount"])
+        self.df.info(verbose=True)
+        print(self.df)
+
+    def show_values_on_bars(self, axs):
+        def _show_on_single_plot(ax):
+            for p in ax.patches:
+                _x = p.get_x() + p.get_width() / 2
+                _y = p.get_y() + p.get_height()
+                value = '{:.2f}'.format(p.get_height())
+                ax.text(_x, _y, value, ha="center")
+
+        if isinstance(axs, np.ndarray):
+            for idx, ax in np.ndenumerate(axs):
+                _show_on_single_plot(ax)
+        else:
+            _show_on_single_plot(axs)
 
 
 if __name__ == '__main__':
