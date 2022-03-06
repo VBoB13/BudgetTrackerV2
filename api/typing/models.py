@@ -1,3 +1,4 @@
+import datetime
 from typing import Dict, List
 from pydantic import BaseModel, EmailStr
 
@@ -84,9 +85,9 @@ class TransactionsOut(BaseModel):
 
 
 class TransactionIn(BaseModel):
-    date: str
+    date: str = datetime.date.today().strftime("%Y-%m-%d")
     amount: float
-    currency: str
+    currency: str = "NTD"
     category: str
     user_id: int
     store: str
