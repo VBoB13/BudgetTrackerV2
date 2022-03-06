@@ -4,7 +4,7 @@ import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import auth, categories, stores, transactions, subscriptions, stats
+from .routers import auth, categories, stores, transactions, subscriptions, stats, incomes
 
 sys.dont_write_bytecode = True
 
@@ -25,10 +25,11 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(categories.router)
-app.include_router(stores.router)
-app.include_router(transactions.router)
-app.include_router(subscriptions.router)
+app.include_router(incomes.router)
 app.include_router(stats.router)
+app.include_router(stores.router)
+app.include_router(subscriptions.router)
+app.include_router(transactions.router)
 
 
 @app.get("/")

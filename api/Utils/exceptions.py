@@ -1,12 +1,12 @@
+class AuthError(Exception):
+    """
+    Error raised by the api.routers.auth module.
+    """
+
+
 class ControllerError(Exception):
     """
     Error thrown by the api.db.controller module.
-    """
-
-
-class UsersError(Exception):
-    """
-    Error raised by the api.objects.users module.
     """
 
 
@@ -16,21 +16,9 @@ class CategoriesError(Exception):
     """
 
 
-class StoresError(Exception):
+class IncomesError(Exception):
     """
-    Error raised by the api.objects.stores module.
-    """
-
-
-class TransactionsError(Exception):
-    """
-    Error raised by the api.objects.transactions module.
-    """
-
-
-class SubscriptionError(Exception):
-    """
-    Error raised by the api.objects.subscriptions module.
+    Error raised by the api.objects.incomes module.
     """
 
 
@@ -40,7 +28,25 @@ class StatsError(Exception):
     """
 
 
-class AuthError(Exception):
+class StoresError(Exception):
     """
-    Error raised by the api.routers.auth module.
+    Error raised by the api.objects.stores module.
+    """
+
+
+class SubscriptionError(Exception):
+    """
+    Error raised by the api.objects.subscriptions module.
+    """
+
+
+class TransactionsError(Exception):
+    """
+    Error raised by the api.objects.transactions module.
+    """
+
+
+class UsersError(Exception):
+    """
+    Error raised by the api.objects.users module.
     """

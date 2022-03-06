@@ -1,4 +1,5 @@
 from typing import AnyStr, Dict
+from pydantic import EmailStr
 
 from ..Utils.exceptions import UsersError
 
@@ -6,20 +7,20 @@ from ..Utils.exceptions import UsersError
 class User(object):
     def __init__(self, row=None, **kwargs) -> None:
         self.id = None
-        self.username = None
-        self.name = None
-        self.email = None
+        self.username: str = None
+        self.name: str = None
+        self.email: EmailStr = None
         if row:
             self.id = int(row[0])
-            self.username = row[1]
-            self.name = row[2]
-            self.email = row[3]
+            self.username: str = row[1]
+            self.name: str = row[2]
+            self.email: EmailStr = row[3]
         elif kwargs.get('username', None):
             try:
-                self.username = kwargs.pop('username')
+                self.username: str = kwargs.pop('username')
                 self.password = kwargs.pop('password')
-                self.name = kwargs.pop('name', None)
-                self.email = kwargs.pop('email', None)
+                self.name: str = kwargs.pop('name', None)
+                self.email: EmailStr = kwargs.pop('email', None)
             except KeyError as err:
                 raise UsersError(
                     "Could not extract username or password values to register!") from err

@@ -34,6 +34,22 @@ class CategoriesOut(BaseModel):
     categories: List[CategoryOut]
 
 
+class IncomeIn(BaseModel):
+    user: int
+    amount: float
+    currency: str = "NTD"
+    date: datetime.date = datetime.date.today().strftime("%Y-%m-%d")
+
+
+class IncomeOut(IncomeIn):
+    id: int
+    user: str
+
+
+class IncomesOut(BaseModel):
+    incomes: List[IncomeOut]
+
+
 class StatsImage(BaseModel):
     yes: bool
 
