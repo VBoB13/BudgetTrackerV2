@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from traceback import print_tb
 from typing import List, Tuple
 from decimal import Decimal
 from pprint import pprint
@@ -59,6 +60,17 @@ class Stats(object):
             raise StatsError(
                 "Something went wrong when querying the database!") from err
         return results
+
+    def _get_income_daily_avg(self) -> int:
+        sql = """
+        SELECT ROUND(SUM(amount)/30, 2) FROM "INCOMES" TOP2;
+        """
+        try:
+            results = query_db(sql)
+        except ControllerError as err:
+            raise StatsError(
+                "Something went wrong when querying the database!") from err
+        return results[0][0]
 
     def _get_meal_avgs(self) -> List[Tuple[str, float]]:
         sql = """
@@ -122,8 +134,24 @@ class Stats(object):
 
     def get_category_sums_per_date(self):
         data = self._get_category_sums_per_date()
-        df = pd.DataFrame(data, columns=["Date", "Category", "Sum"])
-        df = pd.pivot_table(df, index=["Date", "Category"], values="Sum")
+        income_daily_avg = self._get_income_daily_avg()
+        first_date = data[0][0]
+        current_date = first_date
+        date_list = []
+        while current_date <= date.today():
+            date_list.append(current_date + timedelta(days=1))
+            current_date += timedelta(days=1)
+        try:
+            for date_obj in date_list:
+                data.append((date_obj, "Income", income_daily_avg))
+        except Exception as err:
+            print(err)
+            print_tb(err.__traceback__)
+
+        df = pd.DataFrame(
+            data, columns=["Date", "Category", "Sum"])
+        df = pd.pivot_table(
+            df, index=["Date", "Category"], values="Sum", fill_value=0)
         print(df)
         self.df = df
 
@@ -157,4 +185,4 @@ class Stats(object):
 
 if __name__ == '__main__':
     stats = Stats()
-    stats.get_category_sums()
+    stats.get_category_sums_per_date()

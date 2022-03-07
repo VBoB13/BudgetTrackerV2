@@ -78,8 +78,8 @@ class Subscription(object):
 
         sql = """
             INSERT INTO "SUBSCRIPTIONS"
-            (name, start_date, end_date, cost, auto_resub, currency, period)
-            VALUES ('{}', date '{}', date '{}', {}, {}, '{}', '{}')
+            (name, start_date, end_date, cost, currency, auto_resub, period)
+            VALUES ('{}', date '{}', date '{}', {}, '{}', {}, '{}')
         """
         return sql.format(name, s_date, e_date, cost, currency, auto_resub, period)
 
@@ -101,7 +101,7 @@ class Subscription(object):
         Method that returns the SQL which gets a Subscription from DB by name.
         """
         sql = """
-            SELECT * FROM "SUBSCRIPTIONS"
+            SELECT id, name, start_date, end_date, cost, currency, auto_resub, period FROM "SUBSCRIPTIONS"
             WHERE name='{}'
         """
         return sql.format(name)

@@ -31,13 +31,13 @@ async def get_all_subscriptions():
 @router.post("/add", description="Add a single Subscription to the database.", response_model=SubscriptionOut)
 async def add_subscription(subscription: SubscriptionIn):
     sql = Subscription.add_subscription(
-        subscription.name, subscription.s_date, subscription.e_date, subscription.cost, subscription.currency, subscription.auto_resub, subscription.period)
+        subscription.name, subscription.start_date, subscription.end_date, subscription.cost, subscription.currency, subscription.auto_resub, subscription.period)
     try:
         query_db(sql, True)
     except ControllerError as err:
         raise HTTPException(
             500, "Could not insert new Subscription ({} - {} to {} ({}{}/{})) into database!".format(
-                subscription.name, subscription.s_date, subscription.e_date, subscription.cost, subscription.currency, subscription.period)) from err
+                subscription.name, subscription.start_date, subscription.end_date, subscription.cost, subscription.currency, subscription.period)) from err
     else:
         sql = Subscription.get_subscription_by_name(subscription.name)
         try:
