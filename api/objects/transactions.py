@@ -132,8 +132,9 @@ class Transaction(object):
                     (SELECT (cat.id) FROM "CATEGORIES" AS cat WHERE cat.name='{}'),
                     {},
                     (SELECT (st.id) FROM "STORES" AS st WHERE s_name='{}'),
-                    '{}')
-        """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment)
+                    '{}');
+            UPDATE "STASH" SET amount=amount-{} WHERE user_id={} AND currency='{}';
+        """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment, amount, user_id, currency)
 
     @staticmethod
     def get_transactions_by_date(date: str):

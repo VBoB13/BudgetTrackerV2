@@ -1,3 +1,4 @@
+from typing import Dict
 from fastapi import APIRouter, HTTPException
 
 from ..objects.subscriptions import Subscription, SubscriptionList
@@ -13,7 +14,7 @@ router = APIRouter(
 
 
 @router.get("/get_all", description="Show all the registered subscriptions in the database.", response_model=SubscriptionsOut)
-async def get_all_subscriptions():
+async def get_all_subscriptions() -> Dict:
     sql = Subscription.get_all()
     try:
         subscriptions = SubscriptionList(
@@ -29,7 +30,7 @@ async def get_all_subscriptions():
 
 
 @router.post("/add", description="Add a single Subscription to the database.", response_model=SubscriptionOut)
-async def add_subscription(subscription: SubscriptionIn):
+async def add_subscription(subscription: SubscriptionIn) -> Subscription:
     sql = Subscription.add_subscription(
         subscription.name, subscription.start_date, subscription.end_date, subscription.cost, subscription.currency, subscription.auto_resub, subscription.period)
     try:
