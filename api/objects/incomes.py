@@ -44,7 +44,7 @@ class Income(object):
         """
 
     @staticmethod
-    def add_income(user_id: int, amount: float, currency: str, date: str):
+    def add_income(user_id: int, amount: float, currency: str, date: str) -> str:
         return """
             INSERT INTO "INCOMES" (user_id, amount, currency, i_date) VALUES ({}, {}, '{}', date '{}');
             UPDATE "STASH" SET amount=amount+{} WHERE user_id={} AND currency='{}';
