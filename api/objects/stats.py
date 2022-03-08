@@ -35,7 +35,10 @@ class Stats(object):
         sql = """
             SELECT DISTINCT(cat.name), SUM(tra.amount) AS "sum" FROM "TRANSACTIONS" tra
             JOIN "CATEGORIES" cat ON cat.id = tra.category_id
-            GROUP BY cat.name;
+            GROUP BY cat.name
+            UNION ALL
+                SELECT 'Remaining', SUM(amount)-(SELECT SUM(amount) FROM "TRANSACTIONS") FROM "INCOMES"
+            ;
         """
         try:
             results = query_db(sql)
@@ -61,10 +64,15 @@ class Stats(object):
                 "Something went wrong when querying the database!") from err
         return results
 
-    def _get_income_daily_avg(self) -> int:
-        sql = """
-        SELECT ROUND(SUM(amount)/30, 2) FROM "INCOMES" TOP2;
-        """
+    def _get_income(self, daily_avg=False) -> int:
+        if daily_avg:
+            sql = """
+            SELECT ROUND(SUM(amount)/30, 2) FROM "INCOMES" TOP2;
+            """
+        else:
+            sql = """
+            SELECT SUM(amount) FROM "INCOMES";
+            """
         try:
             results = query_db(sql)
         except ControllerError as err:
@@ -134,7 +142,7 @@ class Stats(object):
 
     def get_category_sums_per_date(self):
         data = self._get_category_sums_per_date()
-        income_daily_avg = self._get_income_daily_avg()
+        income_daily_avg = self._get_income(daily_avg=True)
         first_date = data[0][0]
         current_date = first_date
         date_list = []

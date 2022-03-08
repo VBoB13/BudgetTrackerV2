@@ -15,3 +15,9 @@
 # Step 3:
 # Add that subscription data into any month that does not
 # have it registered as a transaction ("TRANSACTIONS").
+
+
+# THEN - something different:
+# Add another row into the pie-chart so that
+# Category: "Remaining"
+# Sum: Income-TheRest
