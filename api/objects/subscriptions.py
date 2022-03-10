@@ -1,5 +1,5 @@
 from colorama import Fore, Style
-from typing import Tuple
+from typing import Tuple, Iterator
 from datetime import date
 import pandas as pd
 import re
@@ -18,7 +18,7 @@ class Subscription(object):
     Reminder: 'date' corresponds to 't_date' in DB.
     """
 
-    def __init__(self, row: Tuple = None):
+    def __init__(self, row: Tuple = None, **kwargs):
         self.id = None
         self.name = None
         self.start_date = None
@@ -39,10 +39,22 @@ class Subscription(object):
             self.currency = str(row[5])
             self.auto_resub = row[6]
             self.period = self._fetch_timeperiod(row[7])
+        if kwargs:
+            self.id = kwargs.pop("id")
+            self.name = kwargs.pop("name")
+            self.start_date = str_to_date(kwargs.pop("start_date"))
+            self.end_date = str_to_date(kwargs.pop("end_date"))
+            self.cost = kwargs.pop("cost")
+            self.currency = kwargs.pop("currency")
+            self.auto_resub = kwargs.pop("auto_resub")
+            re_match = re.match(
+                "^(?P<amount>[1-9]{1,2}) (?P<unit>days)$", kwargs.pop("period"))
+            self.period = self._fetch_timeperiod(
+                re_match.group("amount")+re_match.group("unit")[0])
 
     def __str__(self):
         if self.id:
-            return "{} - {} {}/{}".format(self.name, self.amount, self.currency, str(self.period))
+            return "{}: {} {}/{}".format(self.name, self.cost, self.currency, str(self.period).split(", ")[0])
         return "No real subscription.(No id detected.)"
 
     def __iter__(self):
@@ -97,7 +109,7 @@ class Subscription(object):
             date_list.append(compare_date)
 
         set_date = None
-        if len(results) != len(date_list):
+        if len(results) != len(date_list) and len(results) > 0:
             trans_list = TransactionList(
                 [Transaction(trans_data) for trans_data in results])
             for index, transaction in enumerate(trans_list):
@@ -121,7 +133,7 @@ class Subscription(object):
                     print(self, "Added transaction for", Fore.YELLOW,
                           set_date.strftime("%Y-%m-%d"), Style.RESET_ALL)
         else:
-            print(self, Fore.GREEN, "Updated!")
+            print(self, Fore.GREEN, "Updated!", Style.RESET_ALL)
 
     @ staticmethod
     def add_subscription(name: str, s_date: date, e_date: date,
@@ -191,10 +203,10 @@ class SubscriptionList(list):
     def __dict__(self):
         return {"subscriptions": [sub for sub in self.__iter__()]}
 
-    def __iter__(self) -> Subscription:
-        for subscription in super().__iter__():
-            if isinstance(subscription, Subscription):
-                yield subscription
+    def __iter__(self) -> Iterator[Subscription]:
+        for index in range(len(self)):
+            if isinstance(self[index], Subscription):
+                yield self[index]
                 continue
             raise SubscriptionError("Item is not a Subscription instance!")
 
