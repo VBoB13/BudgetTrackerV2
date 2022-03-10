@@ -42,7 +42,7 @@ class Subscription(object):
 
     def __str__(self):
         if self.id:
-            return "{} - {} {}".format(self.date, self.amount, self.currency)
+            return "{} - {} {}/{}".format(self.name, self.amount, self.currency, str(self.period))
         return "No real subscription.(No id detected.)"
 
     def __iter__(self):
@@ -117,6 +117,11 @@ class Subscription(object):
                     print(Fore.RED, "--- !WARNING! ---", Style.RESET_ALL)
                     print(err)
                     print_tb(err.__traceback__)
+                else:
+                    print(self, "Added transaction for", Fore.YELLOW,
+                          set_date.strftime("%Y-%m-%d"), Style.RESET_ALL)
+        else:
+            print(self, Fore.GREEN, "Updated!")
 
     @ staticmethod
     def add_subscription(name: str, s_date: date, e_date: date,
