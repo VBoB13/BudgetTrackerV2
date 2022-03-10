@@ -23,10 +23,5 @@ def check_subs():
     sub_list.check_sub_transactions()
 
 
-# Step 2:
-# Check whether these subscriptions have been properly
-# deducted as transactions.
-
-# Step 3:
-# Add that subscription data into any month that does not
-# have it registered as a transaction ("TRANSACTIONS").
+if __name__ == '__main__':
+    check_subs()
