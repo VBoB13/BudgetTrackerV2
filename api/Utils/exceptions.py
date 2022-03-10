@@ -16,6 +16,12 @@ class CategoriesError(Exception):
     """
 
 
+class CheckSubError(Exception):
+    """
+    Error raised by the api.check_subscriptions module.
+    """
+
+
 class IncomesError(Exception):
     """
     Error raised by the api.objects.incomes module.

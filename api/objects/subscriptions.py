@@ -1,11 +1,15 @@
+from colorama import Fore, Style
 from typing import Tuple
 from datetime import date
 import pandas as pd
 import re
+from traceback import print_tb
 
 from ..Utils.exceptions import SubscriptionError
 from ..Utils.common import str_to_date
 from ..db.controller import query_db
+from .transactions import Transaction, TransactionList
+
 from . import subscription_period_dict
 
 
@@ -69,7 +73,52 @@ class Subscription(object):
         raise SubscriptionError(
             "Could not decipher the subscription period string!")
 
-    @staticmethod
+    def check_sub_transactions(self):
+        sql = """
+            SELECT * FROM "TRANSACTIONS" WHERE t_date > date '2022-02-22' AND amount={} AND currency='{}' AND comment='{}'
+        """.format(self.cost, self.currency, self.name)
+        try:
+            results = query_db(sql)
+        except Exception as err:
+            raise SubscriptionError(
+                "Could not fetch Transactions from database!") from err
+        today = date.today()
+        start_date_no = 22
+        if self.start_date.day > start_date_no:
+            start_date_no = self.start_date.day
+        compare_date = date(2022, 2, start_date_no)
+        if self.period is None:
+            raise SubscriptionError(
+                "Cannot iterate through dates when no period is set!" + Fore.RED + "\n -- self.period: {}".format(
+                    str(self.period) if self.period is not None else None) + Style.RESET_ALL)
+        date_list = [compare_date]
+        while compare_date < today:
+            compare_date += self.period
+            date_list.append(compare_date)
+
+        set_date = None
+        if len(results) != len(date_list):
+            trans_list = TransactionList(
+                [Transaction(trans_data) for trans_data in results])
+            for index, transaction in enumerate(trans_list):
+                try:
+                    if date_list[index].month != transaction.date.month:
+                        set_date = date_list[index]
+                        Transaction.add_transaction(
+                            set_date.strftime("%Y-%m-%d"),
+                            self.cost,
+                            self.currency,
+                            "Other",
+                            1,
+                            "Other",
+                            self.name
+                        )
+                except Exception as err:
+                    print(Fore.RED, "--- !WARNING! ---", Style.RESET_ALL)
+                    print(err)
+                    print_tb(err.__traceback__)
+
+    @ staticmethod
     def add_subscription(name: str, s_date: date, e_date: date,
                          cost: float, currency: str, auto_resub: bool, period: str):
         """
@@ -83,7 +132,7 @@ class Subscription(object):
         """
         return sql.format(name, s_date, e_date, cost, currency, auto_resub, period)
 
-    @staticmethod
+    @ staticmethod
     def get_all():
         """
         Method that returns the SQL which gets all Subscriptions from the DB.
@@ -95,7 +144,7 @@ class Subscription(object):
         """
         return sql
 
-    @staticmethod
+    @ staticmethod
     def get_subscription_by_name(name: str):
         """
         Method that returns the SQL which gets a Subscription from DB by name.
@@ -105,6 +154,17 @@ class Subscription(object):
             WHERE name='{}'
         """
         return sql.format(name)
+
+    @ staticmethod
+    def get_non_expired_subs():
+        """
+        Method that returns SQL which gets all subscriptions that have not yet
+        expired OR have auto_resub == true.
+        """
+        sql = """
+            SELECT id, name, start_date, end_date, cost, currency, auto_resub, period FROM "SUBSCRIPTIONS" WHERE end_date < CURRENT_DATE OR auto_resub=true;
+        """
+        return sql
 
 
 class SubscriptionList(list):
@@ -126,7 +186,7 @@ class SubscriptionList(list):
     def __dict__(self):
         return {"subscriptions": [sub for sub in self.__iter__()]}
 
-    def __iter__(self):
+    def __iter__(self) -> Subscription:
         for subscription in super().__iter__():
             if isinstance(subscription, Subscription):
                 yield subscription
@@ -164,3 +224,7 @@ class SubscriptionList(list):
         except Exception as err:
             raise SubscriptionError(
                 "Could not convert Subscriptions into DF!") from err
+
+    def check_sub_transactions(self):
+        for sub in self.__iter__():
+            sub.check_sub_transactions()

@@ -17,25 +17,25 @@ class Transaction(object):
     """
 
     def __init__(self, row: Tuple = None):
-        self.id = None
-        self.date = None
-        self.amount = None
+        self.id: int = None
+        self.date: datetime.date = None
+        self.amount: float or int = None
         self.currency = None
-        self.category = None
-        self.user = None
-        self.store = None
-        self.comment = None
+        self.category: Category = None
+        self.user: User = None
+        self.store: Store = None
+        self.comment: str = None
 
         if row is not None:
             self.id = int(row[0])
-            self.date = row[1] if isinstance(
+            self.date: datetime.date = row[1] if isinstance(
                 row[1], datetime.date) else str_to_date(row[1])
             self.amount = float(row[2])
-            self.currency = str(row[3])
-            self.category = self._fetch_category(row[4])
-            self.user = self._fetch_user(int(row[5]))
-            self.store = self._fetch_store(row[6])
-            self.comment = row[7] if row[7] else ""
+            self.currency: str = str(row[3])
+            self.category: Category = self._fetch_category(row[4])
+            self.user: User = self._fetch_user(int(row[5]))
+            self.store: Store = self._fetch_store(row[6])
+            self.comment: str = row[7] if row[7] else ""
 
     def __str__(self):
         if self.id:
@@ -166,7 +166,11 @@ class TransactionList(list):
 
         if trans_list:
             for transaction in trans_list:
-                self.append(transaction)
+                if isinstance(transaction, Transaction):
+                    self.append(transaction)
+                    continue
+                raise TransactionsError(
+                    "This list can only contain Transactions!")
 
     def __iter__(self):
         for transaction in super().__iter__():
