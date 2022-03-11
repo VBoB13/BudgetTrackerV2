@@ -12,7 +12,7 @@ from ..db.controller import query_db
 from .transactions import Transaction, TransactionList
 
 from . import subscription_period_dict
-from ..Utils import TODAY, ONE_DAY
+from ..Utils import TODAY, ONE_DAY, ONE_MONTH, ONE_YEAR
 
 
 class Subscription(object):
@@ -101,17 +101,23 @@ class Subscription(object):
             raise SubscriptionError(
                 "Cannot iterate through dates when no period is set!" + Fore.RED + "\n -- self.period: {}".format(
                     str(self.period) if self.period is not None else None) + Style.RESET_ALL)
-        date_list = [compare_date]
+        date_list = []
         if self.auto_resub:
             while compare_date < TODAY:
-                compare_date += ONE_DAY * \
-                    monthrange(compare_date.year, compare_date.month)[1]
                 date_list.append(compare_date)
+                if self.period == ONE_MONTH:
+                    compare_date += ONE_DAY * \
+                        monthrange(compare_date.year, compare_date.month)[1]
+                if self.period == ONE_YEAR:
+                    compare_date += self.period
         else:
             while compare_date <= self.end_date:
-                compare_date += ONE_DAY * \
-                    monthrange(compare_date.year, compare_date.month)[1]
                 date_list.append(compare_date)
+                if self.period == ONE_MONTH:
+                    compare_date += ONE_DAY * \
+                        monthrange(compare_date.year, compare_date.month)[1]
+                if self.period == ONE_YEAR:
+                    compare_date += self.period
 
         if len(results) != len(date_list):
             trans_list = TransactionList(
