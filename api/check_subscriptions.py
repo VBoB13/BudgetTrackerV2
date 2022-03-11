@@ -12,7 +12,7 @@ from .Utils.exceptions import CheckSubError
 
 
 def check_subs():
-    sql = Subscription.get_non_expired_subs()
+    sql = Subscription.get_all()
     try:
         results = query_db(sql)
     except Exception as err:

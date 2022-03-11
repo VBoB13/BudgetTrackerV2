@@ -1,5 +1,6 @@
 from colorama import Fore, Style
 from typing import Tuple, Iterator
+from calendar import monthrange
 from datetime import date
 import pandas as pd
 import re
@@ -11,6 +12,7 @@ from ..db.controller import query_db
 from .transactions import Transaction, TransactionList
 
 from . import subscription_period_dict
+from ..Utils import TODAY, ONE_DAY
 
 
 class Subscription(object):
@@ -87,51 +89,57 @@ class Subscription(object):
 
     def check_sub_transactions(self):
         sql = """
-            SELECT * FROM "TRANSACTIONS" WHERE t_date > date '2022-02-22' AND amount={} AND currency='{}' AND comment='{}'
+            SELECT * FROM "TRANSACTIONS" WHERE amount={} AND currency='{}' AND comment='{}'
         """.format(self.cost, self.currency, self.name)
         try:
             results = query_db(sql)
         except Exception as err:
             raise SubscriptionError(
                 "Could not fetch Transactions from database!") from err
-        today = date.today()
-        start_date_no = 22
-        if self.start_date.day > start_date_no:
-            start_date_no = self.start_date.day
-        compare_date = date(2022, 2, start_date_no)
+        compare_date = self.start_date
         if self.period is None:
             raise SubscriptionError(
                 "Cannot iterate through dates when no period is set!" + Fore.RED + "\n -- self.period: {}".format(
                     str(self.period) if self.period is not None else None) + Style.RESET_ALL)
         date_list = [compare_date]
-        while compare_date < today:
-            compare_date += self.period
-            date_list.append(compare_date)
+        if self.auto_resub:
+            while compare_date < TODAY:
+                compare_date += ONE_DAY * \
+                    monthrange(compare_date.year, compare_date.month)[1]
+                date_list.append(compare_date)
+        else:
+            while compare_date <= self.end_date:
+                compare_date += ONE_DAY * \
+                    monthrange(compare_date.year, compare_date.month)[1]
+                date_list.append(compare_date)
 
-        set_date = None
-        if len(results) != len(date_list) and len(results) > 0:
+        if len(results) != len(date_list):
             trans_list = TransactionList(
                 [Transaction(trans_data) for trans_data in results])
-            for index, transaction in enumerate(trans_list):
+            trans_date_list = []
+            for transaction in trans_list:
+                trans_date_list.append(transaction.date)
+            for date_obj in date_list:
                 try:
-                    if date_list[index].month != transaction.date.month:
-                        set_date = date_list[index]
-                        Transaction.add_transaction(
-                            set_date.strftime("%Y-%m-%d"),
+                    if date_obj not in trans_date_list and (date_obj <= self.end_date or self.auto_resub):
+                        sql_query = Transaction.add_transaction(
+                            date_obj.strftime("%Y-%m-%d"),
                             self.cost,
                             self.currency,
-                            "Other",
+                            "Others",
                             1,
                             "Other",
                             self.name
                         )
+                        query_db(sql_query, True)
+                        print(self, "Added transaction for", Fore.YELLOW,
+                              date_obj.strftime("%Y-%m-%d"), Style.RESET_ALL)
+                        continue
                 except Exception as err:
                     print(Fore.RED, "--- !WARNING! ---", Style.RESET_ALL)
                     print(err)
                     print_tb(err.__traceback__)
-                else:
-                    print(self, "Added transaction for", Fore.YELLOW,
-                          set_date.strftime("%Y-%m-%d"), Style.RESET_ALL)
+
         else:
             print(self, Fore.GREEN, "Updated!", Style.RESET_ALL)
 

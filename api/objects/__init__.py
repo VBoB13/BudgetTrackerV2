@@ -1,11 +1,12 @@
 from datetime import date, timedelta
 from calendar import monthrange
 
-today = date.today()
+from ..Utils import TODAY, ONE_DAY
+
 
 subscription_period_dict = {
     'y': timedelta(days=365),
-    'm': timedelta(days=monthrange(today.year, today.month)[1]),
+    'm': timedelta(days=monthrange(TODAY.year, TODAY.month)[1]),
     'w': timedelta(weeks=1),
-    'd': timedelta(days=1)
+    'd': ONE_DAY
 }

@@ -16,7 +16,7 @@ class Transaction(object):
     Reminder: 'date' corresponds to 't_date' in DB.
     """
 
-    def __init__(self, row: Tuple = None):
+    def __init__(self, row: Tuple = None, **kwargs):
         self.id: int = None
         self.date: datetime.date = None
         self.amount: float or int = None
@@ -36,6 +36,16 @@ class Transaction(object):
             self.user: User = self._fetch_user(int(row[5]))
             self.store: Store = self._fetch_store(row[6])
             self.comment: str = row[7] if row[7] else ""
+
+        if kwargs:
+            self.id: int = kwargs.pop("id", None)
+            self.date: datetime.date = kwargs.pop("date", None)
+            self.amount: float or int = kwargs.pop("amount", None)
+            self.currency = kwargs.pop("currency", None)
+            self.category: Category = kwargs.pop("category", None)
+            self.user: User = kwargs.pop("user", None)
+            self.store: Store = kwargs.pop("store", None)
+            self.comment: str = kwargs.pop("comment", None)
 
     def __str__(self):
         if self.id:
@@ -60,7 +70,7 @@ class Transaction(object):
         sql = Category.get_category_by_name(cat_name)
         category = None
         try:
-            category = Category(query_db(sql)[0])
+            category = Category(query_db(sql))
         except ControllerError as err:
             raise TransactionsError(
                 "Could not retrieve category data from database!") from err

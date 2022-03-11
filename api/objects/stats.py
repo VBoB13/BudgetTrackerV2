@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from calendar import monthrange
 from traceback import print_tb
 from typing import List, Tuple
 from decimal import Decimal
@@ -12,6 +13,8 @@ import io
 from ..Utils.exceptions import StatsError
 from ..objects.categories import Category
 from ..db.controller import query_db, ControllerError
+
+from ..Utils import START_DAY, TODAY, ONE_MONTH_AGO, ONE_MONTH_AHEAD, ONE_DAY
 
 
 class Stats(object):
@@ -35,11 +38,16 @@ class Stats(object):
         sql = """
             SELECT DISTINCT(cat.name), SUM(tra.amount) AS "sum" FROM "TRANSACTIONS" tra
             JOIN "CATEGORIES" cat ON cat.id = tra.category_id
+            WHERE t_date < '{}' AND t_date > '{}'
             GROUP BY cat.name
             UNION ALL
-                SELECT 'Remaining', SUM(amount)-(SELECT SUM(amount) FROM "TRANSACTIONS") FROM "INCOMES"
+                SELECT 'Remaining', SUM(amount)-(SELECT SUM(amount) FROM "TRANSACTIONS" WHERE t_date < '{}' AND t_date > '{}') FROM "INCOMES"
+                WHERE i_date < '{}' AND i_date > '{}'
             ;
-        """
+        """.format(
+            TODAY.strftime("%Y-%m-%d"), START_DAY.strftime("%Y-%m-%d"),
+            TODAY.strftime("%Y-%m-%d"), START_DAY.strftime("%Y-%m-%d"),
+            TODAY.strftime("%Y-%m-%d"), START_DAY.strftime("%Y-%m-%d"))
         try:
             results = query_db(sql)
         except ControllerError as err:
@@ -52,11 +60,12 @@ class Stats(object):
         sql = """
         SELECT DISTINCT(tr.t_date), ca.name, SUM(tr.amount) AS "Sum" FROM "TRANSACTIONS" tr
         JOIN "CATEGORIES" ca ON ca.id = tr.category_id
+        WHERE t_date > '{}' AND t_date < '{}' AND ca.id != 2
         GROUP BY tr.t_date, ca.name
         ORDER BY
             tr.t_date ASC,
             "Sum" DESC;
-        """
+        """.format(ONE_MONTH_AGO.strftime("%Y-%m-%d"), TODAY.strftime("%Y-%m-%d"))
         try:
             results = query_db(sql)
         except ControllerError as err:
@@ -67,12 +76,25 @@ class Stats(object):
     def _get_income(self, daily_avg=False) -> int:
         if daily_avg:
             sql = """
-            SELECT ROUND(SUM(amount)/30, 2) FROM "INCOMES" TOP2;
-            """
+                SELECT ROUND(SUM(amount)/{}, 2) FROM "INCOMES" TOP2;
+            """.format(monthrange(TODAY.year, TODAY.month)[1])
         else:
             sql = """
-            SELECT SUM(amount) FROM "INCOMES";
+                SELECT SUM(amount) FROM "INCOMES";
             """
+        try:
+            results = query_db(sql)
+        except ControllerError as err:
+            raise StatsError(
+                "Something went wrong when querying the database!") from err
+        return results[0][0]
+
+    def _get_rent_util_avg(self) -> int:
+        sql = """
+            SELECT ROUND(SUM(amount)/30, 2) FROM "TRANSACTIONS"
+            WHERE category_id=2 AND t_date > '{}';
+        """.format(ONE_MONTH_AGO.strftime("%Y-%m-%d"))
+
         try:
             results = query_db(sql)
         except ControllerError as err:
@@ -143,15 +165,17 @@ class Stats(object):
     def get_category_sums_per_date(self):
         data = self._get_category_sums_per_date()
         income_daily_avg = self._get_income(daily_avg=True)
+        rent_util_avg = self._get_rent_util_avg()
         first_date = data[0][0]
         current_date = first_date
         date_list = []
-        while current_date <= date.today():
-            date_list.append(current_date + timedelta(days=1))
-            current_date += timedelta(days=1)
+        while current_date <= TODAY:
+            date_list.append(current_date + ONE_DAY)
+            current_date += ONE_DAY
         try:
             for date_obj in date_list:
                 data.append((date_obj, "Income", income_daily_avg))
+                data.append((date_obj, "Rent & Utilities", rent_util_avg))
         except Exception as err:
             print(err)
             print_tb(err.__traceback__)
