@@ -89,8 +89,8 @@ class Subscription(object):
 
     def check_sub_transactions(self):
         sql = """
-            SELECT * FROM "TRANSACTIONS" WHERE amount={} AND currency='{}' AND comment='{}'
-        """.format(self.cost, self.currency, self.name)
+            SELECT * FROM "TRANSACTIONS" WHERE amount={} AND currency='{}' AND comment='{}' AND t_date <= CURRENT_DATE
+        """.format(self.cost, self.currency, self.name, TODAY.strftime("%Y-%m-%d"))
         try:
             results = query_db(sql)
         except Exception as err:
@@ -102,8 +102,8 @@ class Subscription(object):
                 "Cannot iterate through dates when no period is set!" + Fore.RED + "\n -- self.period: {}".format(
                     str(self.period) if self.period is not None else None) + Style.RESET_ALL)
         date_list = []
-        if self.auto_resub:
-            while compare_date < TODAY:
+        if self.end_date < TODAY:
+            while compare_date <= self.end_date:
                 date_list.append(compare_date)
                 if self.period == ONE_MONTH:
                     compare_date += ONE_DAY * \
@@ -111,7 +111,7 @@ class Subscription(object):
                 if self.period == ONE_YEAR:
                     compare_date += self.period
         else:
-            while compare_date <= self.end_date:
+            while compare_date <= TODAY:
                 date_list.append(compare_date)
                 if self.period == ONE_MONTH:
                     compare_date += ONE_DAY * \
@@ -127,7 +127,7 @@ class Subscription(object):
                 trans_date_list.append(transaction.date)
             for date_obj in date_list:
                 try:
-                    if date_obj not in trans_date_list and (date_obj <= self.end_date or self.auto_resub):
+                    if date_obj not in trans_date_list and date_obj < self.end_date:
                         sql_query = Transaction.add_transaction(
                             date_obj.strftime("%Y-%m-%d"),
                             self.cost,

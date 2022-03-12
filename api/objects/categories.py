@@ -9,9 +9,14 @@ class Category(object):
         self.sum = None
 
         if row:
-            self.id = int(row[0])
-            self.name = row[1]
-            self.color = row[2]
+            if isinstance(row[0], tuple):
+                self.id = int(row[0][0])
+                self.name = row[0][1]
+                self.color = row[0][2]
+            else:
+                self.id = int(row[0])
+                self.name = row[1]
+                self.color = row[2]
 
         if kwargs.pop("color", None):
             try:
