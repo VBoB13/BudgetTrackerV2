@@ -118,7 +118,7 @@ class Stats(object):
     def create_bytes_categories(self, plot: str) -> io.BytesIO:
         # Initiate plot figure
         fig, axes = plt.subplots()
-        plt.style.use("dark_background")
+        plt.style.use("seaborn-dark-palette")
         sns.set_style('darkgrid')
 
         if self.df is None:
@@ -133,10 +133,10 @@ class Stats(object):
                      ha="right", rotation_mode="anchor")
         elif plot == "pie":
             colors = plt.get_cmap('Blues')(
-                np.linspace(0.25, 0.95, len(self.df["Sum"])))
+                np.linspace(0.15, 1, len(self.df["Sum"])))
             labels = list(self.df["Category"])
-            axes.pie(x=self.df["Sum"], colors=colors, labels=labels, textprops={"color": "black"}, labeldistance=1.15,
-                     radius=4, center=(7, 7), frame=True, wedgeprops={"linewidth": 1.5, "edgecolor": "white"})
+            axes.pie(x=self.df["Sum"], colors=colors, labels=labels, textprops={"color": "black"}, labeldistance=1.0,
+                     radius=4, center=(7, 7), frame=True, wedgeprops={"linewidth": 1, "edgecolor": "white"})
             axes.set_title("Sums per category")
         elif plot == "bar":
             axes = sns.barplot(x="Meal", y="Amount",

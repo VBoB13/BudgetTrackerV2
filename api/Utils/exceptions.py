@@ -56,3 +56,15 @@ class UsersError(Exception):
     """
     Error raised by the api.objects.users module.
     """
+
+
+class UtilError(Exception):
+    """
+    Error raised by the api.Utils package.
+    """
+
+
+class CommonUtilError(Exception):
+    """
+    Error raised by the api.Utils.common module.
+    """
