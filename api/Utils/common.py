@@ -5,7 +5,7 @@ from colorama import Fore, Style
 from pprint import pprint
 from datetime import date, datetime
 
-from .exceptions import CommonUtilError
+from .exceptions import CommonUtilError, ControllerError
 from ..db.controller import query_db
 
 EXCHANGE_KEY = os.environ["EXCH_KEY"]
@@ -17,8 +17,20 @@ def str_to_date(s: str) -> date:
     return d
 
 
-def get_ntd_rates(date_obj: date) -> float:
-    return
+def get_ntd_from_base_date(base: str, date_obj: date) -> float:
+    sql = """
+        SELECT rate FROM "EXCHANGE_RATES"
+        WHERE r_date <=date '{}'
+        AND base='{}'
+        ORDER BY r_date DESC
+        LIMIT 1
+    """.format(date_obj.strftime("%Y-%m-%d"), base)
+    try:
+        rate = query_db(sql)[0][0]
+    except ControllerError as err:
+        raise CommonUtilError("Could not get NTD rate from DB.\nBase: {}\nDate: {}".format(
+            base, date_obj.strftime("%Y-%m-%d")))
+    return rate
 
 
 def save_rate():
@@ -47,6 +59,6 @@ def save_rate():
 
 
 if __name__ == '__main__':
-    # today = date.today()
-    # get_ntd_rates(today)
-    save_rate()
+    today = date.today()
+    print("USD - NTD:", get_ntd_from_base_date("USD", today))
+    # save_rate()
