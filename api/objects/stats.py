@@ -36,7 +36,14 @@ class Stats(object):
 
     def _get_category_sums(self):
         sql = """
-            SELECT DISTINCT(cat.name), SUM(tra.amount) AS "sum" FROM "TRANSACTIONS" tra
+            SELECT DISTINCT(cat.name), SUM(case when tra.currency='USD' then
+                tra.amount*(
+                    SELECT rate FROM "EXCHANGE_RATES"
+                    WHERE r_date <= tra.t_date
+                    ORDER BY r_date DESC
+                    LIMIT 1) else
+                tra.amount END)::numeric(8,2) AS "sum"
+            FROM "TRANSACTIONS" tra
             JOIN "CATEGORIES" cat ON cat.id = tra.category_id
             WHERE t_date < '{}' AND t_date > '{}'
             GROUP BY cat.name
