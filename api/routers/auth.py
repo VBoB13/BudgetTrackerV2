@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException, Form
 
+from api.Utils.exceptions import AuthError
+
 from ..objects.users import User
 from ..typing.models import UserOut
 from ..Utils.tokens import encrypt_password
@@ -63,9 +65,10 @@ async def login(
     except ControllerError as err:
         raise HTTPException(500, "SQL Error! Could not login user!")
     else:
-        user.id = results[0][0]
-        user.username = results[0][1]
-        user.name = results[0][2]
-        user.email = results[0][3]
-
-    return dict(user)
+        if len(results) > 0:
+            user.id = results[0][0]
+            user.username = results[0][1]
+            user.name = results[0][2]
+            user.email = results[0][3]
+            return dict(user)
+        raise HTTPException(401, "Wrong username and/or password!")
