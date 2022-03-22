@@ -1,26 +1,36 @@
 <script setup>
-import { ref } from "vue";
+import { reactive, onMounted } from "vue";
 import HomeView from "./views/HomeView.vue";
 import AboutView from "./views/AboutView.vue";
 import { RequestHandler } from "./helpers/reqs";
 
-const login = ref(false);
-let user = null;
+const state = reactive({
+  isAuthenticated: false,
+  user: null,
+});
 
-try {
-  let req = new RequestHandler("192.168.1.108:8000/auth/login", "POST");
-  user = req.sendRequest();
-} catch (error) {
-  console.error(error);
+function authenticate() {
+  try {
+    let req = new RequestHandler("192.168.1.108:8000/auth/login", "POST");
+    req.reqConf.body = {
+      username: "w1ck3d",
+      password: "13",
+    };
+    state.user = req.sendRequest();
+  } catch (error) {
+    console.error(error);
+  }
+  state.isAuthenticated = true;
 }
-if (user.id !== null) {
-  login.value = true;
-}
+
+onMounted(() => {
+  authenticate();
+});
 </script>
 
 <template>
   <main>
-    <HomeView v-if="login" />
+    <HomeView v-if="state.isAuthenticated" />
     <AboutView v-else />
   </main>
 </template>
