@@ -1,17 +1,27 @@
 <script setup>
-import { RouterLink } from "vue-router";
+import { ref } from "vue";
 import HomeView from "./views/HomeView.vue";
+import AboutView from "./views/AboutView.vue";
+import { RequestHandler } from "./helpers/reqs";
+
+const login = ref(false);
+let user = null;
+
+try {
+  let req = new RequestHandler("192.168.1.108:8000/auth/login", "POST");
+  user = req.sendRequest();
+} catch (error) {
+  console.error(error);
+}
+if (user.id !== null) {
+  login.value = true;
+}
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>&nbsp; |&nbsp;
-      <RouterLink to="/about">About</RouterLink>
-    </nav>
-  </header>
   <main>
-    <HomeView />
+    <HomeView v-if="login" />
+    <AboutView v-else />
   </main>
 </template>
 
@@ -26,14 +36,5 @@ body {
     #afe2ff -8.06%,
     rgba(175, 226, 255, 0) 100%
   );
-}
-main {
-  display: flex;
-  justify-content: center;
-}
-header {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
 }
 </style>
