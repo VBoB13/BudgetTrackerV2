@@ -45,7 +45,7 @@ class Stats(object):
                 tra.amount END)::numeric(8,2) AS "sum"
             FROM "TRANSACTIONS" tra
             JOIN "CATEGORIES" cat ON cat.id = tra.category_id
-            WHERE t_date < '{}' AND t_date > '{}'
+            WHERE t_date <= '{}' AND t_date >= '{}'
             GROUP BY cat.name
             UNION ALL
                 SELECT 'Remaining', SUM(amount)-(SELECT SUM(amount) FROM "TRANSACTIONS" WHERE t_date < '{}' AND t_date > '{}') FROM "INCOMES"
@@ -65,9 +65,15 @@ class Stats(object):
 
     def _get_category_sums_per_date(self) -> List[Tuple[date, str, float]]:
         sql = """
-        SELECT DISTINCT(tr.t_date), ca.name, SUM(tr.amount) AS "Sum" FROM "TRANSACTIONS" tr
+        SELECT DISTINCT(tr.t_date), ca.name, SUM(case when tr.currency='USD' then
+            tr.amount*(
+                    SELECT rate FROM "EXCHANGE_RATES"
+                    WHERE r_date <= tr.t_date
+                    ORDER BY r_date DESC
+                    LIMIT 1) else
+                tr.amount END)::numeric(8,2) AS "Sum" FROM "TRANSACTIONS" tr
         JOIN "CATEGORIES" ca ON ca.id = tr.category_id
-        WHERE t_date > '{}' AND t_date < '{}' AND ca.id != 2
+        WHERE t_date >= '{}' AND t_date <= '{}' AND ca.id != 2
         GROUP BY tr.t_date, ca.name
         ORDER BY
             tr.t_date ASC,
