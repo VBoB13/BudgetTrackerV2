@@ -143,7 +143,7 @@ class Transaction(object):
                     {},
                     (SELECT (st.id) FROM "STORES" AS st WHERE s_name='{}'),
                     '{}');
-            UPDATE "STASH" SET amount=amount-{} WHERE user_id={} AND currency='{}';
+            UPDATE "STASH" SET amount=amount-{} WHERE amount=(SELECT max(amount) FROM "STASH");
         """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment, amount, user_id, currency)
 
     @staticmethod
