@@ -144,7 +144,7 @@ class Transaction(object):
                     (SELECT (st.id) FROM "STORES" AS st WHERE s_name='{}'),
                     '{}');
             UPDATE "STASH" SET amount=amount-{} WHERE amount=(SELECT max(amount) FROM "STASH");
-        """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment, amount, user_id, currency)
+        """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment, amount)
 
     @staticmethod
     def get_transactions_by_date(date: str):
