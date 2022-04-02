@@ -10,16 +10,17 @@ const state = reactive({
 });
 
 function authenticate() {
+  let req = new RequestHandler("http://192.168.1.108:8000/auth/login", "POST");
+  req.reqConf.body = {
+    username: "w1ck3d",
+    password: "13",
+  };
   try {
-    let req = new RequestHandler("192.168.1.108:8000/auth/login", "POST");
-    req.reqConf.body = {
-      username: "w1ck3d",
-      password: "13",
-    };
     state.user = req.sendRequest();
   } catch (error) {
     console.error(error);
   }
+  console.log("Login successful!");
   state.isAuthenticated = true;
 }
 
