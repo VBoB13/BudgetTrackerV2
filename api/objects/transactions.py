@@ -9,6 +9,7 @@ from ..objects.stores import Store
 from ..Utils.exceptions import TransactionsError, ControllerError, CategoriesError
 from ..Utils.common import str_to_date
 from ..db.controller import query_db
+from . import TODAY
 
 
 class Transaction(object):
@@ -116,11 +117,12 @@ class Transaction(object):
             JOIN "CATEGORIES" AS cat ON tra.category_id = cat.id
             JOIN "USERS" AS u ON tra.user_id = u.id
             JOIN "STORES" AS st ON tra.store_id = st.id
+            WHERE tra.t_date >= date '{}'
             ORDER BY
                 tra.t_date DESC,
                 tra.user_id ASC,
                 st.s_name ASC;
-        """
+        """.format((TODAY - datetime.timedelta(days=30)).strftime("%Y-%m-%d"))
 
     @staticmethod
     def add_transaction(date: str, amount: float, currency: str, category: str, user_id: int, store_name: str, comment: str):
