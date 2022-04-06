@@ -48,8 +48,8 @@ class Stats(object):
             WHERE t_date <= '{}' AND t_date >= '{}'
             GROUP BY cat.name
             UNION ALL
-                SELECT 'Remaining', SUM(amount)-(SELECT SUM(amount) FROM "TRANSACTIONS" WHERE t_date < '{}' AND t_date > '{}') FROM "INCOMES"
-                WHERE i_date < '{}' AND i_date > '{}'
+                SELECT 'Remaining', SUM(amount)-(SELECT SUM(amount) FROM "TRANSACTIONS" WHERE t_date <= '{}' AND t_date >= '{}') FROM "INCOMES"
+                WHERE i_date <= '{}' AND i_date >= '{}'
             ;
         """.format(
             TODAY.strftime("%Y-%m-%d"), START_DAY.strftime("%Y-%m-%d"),
