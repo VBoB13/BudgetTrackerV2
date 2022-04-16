@@ -52,9 +52,9 @@ class Stats(object):
                 WHERE i_date <= '{}' AND i_date >= '{}'
             ;
         """.format(
-            TODAY.strftime("%Y-%m-%d"), START_DAY.strftime("%Y-%m-%d"),
-            TODAY.strftime("%Y-%m-%d"), START_DAY.strftime("%Y-%m-%d"),
-            TODAY.strftime("%Y-%m-%d"), START_DAY.strftime("%Y-%m-%d"))
+            TODAY.strftime("%Y-%m-%d"), ONE_MONTH_AGO.strftime("%Y-%m-%d"),
+            TODAY.strftime("%Y-%m-%d"), ONE_MONTH_AGO.strftime("%Y-%m-%d"),
+            TODAY.strftime("%Y-%m-%d"), ONE_MONTH_AGO.strftime("%Y-%m-%d"))
         try:
             results = query_db(sql)
         except ControllerError as err:
