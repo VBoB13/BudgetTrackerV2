@@ -4,7 +4,7 @@ import { ref, defineProps, onMounted } from "vue";
 const props = defineProps({
   name: String(""),
   type: String("text"),
-  class: String("text_input"),
+  class: String("inputField"),
   placeholder: String("")
 });
 
