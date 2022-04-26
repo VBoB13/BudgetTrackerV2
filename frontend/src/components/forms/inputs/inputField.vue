@@ -1,28 +1,23 @@
 <script setup>
 import { ref, defineProps, onMounted } from "vue";
 
-const field = defineProps({
+const props = defineProps({
   name: String(""),
   type: String("text"),
-  value: String(""),
   class: String("text_input"),
+  placeholder: String("")
 });
 
-const fieldVal = ref("");
-
-function onInput(e) {
-  fieldVal.value = e.target.value;
-}
+const fieldVal = ref("")
 
 onMounted(() => {
-  // Something...
+  if (props.name === "" || props.name === null || props.name === undefined) throw Error("Input field MUST have a name...");
 });
 </script>
 
 <template>
   <input
-    v-bind="field"
-    @input="onInput"
-    placeholder="{{ field.name }} here..."
+    v-bind="props"
+    v-model="fieldVal"
   />
 </template>
