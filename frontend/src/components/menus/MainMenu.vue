@@ -1,12 +1,18 @@
 <script setup>
-console.log("Henlo!");
+import { RouterLink } from "vue-router";
 </script>
 
 <template>
   <section class="menu">
-    <img src="../../assets/icons/Add-Icon.svg" alt="Add" />
-    <img src="../../assets/icons/Stats.svg" alt="Stats" />
-    <img src="../../assets/icons/Inspect.svg" alt="Inspect" />
+    <RouterLink :to="{ name: 'Add' }">
+      <img src="../../assets/icons/Add-Icon.svg" alt="Add" />
+    </RouterLink>
+    <RouterLink :to="{ name: 'Stats' }">
+      <img src="../../assets/icons/Stats.svg" alt="Stats" />
+    </RouterLink>
+    <RouterLink :to="{ name: 'Inspect' }">
+      <img src="../../assets/icons/Inspect.svg" alt="Inspect" />
+    </RouterLink>
   </section>
 </template>
 
