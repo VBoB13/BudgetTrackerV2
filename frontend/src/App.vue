@@ -10,28 +10,33 @@ const state = reactive({
   user: null,
 });
 
-function setState(data){
-  if (data.isAuthenticated) {
-    state.isAuthenticated = isAuthenticated;
-    state.user = data.user;
-  }
-}
-
-function auth_check(username, password){
-
+function login(){
+  let username = document.getElementById('username').value;
+  let password = document.getElementById('password').value;
+  console.log(`Username: ${username}`);
+  console.log(`Password: ${password}`);
+  fake_data.users.forEach(user => {
+    if(username === user.username){
+      if (password === user.password){
+        state.isAuthenticated = true;
+        state.user = user.username;
+      }
+      else {
+        state.isAuthenticated = false;
+        state.user = null;
+      }
+    }
+  });
 }
 
 function authenticate() {
-  // let req = new RequestHandler("http://192.168.1.108:8000/auth/login", "POST");
-  // req.reqConf.body = {
-  //   username: "w1ck3d",
-  //   password: "13",
-  // };
+  let req = new RequestHandler("http://192.168.1.108:8000/auth/login", "POST");
+  req.reqConf.body = {
+    username: "w1ck3d",
+    password: "13",
+  };
   try {
-    // let data = req.sendRequest();
-    let data = fake_data;
-    console.log("Login successful!");
-    setState(data);
+    let data = req.sendRequest();
   } catch (error) {
     console.error(error);
     state.isAuthenticated = false;
@@ -49,7 +54,7 @@ onMounted(() => {
     <NavbarMenu />
   </header>
   <main>
-    <LoginView v-if="state.isAuthenticated" />
+    <LoginView v-if="!state.isAuthenticated" @loginevent="login" />
     <router-view v-else />
   </main>
 </template>

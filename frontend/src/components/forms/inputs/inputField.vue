@@ -1,5 +1,9 @@
 <script setup>
 const props = defineProps({
+  id: {
+    type: String,
+    required: false
+  },
   name: String,
   type: {
     type: String,
@@ -28,6 +32,7 @@ const props = defineProps({
 
 <template>
   <input
+    :id="props.id ?? ''"
     :name="props.name"
     :type="props.type"
     :class="props.class"

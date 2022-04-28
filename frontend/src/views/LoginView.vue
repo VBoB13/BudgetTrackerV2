@@ -1,10 +1,13 @@
 <script setup>
-import LoginForm from "../components/forms/LoginForm.vue"
+import LoginForm from "../components/forms/LoginForm.vue";
+
+const emit = defineEmits(['loginevent']);
+
 </script>
 
 <template>
     <h1>Login</h1>
-    <LoginForm />
+    <LoginForm @formloginevent="emit('loginevent')" />
 </template>
 
 <style scoped>

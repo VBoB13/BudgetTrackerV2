@@ -1,7 +1,10 @@
 <script setup>
 import InputField from "./inputs/InputField.vue";
 
+const emit = defineEmits(['formloginevent']);
+
 const usernameInput = {
+  id: "username",
   name: "username",
   type: "text",
   class: "inputField",
@@ -10,6 +13,7 @@ const usernameInput = {
 }
 
 const pwdInput = {
+  id: "password",
   name: "password",
   type: "password",
   class: "inputField",
@@ -17,19 +21,16 @@ const pwdInput = {
   value: ""
 }
 
-function login(){
-  if(username === "w1ck3d" && password === "13") return true;
-  else return false;
-}
-
 </script>
 
 <template>
-  <form @submit.prevent="login" class="form_std">
+  <div class="form">
+    <form @submit.prevent="emit('formloginevent')" class="form_std">
     <InputField v-bind="usernameInput" /><br>
     <InputField v-bind="pwdInput" />
     <p><button type="submit">Login</button></p>
   </form>
+  </div>
 </template>
 
 <style scoped>
