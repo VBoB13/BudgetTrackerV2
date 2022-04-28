@@ -1,0 +1,58 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Ric",
+            "username": "w1ck3d",
+            "password": "13"
+        },
+        {
+            "id": 4,
+            "name": "Jenn",
+            "username": "J3nn",
+            "password": "13"
+        }
+    ],
+    "transactions": [
+        {
+            "id": 1,
+            "date": "2022-04-28",
+            "category": "Food",
+            "user": 1,
+            "currency": "NTD",
+            "amount": 67,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "id": 2,
+            "date": "2022-04-27",
+            "category": "Transportation",
+            "user": 1,
+            "currency": "NTD",
+            "amount": 40,
+            "store": "MRT",
+            "comment": "Jingmei<->Gongguan"
+        },
+        {
+            "id": 3,
+            "date": "2022-04-27",
+            "category": "Food",
+            "user": 1,
+            "currency": "NTD",
+            "amount": 285,
+            "store": "Other",
+            "comment": "Dinner"
+        },
+        {
+            "id": 4,
+            "date": "2022-04-27",
+            "category": "Food",
+            "user": 4,
+            "currency": "NTD",
+            "amount": 285,
+            "store": "Other",
+            "comment": "Dinner"
+        }
+    ]
+}

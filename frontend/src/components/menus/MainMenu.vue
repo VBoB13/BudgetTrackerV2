@@ -22,6 +22,6 @@ section.menu {
   padding: 5px;
   display: flex;
   justify-content: space-between;
-  align-content: flex-start;
+  align-items: center;
 }
 </style>
