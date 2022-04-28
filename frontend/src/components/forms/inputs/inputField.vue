@@ -41,3 +41,12 @@ const props = defineProps({
     :required="props.required"
   />
 </template>
+
+<style scoped>
+input.inputField {
+  border-radius: 1.5em;
+  border: 1px solid #000000;
+  padding: 0.66em;
+  margin: 0.25em;
+}
+</style>

@@ -6,7 +6,7 @@ function goBack(){
 
 <template>
     <nav>
-      <button class="normal" @click="goBack">Back</button>&nbsp;|&nbsp;
+      <button @click="goBack">Back</button>&nbsp;|&nbsp;
       <RouterLink :to="{ name: 'Home' }">Home</RouterLink>&nbsp; |&nbsp;
       <RouterLink :to="{ name: 'About' }">About</RouterLink>
     </nav>
@@ -17,5 +17,12 @@ nav {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+button {
+  padding: 0.5em;
+  border: 1px solid #000000;
+  border-radius: 1em;
+  background-color: #666;
+  color: #fff;
 }
 </style>

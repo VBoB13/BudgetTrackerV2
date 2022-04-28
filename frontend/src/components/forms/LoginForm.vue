@@ -40,4 +40,10 @@ const pwdInput = {
   justify-content: center;
   align-items: center;
 }
+button[type='submit'] {
+  border: 1px solid #000000;
+  border-radius: 0.5em;
+  padding: 0.66em;
+  background-color: #5DF;
+}
 </style>
