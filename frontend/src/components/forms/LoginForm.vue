@@ -4,8 +4,8 @@ import InputField from "./inputs/InputField.vue";
 const emit = defineEmits(['formloginevent']);
 
 const usernameInput = {
-  id: "username",
-  name: "username",
+  id: "login_username",
+  name: "login_username",
   type: "text",
   class: "inputField",
   placeholder: "Username here...",
@@ -13,8 +13,8 @@ const usernameInput = {
 }
 
 const pwdInput = {
-  id: "password",
-  name: "password",
+  id: "login_password",
+  name: "login_password",
   type: "password",
   class: "inputField",
   placeholder: "Password here...",
@@ -34,7 +34,7 @@ const pwdInput = {
 </template>
 
 <style scoped>
-.form_std {
+div.form {
   display: flex;
   flex-direction: column;
   justify-content: center;

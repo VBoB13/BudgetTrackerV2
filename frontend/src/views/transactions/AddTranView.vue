@@ -1,7 +1,12 @@
 <script setup>
 import { onMounted } from "vue";
 import InputField from "../../components/forms/inputs/InputField.vue";
+import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
+
+const NOW = new Date();
+const TODAY = `${NOW.getFullYear()}-${NOW.getMonth()+1}-${NOW.getDate()}`;
+
 
 function add_transaction(){
     const transForm = document.getElementById("add-trans-form");
@@ -24,7 +29,7 @@ onMounted(() => {
         <h2>Add Transaction</h2>
         <form id="add-trans-form" @submit.prevent="add_transaction">
             <!-- DateField -->
-            <i><h5>DateField here...</h5></i>
+            <DateField id="trans_date" name="trans_date" />
             <!-- Category -->
             <InputField id="trans_category" name="trans_category" placeholder="Category" />
             <!-- Amount -->

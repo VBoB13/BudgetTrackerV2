@@ -11,8 +11,8 @@ const state = reactive({
 });
 
 function login(prev_url=""){
-  let username = document.getElementById('username').value;
-  let password = document.getElementById('password').value;
+  let username = document.getElementById('login_username').value;
+  let password = document.getElementById('login_password').value;
   fake_data.users.forEach(user => {
     if(username === user.username){
       if (password === user.password){
