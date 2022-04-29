@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import InputField from "../../components/forms/inputs/InputField.vue";
 import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
+import * as fake_data from "../../../../fake_data.json";
 
 const NOW = new Date();
 const TODAY = `${NOW.getFullYear()}-${NOW.getMonth()+1}-${NOW.getDate()}`;
@@ -15,7 +16,9 @@ function add_transaction(){
     for(var pair of formData.entries()){
         finalFormData.push([`${pair[0]}`.slice(6), pair[1]]);
     };
-    console.log(Object.fromEntries(finalFormData));
+    const data = Object.fromEntries(finalFormData);
+    console.log({data});
+    fake_data["transactions"].push(data);
 };
 
 onMounted(() => {

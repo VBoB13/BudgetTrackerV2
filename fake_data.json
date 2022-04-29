@@ -15,7 +15,6 @@
     ],
     "transactions": [
         {
-            "id": 1,
             "date": "2022-04-28",
             "category": "Food",
             "user": 1,
@@ -25,7 +24,6 @@
             "comment": "Breakfast"
         },
         {
-            "id": 2,
             "date": "2022-04-27",
             "category": "Transportation",
             "user": 1,
@@ -35,7 +33,6 @@
             "comment": "Jingmei<->Gongguan"
         },
         {
-            "id": 3,
             "date": "2022-04-27",
             "category": "Food",
             "user": 1,
@@ -45,7 +42,6 @@
             "comment": "Dinner"
         },
         {
-            "id": 4,
             "date": "2022-04-27",
             "category": "Food",
             "user": 4,
@@ -53,6 +49,14 @@
             "amount": 285,
             "store": "Other",
             "comment": "Dinner"
+        },
+        {
+            "date": "2022-04-29",
+            "amount": 67,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "comment": "Breakfast"
         }
     ]
 }

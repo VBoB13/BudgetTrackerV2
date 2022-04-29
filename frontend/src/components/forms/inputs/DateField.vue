@@ -58,4 +58,8 @@ input.inputField {
   padding: 0.66em;
   margin: 0.25em;
 }
+section.inputField {
+  padding-bottom: 0.66em;
+  align-self: flex-start;
+}
 </style>

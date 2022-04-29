@@ -1,6 +1,8 @@
 <script setup>
-function goBack(){
-  this.$router.go(-1);
+import router from "../../router/";
+
+function goBack() {
+  router.go(-1);
 }
 </script>
 
