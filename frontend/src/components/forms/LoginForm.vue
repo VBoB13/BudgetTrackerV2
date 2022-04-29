@@ -1,5 +1,6 @@
 <script setup>
 import InputField from "./inputs/InputField.vue";
+import SubmitButton from "./buttons/SubmitButton.vue";
 
 const emit = defineEmits(['formloginevent']);
 
@@ -28,7 +29,7 @@ const pwdInput = {
     <form @submit.prevent="emit('formloginevent')" class="form_std">
     <InputField v-bind="usernameInput" /><br>
     <InputField v-bind="pwdInput" />
-    <p><button type="submit">Login</button></p>
+    <SubmitButton value="Login" />
   </form>
   </div>
 </template>
