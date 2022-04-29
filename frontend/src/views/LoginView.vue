@@ -7,7 +7,7 @@ const emit = defineEmits(['loginevent']);
 
 <template>
     <h1>Login</h1>
-    <LoginForm @formloginevent="emit('loginevent')" />
+    <LoginForm @formloginevent="emit('loginevent', { prev_url: this.$route.redirectedFrom })" />
 </template>
 
 <style scoped>

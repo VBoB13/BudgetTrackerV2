@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import LoginView from "../views/LoginView.vue";
+import AddTranView from "../views/transactions/AddTranView.vue";
 import NotFound from "../views/NotFound.vue";
 
 const router = createRouter({
@@ -25,7 +26,7 @@ const router = createRouter({
     {
       path: "/add",
       name: "Add",
-      component: AboutView,
+      component: AddTranView,
     },
     {
       path: "/stats",

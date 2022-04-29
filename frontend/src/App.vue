@@ -7,10 +7,10 @@ import * as fake_data from "../../fake_data.json";
 
 const state = reactive({
   isAuthenticated: false,
-  user: null,
+  user: "",
 });
 
-function login(){
+function login(prev_url=""){
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
   fake_data.users.forEach(user => {
@@ -18,10 +18,11 @@ function login(){
       if (password === user.password){
         state.isAuthenticated = true;
         state.user = user.username;
+        if (prev_url) router.push(`${prev_url}`);
       }
       else {
         state.isAuthenticated = false;
-        state.user = null;
+        state.user = "";
       }
     }
   });
@@ -38,7 +39,8 @@ function authenticate() {
   } catch (error) {
     console.error(error);
     state.isAuthenticated = false;
-    state.user = null;
+    state.user = "";
+    this.$router.push({ name: 'Login'});
   }
 }
 
@@ -52,7 +54,7 @@ onMounted(() => {
     <NavbarMenu />
   </header>
   <main>
-    <LoginView v-if="!state.isAuthenticated" @loginevent="login" />
+    <LoginView v-if="!state.isAuthenticated" @loginevent="({prev_url}) => login(prev_url)" />
     <router-view v-else />
   </main>
 </template>
