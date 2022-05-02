@@ -1,45 +1,45 @@
 <script setup>
-const NOW = new Date();
-const TODAY = `${NOW.getFullYear()}-${NOW.getMonth()+1}-${NOW.getDate()}`;
-
 const props = defineProps({
   id: {
     type: String,
-    required: false
+    required: false,
   },
   name: String,
   type: {
     type: String,
     default: "text",
-    required: false
+    required: false,
   },
   class: {
     type: String,
-    default: "inputField"
+    default: "inputField",
   },
   placeholder: {
     type: String,
-    default: "Text goes here..."
+    default: "Text goes here...",
   },
   value: {
     type: String,
-    default: ""
+    default: "",
   },
   required: {
     type: Boolean,
     default: true,
-    required: false
-  }
+    required: false,
+  },
 });
-
 </script>
 
 <template>
   <section class="inputField">
     <label :for="props.id ?? props.name">
-      {{ props.id ? `${props.id[6]}`.toUpperCase() + `${props.id}`.slice(7) : `${props.name[6]}`.toUpperCase() + `${props.name}`.slice(7)}}
+      {{
+        props.id
+          ? `${props.id[6]}`.toUpperCase() + `${props.id}`.slice(7)
+          : `${props.name[6]}`.toUpperCase() + `${props.name}`.slice(7)
+      }}
     </label>
-    <br>
+    <br />
     <input
       :id="props.id ?? ''"
       :name="props.name"
@@ -59,6 +59,7 @@ input.inputField {
   padding: 0.66em;
   margin: 0.25em;
 }
+
 section.inputField {
   padding-bottom: 0.66em;
   align-self: flex-start;
