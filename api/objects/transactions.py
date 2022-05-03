@@ -56,16 +56,16 @@ class Transaction(object):
     def __iter__(self):
         if self.id:
             yield "id", self.id
-            yield "date", self.date.strftime("%Y-%m-%d")
-            yield "amount", self.amount
-            yield "currency", self.currency
-            yield "category", str(self.category)
-            yield "user", str(self.user)
-            yield "store", str(self.store)
-            yield "comment", self.comment
-        else:
-            raise TransactionsError(
-                "Not iterable: no 'id'! id:{} & date:{}".format(self.id, self.date))
+        yield "date", self.date.strftime("%Y-%m-%d")
+        yield "amount", self.amount
+        yield "currency", self.currency
+        yield "category", str(self.category)
+        yield "user", str(self.user)
+        yield "store", str(self.store)
+        yield "comment", self.comment
+        # else:
+        #     raise TransactionsError(
+        #         "Not iterable: no 'id'! id:{} & date:{}".format(self.id, self.date))
 
     def _fetch_category(self, cat_name: str) -> Category:
         sql = Category.get_category_by_name(cat_name)

@@ -3,7 +3,8 @@ import { onMounted } from "vue";
 import InputField from "../../components/forms/inputs/InputField.vue";
 import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
-import * as fake_data from "../../../../fake_data.json";
+
+import { RequestHandler } from "../../helpers/reqs";
 
 const NOW = new Date();
 const TODAY = `${NOW.getFullYear()}-${NOW.getMonth()+1}-${NOW.getDate()}`;
@@ -18,7 +19,14 @@ function add_transaction(){
     };
     const data = Object.fromEntries(finalFormData);
     console.log({data});
-    fake_data["transactions"].push(data);
+    try{
+        let req_obj = new RequestHandler("http://0.0.0.0:8000/transactions/add_temp", "POST");
+        req_obj.reqConf["data"] = data;
+        req_obj.sendRequest();
+    } catch(err){
+        console.log("Save data to temp file: FAILED!");
+        console.error(err);
+    }
 };
 
 onMounted(() => {
@@ -42,7 +50,7 @@ onMounted(() => {
             <!-- Store -->
             <InputField id="trans_store" name="trans_store" placeholder="Store" />
             <!-- User -->
-            <InputField id="trans_user" name="trans_user" type="number" placeholder="User ID" />
+            <InputField id="trans_user_id" name="trans_user_id" type="number" placeholder="User ID" />
             <!-- Comment -->
             <InputField id="trans_comment" name="trans_comment" placeholder="Comment" />
             <!-- Submit -->

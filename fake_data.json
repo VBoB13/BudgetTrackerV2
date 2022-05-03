@@ -1,18 +1,4 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "Ric",
-            "username": "w1ck3d",
-            "password": "13"
-        },
-        {
-            "id": 4,
-            "name": "Jenn",
-            "username": "J3nn",
-            "password": "13"
-        }
-    ],
     "transactions": [
         {
             "date": "2022-04-28",
@@ -56,7 +42,188 @@
             "currency": "NTD",
             "category": "Food",
             "user": 1,
+            "store": "foodpanda",
             "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-03",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-02",
+            "amount": 99.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-05-02",
+            "amount": 54.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "foodpanda",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-04-30",
+            "amount": 31.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "foodpanda",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-04-30",
+            "amount": 31.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-04-29",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-04-28",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-04-28",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-04-29",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-02",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-03",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-04-28",
+            "amount": 310.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "The Shack",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-04-28",
+            "amount": 310.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "The Shack",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-04-30",
+            "amount": 310.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "The Shack",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-04-30",
+            "amount": 310.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "The Shack",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-01",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": "1",
+            "store": "7-Eleven",
+            "comment": "Ice Cream"
+        },
+        {
+            "date": "2022-05-01",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": "4",
+            "store": "7-Eleven",
+            "comment": "Ice Cream"
+        },
+        {
+            "date": "2022-05-01",
+            "amount": 350.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "Other",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-01",
+            "amount": 350.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "Other",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-03",
+            "amount": 90.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "Other",
+            "comment": "Lunch"
         }
     ]
 }

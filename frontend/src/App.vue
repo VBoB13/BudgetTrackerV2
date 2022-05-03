@@ -3,7 +3,7 @@ import { reactive, onMounted } from "vue";
 import NavbarMenu from "./components/menus/NavbarMenu.vue";
 import LoginView from "./views/LoginView.vue"
 import { RequestHandler } from "./helpers/reqs.js";
-import * as fake_data from "../../fake_data.json";
+import * as user_data from "../../user_data.json";
 
 const state = reactive({
   isAuthenticated: false,
@@ -13,7 +13,7 @@ const state = reactive({
 function login(prev_url=""){
   let username = document.getElementById('login_username').value;
   let password = document.getElementById('login_password').value;
-  fake_data.users.forEach(user => {
+  user_data.users.forEach(user => {
     if(username === user.username){
       if (password === user.password){
         state.isAuthenticated = true;
@@ -29,8 +29,8 @@ function login(prev_url=""){
 }
 
 function authenticate() {
-  let req = new RequestHandler("http://192.168.1.108:8000/auth/login", "POST");
-  req.reqConf.body = {
+  let req = new RequestHandler("http://0.0.0.0:8000/auth/login", "POST");
+  req.reqConf["data"] = {
     username: "w1ck3d",
     password: "13",
   };

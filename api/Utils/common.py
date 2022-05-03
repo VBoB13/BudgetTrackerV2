@@ -1,15 +1,9 @@
 import os
-import requests
-import bs4
 from colorama import Fore, Style
-from pprint import pprint
 from datetime import date, datetime
 
 from .exceptions import CommonUtilError, ControllerError
 from ..db.controller import query_db
-
-EXCHANGE_KEY = os.environ["EXCH_KEY"]
-EXCH_BASE_URL = "http://data.fixer.io/api/"
 
 
 def str_to_date(s: str) -> date:

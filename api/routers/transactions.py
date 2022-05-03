@@ -1,4 +1,10 @@
+from datetime import datetime, date
+import json
+import os
+from traceback import print_tb
 from fastapi import APIRouter, HTTPException
+
+from colorama import Fore, Style
 
 from ..objects.transactions import Transaction, TransactionList
 from ..typing.models import TransactionIn, TransactionOut, TransactionsOut
@@ -48,3 +54,35 @@ async def add_transaction(transaction: TransactionIn):
                 500, "Could not retrieve the newly added Transaction ({}) from database!".format(Transaction.name)) from err
         else:
             return {"transactions": result_transactions}
+
+
+@router.post("/add_temp", description="Add a Transaction to a temporary file that get its content added to DB later on.")
+async def add_transaction_temp(transaction: TransactionIn):
+    trans = Transaction(
+        date=datetime.strptime(transaction.date, "%Y-%m-%d").date(),
+        amount=transaction.amount,
+        currency=transaction.currency,
+        category=transaction.category,
+        user=transaction.user_id,
+        store=transaction.store,
+        comment=transaction.comment
+    )
+    try:
+        pwd = os.getcwd()
+        data = {}
+        with open(pwd + "/fake_data.json", "r+") as json_file:
+            data = json.load(json_file)
+            data["transactions"].append(dict(trans))
+
+        with open(pwd + "/fake_data.json", "w") as json_file:
+            json.dump(data, json_file, indent=4)
+
+    except Exception as err:
+        print(Fore.RED, err, Style.RESET_ALL)
+        print_tb(err.__traceback__)
+    else:
+        print(Fore.GREEN, "Success!", Style.RESET_ALL)
+
+    return {
+        "transaction": trans
+    }
