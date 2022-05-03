@@ -1,7 +1,7 @@
 <script setup>
 const NOW = new Date();
 const MONTH = NOW.getMonth()+1 < 10 ? `0${NOW.getMonth()+1}` : `${NOW.getMonth()+1}`
-const TODAY = `${NOW.getFullYear()}-${MONTH}-${NOW.getDate()}`;
+const TODAY = `${NOW.getFullYear()}-${MONTH}-${NOW.getDate() < 10 ? '0' + NOW.getDate() : NOW.getDate()}`;
 
 const props = defineProps({
   id: {
@@ -14,7 +14,7 @@ const props = defineProps({
   },
   value: {
     type: String,
-    default: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
+    default: `${new Date().getFullYear()}-${new Date().getMonth()+1 < 10 ? '0' + `${new Date().getMonth()+1}` : new Date().getMonth()+1}-${new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()}`
   },
   required: {
     type: Boolean,
@@ -27,7 +27,7 @@ const props = defineProps({
   },
   max: {
     type: String,
-    default: `${new Date().getFullYear()}-${new Date().getMonth()+1 < 10 ? '0' + `${new Date().getMonth()+1}` : new Date().getMonth()+1}-${new Date().getDate()}`
+    default: `${new Date().getFullYear()}-${new Date().getMonth()+1 < 10 ? '0' + `${new Date().getMonth()+1}` : new Date().getMonth()+1}-${new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()}`
   }
 });
 
