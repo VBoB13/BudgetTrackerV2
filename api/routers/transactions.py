@@ -86,3 +86,24 @@ async def add_transaction_temp(transaction: TransactionIn):
     return {
         "transaction": trans
     }
+
+
+@router.post("/temp_to_db", description="Endpoint to initiate the transferral of the temporarily registered transactions.")
+async def temp_to_db():
+    try:
+        pwd = os.getcwd()
+        data = {}
+
+        def transaction_gen(trans_data: dict):
+            for transaction in trans_data["transactions"]:
+                yield Transaction(transaction)
+
+        with open(pwd + "/fake_data.json", "r") as json_file:
+            data = json.load(json_file)
+
+        for transaction in transaction_gen(data):
+            query_db(transaction.add_transaction(), insert=True)
+
+    except Exception as err:
+        print(Fore.RED, err, Style.RESET_ALL)
+        print_tb(err.__traceback__)

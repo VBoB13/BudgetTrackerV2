@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, overload
 import datetime
 import pandas as pd
 
@@ -124,6 +124,7 @@ class Transaction(object):
                 st.s_name ASC;
         """.format((TODAY - datetime.timedelta(days=30)).strftime("%Y-%m-%d"))
 
+    @overload
     @staticmethod
     def add_transaction(date: str, amount: float, currency: str, category: str, user_id: int, store_name: str, comment: str):
         date_vals = date.split("-")
@@ -147,6 +148,27 @@ class Transaction(object):
                     '{}');
             UPDATE "STASH" SET amount=amount-{} WHERE amount=(SELECT max(amount) FROM "STASH");
         """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment, amount)
+
+    def add_transaction(self):
+        return """
+            INSERT INTO "TRANSACTIONS"
+            (t_date, amount, currency, category_id, user_id, store_id, comment)
+            VALUES (date '{}', {}, '{}',
+                    (SELECT (cat.id) FROM "CATEGORIES" AS cat WHERE cat.name='{}'),
+                    {},
+                    (SELECT (st.id) FROM "STORES" AS st WHERE s_name='{}'),
+                    '{}');
+            UPDATE "STASH" SET amount=amount-{} WHERE amount=(SELECT max(amount) FROM "STASH");
+        """.format(
+            self.date,
+            self.amount,
+            self.currency,
+            self.category,
+            self.user,
+            self.store,
+            self.comment,
+            self.amount
+        )
 
     @staticmethod
     def get_transactions_by_date(date: str):
