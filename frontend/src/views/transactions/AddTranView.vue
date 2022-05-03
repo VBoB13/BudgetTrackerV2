@@ -38,7 +38,9 @@ onMounted(() => {
             <!-- Amount -->
             <InputField id="trans_amount" name="trans_amount" type="number" placeholder="Amount" />
             <!-- Currency -->
-            <InputField id="trans_currency" name="trans_currency" maxlength="3" placeholder="Currency (3 characters)" />
+            <InputField id="trans_currency" name="trans_currency" value="NTD" maxlength="3" placeholder="Currency (3 characters)" />
+            <!-- Store -->
+            <InputField id="trans_store" name="trans_store" placeholder="Store" />
             <!-- User -->
             <InputField id="trans_user" name="trans_user" type="number" placeholder="User ID" />
             <!-- Comment -->
