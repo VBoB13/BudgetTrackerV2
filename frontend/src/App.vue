@@ -60,6 +60,12 @@ onMounted(() => {
 </template>
 
 <style>
+span.text-code {
+  padding: 0.1em;
+  background-color: lightgray;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+}
 body {
   position: relative;
   width: 390px;
@@ -70,5 +76,6 @@ body {
     #afe2ff -8.06%,
     rgba(175, 226, 255, 0) 100%
   );
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 </style>
