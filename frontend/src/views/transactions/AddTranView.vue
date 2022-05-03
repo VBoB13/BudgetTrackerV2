@@ -35,16 +35,14 @@ function add_transaction(){
     }
 };
 
-const check_added_transaction = () => {
-    computed(() => {
-        if (transaction_detail !== {}) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    });
-}
+const check_added_transaction = computed(() => {
+    if (transaction_detail !== {}) {
+        return false;
+    }
+    else {
+        return true;
+    }
+});
 
 onMounted(() => {
     const first_el = document.getElementById("trans_category");
@@ -75,7 +73,7 @@ onMounted(() => {
                 <SubmitButton />
             </form>
         </div>
-        <TransactionDetail v-if="check_added_transaction()" :transaction="transaction_detail" />
+        <TransactionDetail v-if="check_added_transaction" :transaction="transaction_detail" />
     </main>
 </template>
 
