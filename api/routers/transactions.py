@@ -107,3 +107,8 @@ async def temp_to_db():
     except Exception as err:
         print(Fore.RED, err, Style.RESET_ALL)
         print_tb(err.__traceback__)
+
+
+@router.get("/check_temp_to_db", description="This endpoint returns the amount of transactions that are awaiting to be transferred from file to DB.")
+async def check_temp_to_db():
+    pass

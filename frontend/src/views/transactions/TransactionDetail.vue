@@ -1,18 +1,21 @@
 <script setup>
 const props = defineProps(['transaction']);
+console.log(props.transaction);
 </script>
 
 <template>
     <section class="transaction-detail">
-        <dl v-if="props.transaction !== {}">
+        <dl>
             <dt class="detail-title">{{ props.transaction.date }} : {{ props.transaction.comment }}</dt>
-            <dd>{{ props.transaction.amount }} ({{ props.transaction.category }})</dd>
+            <dd>{{ props.transaction.currency }} ${{ props.transaction.amount }} ({{ props.transaction.category }})</dd>
         </dl>
-        <h3 v-else class="warning">No transaction have been added yet...</h3>
     </section>
 </template>
 
 <style scoped>
+dt.detail-title {
+    font-weight: bold;
+}
 section.transaction-detail {
     border: 1px solid #000000;
     border-radius: 1em;

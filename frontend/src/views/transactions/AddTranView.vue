@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, computed } from "vue";
+import { onMounted, reactive, computed } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 
 import InputField from "../../components/forms/inputs/InputField.vue";
@@ -7,8 +7,16 @@ import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
 import TransactionDetail from "./TransactionDetail.vue";
 
-const transaction_detail = ref({});
-const loaded_detail = ref(false);
+const state = reactive({
+    transaction: {},
+    loaded: false
+});
+
+async function update_transaction(data) {
+    data = await Promise.resolve(data);
+    state.transaction = data;
+    state.loaded = true;
+}
 
 function add_transaction(){
     const transForm = document.getElementById("add-trans-form");
@@ -18,31 +26,20 @@ function add_transaction(){
         finalFormData.push([`${pair[0]}`.slice(6), pair[1]]);
     };
     const data = Object.fromEntries(finalFormData);
-    console.log({data});
     try{
         let req_obj = new RequestHandler("http://0.0.0.0:8000/transactions/add_temp", "POST");
         req_obj.reqConf["data"] = data;
         const data2 = req_obj.sendRequest().then(response_data => {
-            return response_data;
+            return response_data.transaction;
         });
-        transaction_detail.value = data2;
-        loaded_detail.value = true;
+        update_transaction(data2);
     } catch(err){
         console.log("Save data to temp file: FAILED!");
         console.error(err);
-        transaction_detail.value = {};
-        loaded_detail.value = false;
+        state.transaction = {};
+        state.loaded = false;
     }
 };
-
-const check_added_transaction = computed(() => {
-    if (transaction_detail !== {}) {
-        return false;
-    }
-    else {
-        return true;
-    }
-});
 
 onMounted(() => {
     const first_el = document.getElementById("trans_category");
@@ -73,7 +70,7 @@ onMounted(() => {
                 <SubmitButton />
             </form>
         </div>
-        <TransactionDetail v-if="check_added_transaction" :transaction="transaction_detail" />
+        <TransactionDetail v-if="state.loaded" :transaction="state.transaction" />
     </main>
 </template>
 

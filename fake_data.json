@@ -242,6 +242,132 @@
             "user": "4",
             "store": "Other",
             "comment": "Massage"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 141.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 1135.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": "1",
+            "store": "Other",
+            "comment": "Gas:6m"
+        },
+        {
+            "date": "2022-05-03",
+            "amount": 168.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "Uber Eats",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-03",
+            "amount": 168.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "Uber Eats",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 168.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "Uber Eats",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 168.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "4",
+            "store": "Uber Eats",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 1996.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": "1",
+            "store": "Chunghwa Telecom",
+            "comment": "Internet:2m"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 50.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "Subway",
+            "comment": "Cookies:3pcs"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": "1",
+            "store": "foodpanda",
+            "comment": "Meh"
         }
     ]
 }
