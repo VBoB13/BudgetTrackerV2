@@ -5,6 +5,7 @@ import { RequestHandler } from "../../helpers/reqs";
 import InputField from "../../components/forms/inputs/InputField.vue";
 import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
+import CheckBox from "../../components/forms/inputs/CheckBox.vue";
 import TransactionDetail from "./TransactionDetail.vue";
 
 const state = reactive({
@@ -32,7 +33,9 @@ function add_transaction(){
         const data2 = req_obj.sendRequest().then(response_data => {
             return response_data.transaction;
         });
-        update_transaction(data2);
+        if (document.getElementById("show_transaction").checked == true) {
+            update_transaction(data2);
+        };
     } catch(err){
         console.log("Save data to temp file: FAILED!");
         console.error(err);
@@ -40,6 +43,12 @@ function add_transaction(){
         state.loaded = false;
     }
 };
+
+const checkbox_props = {
+    id: "show_transaction",
+    name: "show_transaction",
+    text: "Show last added transaction?"
+}
 
 onMounted(() => {
     const first_el = document.getElementById("trans_category");
@@ -70,7 +79,10 @@ onMounted(() => {
                 <SubmitButton />
             </form>
         </div>
-        <TransactionDetail v-if="state.loaded" :transaction="state.transaction" />
+        <section class="last-transaction">
+            <CheckBox v-bind="checkbox_props" />
+            <TransactionDetail v-if="state.loaded" :transaction="state.transaction" />
+        </section>
     </main>
 </template>
 
@@ -88,7 +100,6 @@ div.form-add {
     align-content: center;
     align-items: center;
 }
-
 div.form-add > form {
     padding: 1em;
     border: 1px solid #000000;
@@ -98,5 +109,13 @@ div.form-add > form {
     justify-content: center;
     align-content: center;
     align-items: center;
+}
+section.last-transaction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 99vh;
 }
 </style>

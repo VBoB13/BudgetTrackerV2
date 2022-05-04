@@ -1,6 +1,5 @@
 <script setup>
 const props = defineProps(['transaction']);
-console.log(props.transaction);
 </script>
 
 <template>
