@@ -5,9 +5,10 @@ console.log(props.transaction);
 
 <template>
     <section class="transaction-detail">
-        <dl>
-            <dt class="detail-title">{{ props.transaction.date }} : {{ props.transaction.comment }}</dt>
-            <dd>{{ props.transaction.currency }} ${{ props.transaction.amount }} ({{ props.transaction.category }})</dd>
+        <h3>Previous transaction:</h3>
+        <dl v-for="[key, value] of Object.entries(props.transaction)">
+            <dt class="detail-title" :key="key">{{ key.substr(0, 1).toUpperCase() + key.substr(1) }}:</dt>
+            <dd :key="key">{{ value }}</dd>
         </dl>
     </section>
 </template>
@@ -16,9 +17,18 @@ console.log(props.transaction);
 dt.detail-title {
     font-weight: bold;
 }
+dd {
+    font-style: italic;
+}
+h3 {
+    text-decoration: underline;
+}
 section.transaction-detail {
     border: 1px solid #000000;
     border-radius: 1em;
+    align-self: center;
+    margin: 2em;
+    padding: 1em;
 }
 .warning {
     color: #fda;

@@ -317,57 +317,12 @@
         },
         {
             "date": "2022-05-04",
-            "amount": 150.0,
+            "amount": 300.0,
             "currency": "NTD",
-            "category": "Food",
+            "category": "Rent & Utilities",
             "user": "1",
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-04",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": "1",
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-04",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": "1",
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-04",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": "1",
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-04",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": "1",
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-04",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": "1",
-            "store": "foodpanda",
-            "comment": "Meh"
+            "store": "Other",
+            "comment": "Water:2m"
         }
     ]
 }

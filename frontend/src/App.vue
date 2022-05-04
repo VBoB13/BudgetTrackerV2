@@ -60,6 +60,11 @@ onMounted(() => {
 </template>
 
 <style>
+header {
+  width: 50vw;
+  position: relative;
+  left: 25%;
+}
 span.text-code {
   padding: 0.1em;
   background-color: lightgray;
@@ -68,9 +73,7 @@ span.text-code {
 }
 body {
   position: relative;
-  width: 390px;
   height: 98.4vh;
-  left: 40%;
   background: linear-gradient(
     180deg,
     #afe2ff -8.06%,
