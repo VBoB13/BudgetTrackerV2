@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import LoginView from "../views/LoginView.vue";
 import AddTransactionView from "../views/transactions/AddTransactionView.vue";
+import StatsView from "../views/StatsView.vue";
 import NotFound from "../views/NotFound.vue";
 
 const router = createRouter({
@@ -31,7 +32,7 @@ const router = createRouter({
     {
       path: "/stats",
       name: "Stats",
-      component: AboutView,
+      component: StatsView,
     },
     {
       path: "/inspect",
