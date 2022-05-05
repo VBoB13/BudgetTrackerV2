@@ -25,7 +25,7 @@ export class RequestHandler {
         "Content-Type": this.contentType,
       },
       credentials: "same-origin",
-      body: {}
+      data: {}
     };
   }
   async sendRequest() {
