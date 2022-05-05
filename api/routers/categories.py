@@ -14,11 +14,14 @@ router = APIRouter(
 
 @router.get("/get_all", response_model=CategoriesOut)
 async def get_all_categories():
-    sql = Category.get_all()
-    results = query_db(sql)
     output_list = []
-    for category in results:
-        output_list.append(dict(Category(category)))
+    try:
+        sql = Category.get_all()
+        results = query_db(sql)
+        for category in results:
+            output_list.append(dict(Category(category)))
+    except ControllerError as err:
+        raise HTTPException(500, str(err))
 
     return {"categories": output_list}
 

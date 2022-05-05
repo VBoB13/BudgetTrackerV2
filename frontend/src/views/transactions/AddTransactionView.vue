@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, onUpdated, reactive, computed } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
+import { get_all_categories } from "../../helpers/getters";
 
 import InputField from "../../components/forms/inputs/InputField.vue";
 import DateField from "../../components/forms/inputs/DateField.vue";
@@ -30,10 +31,7 @@ function add_transaction(){
     try{
         let req_obj = new RequestHandler("http://0.0.0.0:8000/transactions/add_temp", "POST");
         req_obj.reqConf.data = data;
-        const data2 = req_obj.sendRequest().then(response_data => {
-            return response_data.transaction;
-        });
-        update_transaction(data2)
+        req_obj.sendRequest().then(response_data => update_transaction(response_data.transaction));
     } catch(err){
         console.log("Save data to temp file: FAILED!");
         console.error(err);
@@ -41,7 +39,19 @@ function add_transaction(){
     }
 };
 
-const category_choices = ["Food", "Rent & Utilities", "Leisure", "Travel", "Others"];
+function get_categories(){
+    // let categories = [];
+    // try {
+    let categories = get_all_categories();
+        // console.log({categories});
+    // } catch (error) {
+    //     console.error(error);
+    //     categories = ["Food", "Rent & Utilities", "Leisure", "Travel", "Others"];
+    // }
+    return categories;
+};
+
+const category_choices = get_categories();
 
 const category_select_props = {
     id: "trans_category",

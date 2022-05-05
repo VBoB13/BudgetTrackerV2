@@ -2,9 +2,13 @@ import axios from "axios";
 
 export function isResponseOK(response) {
   console.log(response);
+  
   if (response.status >= 200 && response.status <= 299) {
-    if (response.data) return response.data;
-    return response;
+    return new Promise((resolve, reject)=> {
+      if (response.data) return resolve(response.data);
+      return reject(response);
+    });
+
   } else if (response.status >= 400 && response.status <= 499) {
     if (response.data) return response.data;
     return response;
@@ -28,9 +32,21 @@ export class RequestHandler {
       data: {}
     };
   }
-  async sendRequest() {
-    const response = await axios(this.reqConf);
-    let data = isResponseOK(response);
-    return data;
+  sendRequest(default_response = null) {
+    return new Promise((resolve, reject) => {
+      axios(this.reqConf).then(response => {
+        if (response.status >= 200 && response.status <= 399) {
+          resolve(response.data);
+        } else {
+          if (default_response === null) reject(response.statusText);
+          reject(default_response);
+        }
+      }).catch(error => {
+        console.log(error);
+        if (default_response === null) reject(error);
+        reject(default_response);
+      })
+      
+    });
   }
 }

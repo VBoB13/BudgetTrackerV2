@@ -12,8 +12,9 @@ connection_str = " ".join('{}={}'.format(key, value)
 
 def query_db(sql: str, insert=False) -> List[Tuple] or Tuple or bool:
     results = None
-    conn = psycopg2.connect(connection_str)
+    conn = None
     try:
+        conn = psycopg2.connect(connection_str)
         with conn:
             with conn.cursor() as cur:
                 cur.execute(sql)
@@ -43,7 +44,8 @@ def query_db(sql: str, insert=False) -> List[Tuple] or Tuple or bool:
             "Something went wrong when trying to execute the SQL query!") from err
 
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
 
     if insert:
         return insert
