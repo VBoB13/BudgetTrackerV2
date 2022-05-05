@@ -50,7 +50,7 @@
             "amount": 67.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "foodpanda",
             "comment": "Breakfast"
         },
@@ -59,7 +59,7 @@
             "amount": 99.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "foodpanda",
             "comment": "Bubble Tea"
         },
@@ -68,7 +68,7 @@
             "amount": 54.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "foodpanda",
             "comment": "Bubble Tea"
         },
@@ -77,7 +77,7 @@
             "amount": 31.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "foodpanda",
             "comment": "Bubble Tea"
         },
@@ -86,7 +86,7 @@
             "amount": 31.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "foodpanda",
             "comment": "Bubble Tea"
         },
@@ -95,7 +95,7 @@
             "amount": 67.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "foodpanda",
             "comment": "Breakfast"
         },
@@ -104,7 +104,7 @@
             "amount": 67.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "foodpanda",
             "comment": "Breakfast"
         },
@@ -113,7 +113,7 @@
             "amount": 42.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
         },
@@ -122,7 +122,7 @@
             "amount": 42.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
         },
@@ -131,7 +131,7 @@
             "amount": 42.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
         },
@@ -140,7 +140,7 @@
             "amount": 42.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
         },
@@ -149,7 +149,7 @@
             "amount": 310.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "The Shack",
             "comment": "Dinner"
         },
@@ -158,7 +158,7 @@
             "amount": 310.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "The Shack",
             "comment": "Dinner"
         },
@@ -167,7 +167,7 @@
             "amount": 310.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "The Shack",
             "comment": "Lunch"
         },
@@ -176,7 +176,7 @@
             "amount": 310.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "The Shack",
             "comment": "Lunch"
         },
@@ -185,7 +185,7 @@
             "amount": 100.0,
             "currency": "NTD",
             "category": "Leisure",
-            "user": "1",
+            "user": 1,
             "store": "7-Eleven",
             "comment": "Ice Cream"
         },
@@ -194,7 +194,7 @@
             "amount": 100.0,
             "currency": "NTD",
             "category": "Leisure",
-            "user": "4",
+            "user": 4,
             "store": "7-Eleven",
             "comment": "Ice Cream"
         },
@@ -203,7 +203,7 @@
             "amount": 350.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "Other",
             "comment": "Dinner"
         },
@@ -212,7 +212,7 @@
             "amount": 350.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "Other",
             "comment": "Dinner"
         },
@@ -221,7 +221,7 @@
             "amount": 90.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "Other",
             "comment": "Lunch"
         },
@@ -230,7 +230,7 @@
             "amount": 1100.0,
             "currency": "NTD",
             "category": "Health",
-            "user": "1",
+            "user": 1,
             "store": "Other",
             "comment": "Massage"
         },
@@ -239,7 +239,7 @@
             "amount": 1100.0,
             "currency": "NTD",
             "category": "Health",
-            "user": "4",
+            "user": 4,
             "store": "Other",
             "comment": "Massage"
         },
@@ -248,7 +248,7 @@
             "amount": 141.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "foodpanda",
             "comment": "Breakfast"
         },
@@ -257,7 +257,7 @@
             "amount": 1135.0,
             "currency": "NTD",
             "category": "Rent & Utilities",
-            "user": "1",
+            "user": 1,
             "store": "Other",
             "comment": "Gas:6m"
         },
@@ -266,7 +266,7 @@
             "amount": 168.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "Uber Eats",
             "comment": "Dinner"
         },
@@ -275,7 +275,7 @@
             "amount": 168.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "Uber Eats",
             "comment": "Dinner"
         },
@@ -284,7 +284,7 @@
             "amount": 168.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "Uber Eats",
             "comment": "Lunch"
         },
@@ -293,7 +293,7 @@
             "amount": 168.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "4",
+            "user": 4,
             "store": "Uber Eats",
             "comment": "Lunch"
         },
@@ -302,7 +302,7 @@
             "amount": 1996.0,
             "currency": "NTD",
             "category": "Rent & Utilities",
-            "user": "1",
+            "user": 1,
             "store": "Chunghwa Telecom",
             "comment": "Internet:2m"
         },
@@ -311,7 +311,7 @@
             "amount": 50.0,
             "currency": "NTD",
             "category": "Food",
-            "user": "1",
+            "user": 1,
             "store": "Subway",
             "comment": "Cookies:3pcs"
         },
@@ -320,9 +320,99 @@
             "amount": 300.0,
             "currency": "NTD",
             "category": "Rent & Utilities",
-            "user": "1",
+            "user": 1,
             "store": "Other",
             "comment": "Water:2m"
+        },
+        {
+            "date": "2022-05-05",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-02",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-03",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-04",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-05",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-05",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-05",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-05",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-05",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Meh"
+        },
+        {
+            "date": "2022-05-05",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Meh"
         }
     ]
 }

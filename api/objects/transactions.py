@@ -60,7 +60,7 @@ class Transaction(object):
         yield "amount", self.amount
         yield "currency", self.currency
         yield "category", str(self.category)
-        yield "user", str(self.user)
+        yield "user", str(self.user) if isinstance(self.user, User) else int(self.user)
         yield "store", str(self.store)
         yield "comment", self.comment
         # else:

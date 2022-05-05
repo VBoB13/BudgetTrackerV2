@@ -14,11 +14,12 @@ const props = defineProps({
         required: true
     }
 });
+const emits = defineEmits(['prevTransChecked']);
 </script>
 
 <template>
     <div class="input-field">
-        <input type="checkbox" v-bind="props">
+        <input type="checkbox" v-bind="props" @click="emits('prevTransChecked')">
         <label :for="props.name ? props.name : props.id">{{ props.text }}</label>
     </div>
 </template>

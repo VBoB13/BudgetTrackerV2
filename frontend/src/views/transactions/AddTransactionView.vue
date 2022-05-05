@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive, computed } from "vue";
+import { onMounted, onUpdated, reactive, computed } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 
 import InputField from "../../components/forms/inputs/InputField.vue";
@@ -10,13 +10,12 @@ import TransactionDetail from "./TransactionDetail.vue";
 
 const state = reactive({
     transaction: {},
-    loaded: false
+    show_transaction: false
 });
 
 async function update_transaction(data) {
     data = await Promise.resolve(data);
     state.transaction = data;
-    state.loaded = true;
 }
 
 function add_transaction(){
@@ -33,14 +32,11 @@ function add_transaction(){
         const data2 = req_obj.sendRequest().then(response_data => {
             return response_data.transaction;
         });
-        if (document.getElementById("show_transaction").checked == true) {
-            update_transaction(data2);
-        };
+        update_transaction(data2)
     } catch(err){
         console.log("Save data to temp file: FAILED!");
         console.error(err);
         state.transaction = {};
-        state.loaded = false;
     }
 };
 
@@ -49,6 +45,10 @@ const checkbox_props = {
     name: "show_transaction",
     text: "Show last added transaction?"
 }
+
+const checkbox_status = () => {
+    state.show_transaction = document.getElementById("show_transaction").checked;
+};
 
 onMounted(() => {
     const first_el = document.getElementById("trans_category");
@@ -80,8 +80,8 @@ onMounted(() => {
             </form>
         </div>
         <section class="last-transaction">
-            <CheckBox v-bind="checkbox_props" />
-            <TransactionDetail v-if="state.loaded" :transaction="state.transaction" />
+            <CheckBox @prevTransChecked="checkbox_status" v-bind="checkbox_props" />
+            <TransactionDetail v-if="state.show_transaction" :transaction="state.transaction" />
         </section>
     </main>
 </template>
