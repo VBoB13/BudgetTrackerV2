@@ -6,6 +6,7 @@ import InputField from "../../components/forms/inputs/InputField.vue";
 import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
 import CheckBox from "../../components/forms/inputs/CheckBox.vue";
+import SelectField from "../../components/forms/inputs/SelectField.vue";
 import TransactionDetail from "./TransactionDetail.vue";
 
 const state = reactive({
@@ -28,7 +29,7 @@ function add_transaction(){
     const data = Object.fromEntries(finalFormData);
     try{
         let req_obj = new RequestHandler("http://0.0.0.0:8000/transactions/add_temp", "POST");
-        req_obj.reqConf["data"] = data;
+        req_obj.reqConf.data = data;
         const data2 = req_obj.sendRequest().then(response_data => {
             return response_data.transaction;
         });
@@ -40,11 +41,20 @@ function add_transaction(){
     }
 };
 
+const category_choices = ["Food", "Rent & Utilities", "Leisure", "Travel", "Others"];
+
+const category_select_props = {
+    id: "trans_category",
+    name: "trans_category",
+    choices: category_choices,
+    label: "Category"
+};
+
 const checkbox_props = {
     id: "show_transaction",
     name: "show_transaction",
     text: "Show last added transaction?"
-}
+};
 
 const checkbox_status = () => {
     state.show_transaction = document.getElementById("show_transaction").checked;
@@ -64,7 +74,7 @@ onMounted(() => {
                 <!-- DateField -->
                 <DateField id="trans_date" name="trans_date" />
                 <!-- Category -->
-                <InputField id="trans_category" name="trans_category" placeholder="Category" />
+                <SelectField v-bind="category_select_props" />
                 <!-- Amount -->
                 <InputField id="trans_amount" name="trans_amount" type="number" placeholder="Amount" />
                 <!-- Currency -->

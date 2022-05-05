@@ -5,7 +5,7 @@ const props = defineProps(['transaction']);
 <template>
     <section class="transaction-detail">
         <h3>Previous transaction:</h3>
-        <dl v-for="[key, value] of Object.entries(props.transaction)">
+        <dl v-for="[key, value] of Object.entries(props.transaction)" :key="key">
             <dt class="detail-title" :key="key">{{ key.substr(0, 1).toUpperCase() + key.substr(1) }}:</dt>
             <dd :key="key">{{ value }}</dd>
         </dl>

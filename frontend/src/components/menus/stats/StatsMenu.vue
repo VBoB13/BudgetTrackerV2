@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
     <section class="tab-menu">
-        <div class="tab-choice" v-for="choice of props.choices">
+        <div class="tab-choice" v-for="(choice, index) of props.choices" :key="index">
             {{ choice }}
         </div>
     </section>    
