@@ -28,4 +28,12 @@ button {
   background-color: #666;
   color: #fff;
 }
+a {
+  padding: 0.25em;
+}
+a:hover {
+  color: #f89;
+  text-decoration: none;
+  background-color: #334499;
+}
 </style>

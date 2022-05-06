@@ -17,10 +17,6 @@ const state = reactive({
 
 const category_choices = ref(["Food", "Rent & Utilities", "Leisure", "Travel", "Others"]);
 
-function get_categories() {
-    return get_all_categories();
-}
-
 async function update_transaction(data) {
     data = await Promise.resolve(data);
     state.transaction = data;
@@ -63,7 +59,7 @@ const category_select_props = {
 };
 
 onMounted(() => {
-    category_choices.value = get_categories();
+    category_choices.value = get_all_categories();
     const first_el = document.getElementById("trans_category");
     first_el.focus();
 });
