@@ -27,7 +27,7 @@ const props = defineProps({
   },
   max: {
     type: String,
-    default: `${new Date().getFullYear()}-${new Date().getMonth()+1 < 10 ? '0' + `${new Date().getMonth()+1}` : new Date().getMonth()+1}-${new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()}`
+    default: `${new Date().getFullYear()}-${new Date().getMonth()+1 < 10 ? '0' + `${new Date().getMonth()+1}` : new Date().getMonth()+1}-${(new Date().getDate()+3) < 10 ? '0' + (new Date().getDate()+3) : (new Date().getDate()+3)}`
   }
 });
 
