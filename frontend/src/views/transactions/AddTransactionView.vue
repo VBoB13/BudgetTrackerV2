@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUpdated, reactive, computed } from "vue";
+import { onMounted, onUpdated, reactive, computed, ref } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 import { get_all_categories } from "../../helpers/getters";
 
@@ -14,6 +14,12 @@ const state = reactive({
     transaction: {},
     show_transaction: false
 });
+
+const category_choices = ref(["Food", "Rent & Utilities", "Leisure", "Travel", "Others"]);
+
+function get_categories() {
+    return get_all_categories();
+}
 
 async function update_transaction(data) {
     data = await Promise.resolve(data);
@@ -39,27 +45,6 @@ function add_transaction(){
     }
 };
 
-function get_categories(){
-    // let categories = [];
-    // try {
-    let categories = get_all_categories();
-        // console.log({categories});
-    // } catch (error) {
-    //     console.error(error);
-    //     categories = ["Food", "Rent & Utilities", "Leisure", "Travel", "Others"];
-    // }
-    return categories;
-};
-
-const category_choices = get_categories();
-
-const category_select_props = {
-    id: "trans_category",
-    name: "trans_category",
-    choices: category_choices,
-    label: "Category"
-};
-
 const checkbox_props = {
     id: "show_transaction",
     name: "show_transaction",
@@ -70,7 +55,15 @@ const checkbox_status = () => {
     state.show_transaction = document.getElementById("show_transaction").checked;
 };
 
+const category_select_props = {
+    id: "trans_category",
+    name: "trans_category",
+    choices: category_choices.value,
+    label: "Category"
+};
+
 onMounted(() => {
+    category_choices.value = get_categories();
     const first_el = document.getElementById("trans_category");
     first_el.focus();
 });
