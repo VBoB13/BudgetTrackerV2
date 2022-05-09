@@ -370,51 +370,6 @@
             "comment": "Breakfast"
         },
         {
-            "date": "2022-05-05",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": 1,
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-05",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": 1,
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-05",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": 1,
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-05",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": 1,
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
-            "date": "2022-05-05",
-            "amount": 150.0,
-            "currency": "NTD",
-            "category": "Food",
-            "user": 1,
-            "store": "foodpanda",
-            "comment": "Meh"
-        },
-        {
             "date": "2022-05-06",
             "amount": 67.0,
             "currency": "NTD",
@@ -442,22 +397,175 @@
             "comment": "Dinner"
         },
         {
-            "date": "2022-05-07",
+            "date": "2022-05-06",
             "amount": 190.0,
             "currency": "NTD",
             "category": "Food",
             "user": 1,
             "store": "The Shack",
-            "comment": "Lunch"
+            "comment": "Dinner"
         },
         {
-            "date": "2022-05-07",
+            "date": "2022-05-06",
             "amount": 190.0,
             "currency": "NTD",
             "category": "Food",
             "user": 4,
             "store": "The Shack",
-            "comment": "Lunch"
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-06",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-06",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-07",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-07",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-07",
+            "amount": 102.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-05-07",
+            "amount": 101.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "foodpanda",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 105.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 105.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-09",
+            "amount": 105.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-09",
+            "amount": 105.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 262.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Uber Eats",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 261.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Uber Eats",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 400.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Veggies"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 400.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Veggies"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-05-08",
+            "amount": 1200.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 1,
+            "store": "Other",
+            "comment": "Bill:Electricity"
         }
     ]
 }
