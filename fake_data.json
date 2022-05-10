@@ -566,6 +566,51 @@
             "user": 1,
             "store": "Other",
             "comment": "Bill:Electricity"
+        },
+        {
+            "date": "2022-05-10",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-09",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Gonguan Thai Fried Rice",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-09",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Gonguan Thai Fried Rice",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-10",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-10",
+            "amount": 119.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Family Mart",
+            "comment": "Coffee"
         }
     ]
 }

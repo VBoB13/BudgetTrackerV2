@@ -5,11 +5,13 @@ const props = defineProps({
         required: true
     }
 });
+
+const emits = defineEmits(['menu-item']);
 </script>
 
 <template>
     <section class="tab-menu">
-        <div class="tab-choice" v-for="(choice, index) of props.choices" :key="index">
+        <div class="tab-choice" @click="emits('menu-item', index)" v-for="(choice, index) of props.choices" :key="index">
             {{ choice }}
         </div>
     </section>    
