@@ -3,7 +3,7 @@ import { ref } from "vue";
 import StatsMenu from "../components/menus/stats/StatsMenu.vue";
 import router from "../router/index"; 
 
-const menuChoices = [{name: "Daily Avg.", route: "/daily"}, {name: "Category Avg.", route: "/category"}];
+const menuChoices = [{name: "Daily Avg.", route: "/stats/daily"}, {name: "Category Avg.", route: "/stats/category"}];
 
 function click_menu(route){
     router.push(route);
