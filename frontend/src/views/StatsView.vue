@@ -1,20 +1,19 @@
 <script setup>
 import { ref } from "vue";
 import StatsMenu from "../components/menus/stats/StatsMenu.vue";
-const menuChoices = ["Daily Avg.", "Category Avg."];
+import router from "../router/index"; 
 
-const menu_choice = ref(0);
+const menuChoices = [{name: "Daily Avg.", route: "/daily"}, {name: "Category Avg.", route: "/category"}];
 
-function click_menu(item_no){
-    menu_choice.value = item_no;
+function click_menu(route){
+    router.push(route);
 }
 </script>
 
 <template>
     <main>
         <h1>Stats</h1>
-        <StatsMenu @menu-item="(item_no) => click_menu(item_no)" :choices="menuChoices" />
-        <h3>{{ menuChoices[menu_choice] }}</h3>
+        <StatsMenu @menu-item="(route) => click_menu(route)" :choices="menuChoices" />
     </main>    
 </template>
 

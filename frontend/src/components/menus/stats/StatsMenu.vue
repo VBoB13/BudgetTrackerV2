@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
     choices: {
-        type: Array[String],
+        type: Array[Object],
         required: true
     }
 });
@@ -11,8 +11,8 @@ const emits = defineEmits(['menu-item']);
 
 <template>
     <section class="tab-menu">
-        <div class="tab-choice" @click="emits('menu-item', index)" v-for="(choice, index) of props.choices" :key="index">
-            {{ choice }}
+        <div class="tab-choice" @click="emits('menu-item', choice.route)" v-for="(choice, index) of props.choices" :key="index">
+            {{ choice.name }}
         </div>
     </section>    
 </template>
