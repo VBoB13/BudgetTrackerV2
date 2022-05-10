@@ -14,6 +14,7 @@ function click_menu(route){
     <main>
         <h1>Stats</h1>
         <StatsMenu @menu-item="(route) => click_menu(route)" :choices="menuChoices" />
+        <router-view></router-view>
     </main>    
 </template>
 
