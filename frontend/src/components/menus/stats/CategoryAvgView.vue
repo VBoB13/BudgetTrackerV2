@@ -4,6 +4,6 @@
 
 <template>
     <section class="stats">
-        <h3>Daily Avg.</h3>
+        <h3>Category Avg.</h3>
     </section>
 </template>

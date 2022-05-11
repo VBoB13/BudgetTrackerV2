@@ -5,6 +5,7 @@ import LoginView from "../views/LoginView.vue";
 import AddTransactionView from "../views/transactions/AddTransactionView.vue";
 import StatsView from "../views/StatsView.vue";
 import DailyAvgView from "../components/menus/stats/DailyAvgView.vue";
+import CategoryAvgView from "../components/menus/stats/CategoryAvgView.vue";
 import NotFound from "../views/NotFound.vue";
 
 const router = createRouter({
@@ -41,7 +42,7 @@ const router = createRouter({
         },
         {
           path: 'category',
-          component: "meh * 2"
+          component: CategoryAvgView
         }
       ]
     },
