@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from "vue-router";
 const props = defineProps({
     choices: {
         type: Array[Object],
@@ -11,9 +12,11 @@ const emits = defineEmits(['menu-item']);
 
 <template>
     <section class="tab-menu">
-        <div class="tab-choice" @click="emits('menu-item', choice.route)" v-for="(choice, index) of props.choices" :key="index">
-            {{ choice.name }}
-        </div>
+        <RouterLink :to="choice.route" v-for="(choice, index) of props.choices" :key="index">
+            <div class="tab-choice">
+                {{ choice.name }}
+            </div>
+        </RouterLink>
     </section>    
 </template>
 

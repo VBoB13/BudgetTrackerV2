@@ -66,7 +66,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <main class="transactions">
+    <section class="transactions">
         <div class="form-add">
             <h2>Add Transaction</h2>
             <form id="add-trans-form" @submit.prevent="add_transaction">
@@ -88,15 +88,15 @@ onMounted(() => {
                 <SubmitButton />
             </form>
         </div>
-        <section class="last-transaction">
+        <div class="last-transaction">
             <CheckBox @prevTransChecked="checkbox_status" v-bind="checkbox_props" />
             <TransactionDetail v-if="state.show_transaction" :transaction="state.transaction" />
-        </section>
-    </main>
+        </div>
+    </section>
 </template>
 
 <style scoped>
-main.transactions {
+section.transactions {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -119,7 +119,7 @@ div.form-add > form {
     align-content: center;
     align-items: center;
 }
-section.last-transaction {
+div.last-transaction {
     display: flex;
     flex-direction: column;
     justify-content: center;
