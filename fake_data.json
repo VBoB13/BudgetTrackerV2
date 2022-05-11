@@ -629,6 +629,33 @@
             "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-11",
+            "amount": 50.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Subway",
+            "comment": "Snacks"
+        },
+        {
+            "date": "2022-05-11",
+            "amount": 311.0,
+            "currency": "NTD",
+            "category": "Others",
+            "user": 4,
+            "store": "Other",
+            "comment": "Stationaries"
+        },
+        {
+            "date": "2022-05-11",
+            "amount": 139.0,
+            "currency": "NTD",
+            "category": "Medical",
+            "user": 4,
+            "store": "Other",
+            "comment": "Masks:10pcs"
         }
     ]
 }
