@@ -656,6 +656,15 @@
             "user": 4,
             "store": "Other",
             "comment": "Masks:10pcs"
+        },
+        {
+            "date": "2022-05-11",
+            "amount": 25015.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 1,
+            "store": "Landlord",
+            "comment": "Rent"
         }
     ]
 }

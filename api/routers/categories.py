@@ -38,10 +38,15 @@ async def get_all_categories():
         {
             "id": 5,
             "name": "Travel",
-            "color": "LightBlue"
+            "color": "Red"
         },
         {
             "id": 6,
+            "name": "Kitties",
+            "color": "LightBlue"
+        },
+        {
+            "id": 7,
             "name": "Others",
             "color": "LightGray"
         }
@@ -51,7 +56,7 @@ async def get_all_categories():
         results = query_db(sql)
         for category in results:
             output_list.append(dict(Category(category)))
-    except ControllerError as err:
+    except Exception as err:
         return {"categories": output_list}
 
     return {"categories": output_list}

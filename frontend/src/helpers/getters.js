@@ -2,7 +2,7 @@ import { RequestHandler } from "./reqs";
 
 export async function get_all_categories(){
     const reqObj = new RequestHandler("http://0.0.0.0:8000/categories/get_all");
-    return await reqObj.sendRequest([
+    const data = await reqObj.sendRequest([
         {
             "id": 1,
             "name": "Food",
@@ -33,5 +33,6 @@ export async function get_all_categories(){
             "name": "Others",
             "color": "LightGray"
         }
-    ]).then(data => data.catetogies);
+    ]);
+    return data.catetogies;
 }
