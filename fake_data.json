@@ -665,6 +665,69 @@
             "user": 1,
             "store": "Landlord",
             "comment": "Rent"
+        },
+        {
+            "date": "2022-05-12",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-11",
+            "amount": 205.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-11",
+            "amount": 205.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-04-23",
+            "amount": 130.0,
+            "currency": "USD",
+            "category": "Medical",
+            "user": 1,
+            "store": "Other",
+            "comment": "Regain"
+        },
+        {
+            "date": "2022-04-23",
+            "amount": 130.0,
+            "currency": "USD",
+            "category": "Medical",
+            "user": 4,
+            "store": "Other",
+            "comment": "Regain"
+        },
+        {
+            "date": "2022-05-12",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-10",
+            "amount": 540.0,
+            "currency": "USD",
+            "category": "Medical",
+            "user": 4,
+            "store": "Other",
+            "comment": "Therapy:3m"
         }
     ]
 }

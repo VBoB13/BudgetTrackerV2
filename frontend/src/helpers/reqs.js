@@ -32,18 +32,18 @@ export class RequestHandler {
       data: {}
     };
   }
-  sendRequest(default_response = null) {
+  sendRequest(default_response = {categories: []}) {
     return new Promise((resolve, reject) => {
       axios(this.reqConf).then(response => {
         if (response.status >= 200 && response.status <= 399) {
           resolve(response.data);
         } else {
-          if (default_response === null) reject(response.statusText);
+          if (default_response.categories.length === 0) reject(response.statusText);
           reject(default_response);
         }
       }).catch(error => {
         console.log(error);
-        if (default_response === null) reject(error);
+        if (default_response.categories.length === 0) reject(error);
         reject(default_response);
       })
       

@@ -16,41 +16,41 @@ const state = reactive({
 });
 
 const category_choices = ref([
-        // {
-        //     "id": 1,
-        //     "name": "Food",
-        //     "color": "Green"
-        // },
-        // {
-        //     "id": 2,
-        //     "name": "Rent & Utilities",
-        //     "color": "Gray"
-        // },
-        // {
-        //     "id": 3,
-        //     "name": "Medical",
-        //     "color": "Pink"
-        // },
-        // {
-        //     "id": 4,
-        //     "name": "Leisure",
-        //     "color": "Blue"
-        // },
-        // {
-        //     "id": 5,
-        //     "name": "Travel",
-        //     "color": "LightBlue"
-        // },
-        // {
-        //     "id": 6,
-        //     "name": "Kitties",
-        //     "color": "LightBlue"
-        // },
-        // {
-        //     "id": 7,
-        //     "name": "Others",
-        //     "color": "LightGray"
-        // }
+        {
+            "id": 1,
+            "name": "Food",
+            "color": "Green"
+        },
+        {
+            "id": 2,
+            "name": "Rent & Utilities",
+            "color": "Gray"
+        },
+        {
+            "id": 3,
+            "name": "Medical",
+            "color": "Pink"
+        },
+        {
+            "id": 4,
+            "name": "Leisure",
+            "color": "Blue"
+        },
+        {
+            "id": 5,
+            "name": "Travel",
+            "color": "LightBlue"
+        },
+        {
+            "id": 6,
+            "name": "Kitties",
+            "color": "LightBlue"
+        },
+        {
+            "id": 7,
+            "name": "Others",
+            "color": "LightGray"
+        }
     ]);
 
 async function update_transaction(data) {
@@ -95,9 +95,12 @@ const category_select_props = {
 };
 
 onMounted(() => {
-    category_choices.value = get_all_categories();
+    category_choices.value = get_all_categories().then(data => data);
     const first_el = document.getElementById("trans_category");
     first_el.focus();
+});
+onUpdated(() => {
+    console.log(category_choices.value);
 });
 </script>
 
