@@ -107,8 +107,20 @@ async def temp_to_db():
     except Exception as err:
         print(Fore.RED, err, Style.RESET_ALL)
         print_tb(err.__traceback__)
+        raise HTTPException(500, detail=str(err))
 
 
 @router.get("/check_temp_to_db", description="This endpoint returns the amount of transactions that are awaiting to be transferred from file to DB.")
 async def check_temp_to_db():
-    pass
+    try:
+        pwd = os.getcwd()
+        data = {}
+
+        with open(pwd + "/fake_data.json", "r") as json_file:
+            data = json.load(json_file)
+
+        return {
+            "transactions": len(data["transactions"])
+        }
+    except Exception as err:
+        print(err)

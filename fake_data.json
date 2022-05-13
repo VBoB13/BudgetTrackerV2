@@ -728,6 +728,60 @@
             "user": 4,
             "store": "Other",
             "comment": "Therapy:3m"
+        },
+        {
+            "date": "2022-05-13",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-12",
+            "amount": 225.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "The Shack",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-12",
+            "amount": 225.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "The Shack",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-14",
+            "amount": 225.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "The Shack",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-14",
+            "amount": 225.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "The Shack",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-14",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Gonguan Thai Fried Rice",
+            "comment": "Lunch"
         }
     ]
 }
