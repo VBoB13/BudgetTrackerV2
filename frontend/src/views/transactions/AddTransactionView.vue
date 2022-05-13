@@ -12,7 +12,8 @@ import TransactionDetail from "./TransactionDetail.vue";
 
 const state = reactive({
     transaction: {},
-    show_transaction: false
+    show_transaction: false,
+    transaction_queue: 0
 });
 
 const category_choices = ref([
@@ -56,7 +57,12 @@ const category_choices = ref([
 async function update_transaction(data) {
     data = await Promise.resolve(data);
     state.transaction = data;
-}
+};
+
+async function check_transaction_queue(){
+    let req_obj2 = new RequestHandler("http://0.0.0.0:8000/transactions/check_temp_to_db");
+    state.transaction_queue = await req_obj2.sendRequest().then(data => data.transactions);
+};
 
 function add_transaction(){
     const transForm = document.getElementById("add-trans-form");
@@ -70,6 +76,7 @@ function add_transaction(){
         let req_obj = new RequestHandler("http://0.0.0.0:8000/transactions/add_temp", "POST");
         req_obj.reqConf.data = data;
         req_obj.sendRequest().then(response_data => update_transaction(response_data.transaction));
+        
     } catch(err){
         console.log("Save data to temp file: FAILED!");
         console.error(err);
@@ -98,6 +105,7 @@ onMounted(() => {
     category_choices.value = get_all_categories().then(data => data);
     const first_el = document.getElementById("trans_category");
     first_el.focus();
+    check_transaction_queue();
 });
 onUpdated(() => {
     console.log(category_choices.value);
@@ -126,6 +134,7 @@ onUpdated(() => {
                 <!-- Submit -->
                 <SubmitButton />
             </form>
+            <span class="small">There are <strong>{{ state.transaction_queue }}</strong> transactions waiting to be submitted.</span>
         </div>
         <div class="last-transaction">
             <CheckBox @prevTransChecked="checkbox_status" v-bind="checkbox_props" />

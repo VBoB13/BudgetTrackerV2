@@ -124,3 +124,5 @@ async def check_temp_to_db():
         }
     except Exception as err:
         print(err)
+        print_tb(err.__traceback__)
+        raise HTTPException(500, detail=str(err))
