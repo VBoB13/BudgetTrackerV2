@@ -2,7 +2,6 @@ import axios from "axios";
 
 export function isResponseOK(response) {
   console.log(response);
-  
   if (response.status >= 200 && response.status <= 299) {
     return new Promise((resolve, reject)=> {
       if (response.data) return resolve(response.data);
@@ -27,26 +26,31 @@ export class RequestHandler {
       url: this.url,
       headers: {
         "Content-Type": this.contentType,
+        "Access-Control-Allow-Origin": "127.0.0.1:8000",
       },
       credentials: "same-origin",
-      data: {}
+      data: {},
     };
   }
-  sendRequest(default_response = {categories: []}) {
+  sendRequest(default_response = {}) {
     return new Promise((resolve, reject) => {
-      axios(this.reqConf).then(response => {
-        if (response.status >= 200 && response.status <= 399) {
-          resolve(response.data);
-        } else {
-          if (default_response.categories.length === 0) reject(response.statusText);
+      axios(this.reqConf)
+        .then((response) => {
+          if (response.status >= 200 && response.status <= 399) {
+            console.log(response.data);
+            resolve(response.data);
+          } else {
+            if (Object.getOwnPropertyNames(default_response).length === 0)
+              reject(response.statusText);
+            reject(default_response);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (Object.getOwnPropertyNames(default_response).length === 0)
+            reject(error);
           reject(default_response);
-        }
-      }).catch(error => {
-        console.log(error);
-        if (default_response.categories.length === 0) reject(error);
-        reject(default_response);
-      })
-      
+        });
     });
   }
 }

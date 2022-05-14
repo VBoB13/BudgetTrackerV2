@@ -1,3 +1,6 @@
+from pprint import pprint
+from traceback import print_tb
+from colorama import Fore, Style
 from fastapi import APIRouter, HTTPException
 
 from ..objects.categories import Category
@@ -57,8 +60,15 @@ async def get_all_categories():
         for category in results:
             output_list.append(dict(Category(category)))
     except Exception as err:
+        print(Fore.RED, "ERROR:", Style.RESET_ALL)
+        print(Fore.YELLOW, err, Style.RESET_ALL)
+        # print_tb(err.__traceback__)
+        print("\n", Fore.YELLOW, "Categories:", Style.RESET_ALL)
+        pprint(output_list)
         return {"categories": output_list}
 
+    print("Categories:")
+    pprint(output_list)
     return {"categories": output_list}
 
 
