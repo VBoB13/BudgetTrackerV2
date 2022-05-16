@@ -2,7 +2,7 @@
 import { onMounted, onUpdated, reactive, computed } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 
-import InputField from "../../components/forms/inputs/inputField.vue";
+import InputField from "../../components/forms/inputs/InputField.vue";
 import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
 import CheckBox from "../../components/forms/inputs/CheckBox.vue";
@@ -127,24 +127,27 @@ function add_transaction() {
     req_obj.reqConf.data = data;
     req_obj
       .sendRequest()
-      .then((response_data) => update_transaction(response_data.transaction));
+      .then((response_data) => update_transaction(response_data.transaction)).catch(err=>{    
+        console.log("Save data to DB: FAILED!");
+        console.log("Saving to temp. file...");
+        let req_obj = new RequestHandler(
+            "http://0.0.0.0:8000/transactions/add_temp",
+            "POST"
+        );
+        req_obj.reqConf.data = data;
+        req_obj
+            .sendRequest()
+            .then((response_data) => {
+                update_transaction(response_data.transaction);
+                check_transaction_queue();
+            }).catch(err => {
+                state.transaction = {};
+                console.log(`Unable to save to temp .json file!`);
+                console.error(err);
+            });
+      });
   } catch (err) {
-    console.log("Save data to DB: FAILED!");
-    console.log("Saving to temp. file...");
-    try {
-      let req_obj = new RequestHandler(
-        "http://0.0.0.0:8000/transactions/add_temp",
-        "POST"
-      );
-      req_obj.reqConf.data = data;
-      req_obj
-        .sendRequest()
-        .then((response_data) => update_transaction(response_data.transaction));
-      state.transaction = {};
-    } catch (err) {
-      console.log(`Unable to save to temp .json file!`);
-      console.error(err);
-    }
+    
   }
 }
 

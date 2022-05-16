@@ -782,6 +782,15 @@
             "user": 1,
             "store": "Gonguan Thai Fried Rice",
             "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-16",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
         }
     ]
 }

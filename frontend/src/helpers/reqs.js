@@ -47,8 +47,6 @@ export class RequestHandler {
         })
         .catch((error) => {
           console.log(error);
-          if (Object.getOwnPropertyNames(default_response).length === 0)
-            reject(error);
           reject(default_response);
         });
     });
