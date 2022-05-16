@@ -119,36 +119,32 @@ function add_transaction() {
     finalFormData.push([`${pair[0]}`.slice(6), pair[1]]);
   }
   const data = Object.fromEntries(finalFormData);
-  try {
-    let req_obj = new RequestHandler(
+  let req_obj = new RequestHandler(
       "http://0.0.0.0:8000/transactions/add",
       "POST"
-    );
-    req_obj.reqConf.data = data;
-    req_obj
+  );
+  req_obj.reqConf.data = data;
+  req_obj
       .sendRequest()
       .then((response_data) => update_transaction(response_data.transaction)).catch(err=>{    
-        console.log("Save data to DB: FAILED!");
-        console.log("Saving to temp. file...");
-        let req_obj = new RequestHandler(
-            "http://0.0.0.0:8000/transactions/add_temp",
-            "POST"
-        );
-        req_obj.reqConf.data = data;
-        req_obj
-            .sendRequest()
-            .then((response_data) => {
-                update_transaction(response_data.transaction);
-                check_transaction_queue();
-            }).catch(err => {
-                state.transaction = {};
-                console.log(`Unable to save to temp .json file!`);
-                console.error(err);
-            });
+      console.log("Save data to DB: FAILED!");
+      console.log("Saving to temp. file...");
+      let req_obj = new RequestHandler(
+          "http://0.0.0.0:8000/transactions/add_temp",
+          "POST"
+      );
+      req_obj.reqConf.data = data;
+      req_obj
+          .sendRequest()
+          .then((response_data) => {
+              update_transaction(response_data.transaction);
+              check_transaction_queue();
+          }).catch(err => {
+              state.transaction = {};
+              console.log(`Unable to save to temp .json file!`);
+              console.error(err);
+          });
       });
-  } catch (err) {
-    
-  }
 }
 
 const checkbox_props = {
