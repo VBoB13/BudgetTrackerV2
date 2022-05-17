@@ -791,6 +791,69 @@
             "user": 1,
             "store": "foodpanda",
             "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-17",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-16",
+            "amount": 185.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Uber Eats",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-16",
+            "amount": 185.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Uber Eats",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-16",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-17",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-11",
+            "amount": 4000.0,
+            "currency": "NTD",
+            "category": "Medical",
+            "user": 4,
+            "store": "Other",
+            "comment": "COVID Tests:20pcs"
+        },
+        {
+            "date": "2022-05-11",
+            "amount": 25015.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 1,
+            "store": "Landlord",
+            "comment": "Rent"
         }
     ]
 }
