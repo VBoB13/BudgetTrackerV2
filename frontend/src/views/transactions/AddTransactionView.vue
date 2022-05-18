@@ -13,43 +13,7 @@ const state = reactive({
   transaction: {},
   show_transaction: false,
   transaction_queue: 0,
-  category_choices: [
-    {
-      id: 1,
-      name: "Food",
-      color: "Green",
-    },
-    {
-      id: 2,
-      name: "Rent & Utilities",
-      color: "Gray",
-    },
-    {
-      id: 3,
-      name: "Medical",
-      color: "Pink",
-    },
-    {
-      id: 4,
-      name: "Leisure",
-      color: "Blue",
-    },
-    {
-      id: 5,
-      name: "Travel",
-      color: "LightBlue",
-    },
-    {
-      id: 6,
-      name: "Kitties",
-      color: "LightBlue",
-    },
-    {
-      id: 7,
-      name: "Others",
-      color: "LightGray",
-    },
-  ],
+  category_choices: [],
 });
 
 // const category_choices = ref();
@@ -62,40 +26,7 @@ async function update_transaction(data) {
 async function get_all_categories() {
   const reqObj = new RequestHandler("http://0.0.0.0:8000/categories/get_all");
   await reqObj
-    .sendRequest({
-      categories: [
-        {
-          id: 1,
-          name: "Food",
-          color: "Green",
-        },
-        {
-          id: 2,
-          name: "Rent & Utilities",
-          color: "Gray",
-        },
-        {
-          id: 3,
-          name: "Medical",
-          color: "Pink",
-        },
-        {
-          id: 4,
-          name: "Leisure",
-          color: "Blue",
-        },
-        {
-          id: 5,
-          name: "Travel",
-          color: "LightBlue",
-        },
-        {
-          id: 6,
-          name: "Others",
-          color: "LightGray",
-        },
-      ],
-    })
+    .sendRequest()
     .then((data) => {
       console.log(data.categories);
       state.category_choices = data.categories;

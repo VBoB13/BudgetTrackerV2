@@ -854,6 +854,69 @@
             "user": 1,
             "store": "Landlord",
             "comment": "Rent"
+        },
+        {
+            "date": "2022-05-18",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-18",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-17",
+            "amount": 240.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-17",
+            "amount": 240.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-13",
+            "amount": 700.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "CO2"
+        },
+        {
+            "date": "2022-05-18",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Gonguan Thai Fried Rice",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-18",
+            "amount": 799.0,
+            "currency": "NTD",
+            "category": "Transportation",
+            "user": 1,
+            "store": "Gogoro",
+            "comment": "Subscription:1m"
         }
     ]
 }
