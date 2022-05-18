@@ -917,6 +917,24 @@
             "user": 1,
             "store": "Gogoro",
             "comment": "Subscription:1m"
+        },
+        {
+            "date": "2022-05-17",
+            "amount": 320.0,
+            "currency": "NTD",
+            "category": "Medical",
+            "user": 1,
+            "store": "Other",
+            "comment": "Medicine"
+        },
+        {
+            "date": "2022-05-17",
+            "amount": 380.0,
+            "currency": "NTD",
+            "category": "Medical",
+            "user": 4,
+            "store": "Other",
+            "comment": "Medicine"
         }
     ]
 }
