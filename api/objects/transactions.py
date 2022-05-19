@@ -49,9 +49,7 @@ class Transaction(object):
             self.comment: str = kwargs.pop("comment", None)
 
     def __str__(self):
-        if self.id:
-            return "{} - {} {}".format(self.date, self.amount, self.currency)
-        return "No real transaction.(No id detected.)"
+        return "{} - {} {}".format(self.date, self.amount, self.currency)
 
     def __iter__(self):
         if self.id:
