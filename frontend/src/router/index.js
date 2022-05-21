@@ -4,8 +4,8 @@ import AboutView from "../views/AboutView.vue";
 import LoginView from "../views/LoginView.vue";
 import AddTransactionView from "../views/transactions/AddTransactionView.vue";
 import StatsView from "../views/StatsView.vue";
-import DailyAvgView from "../components/menus/stats/DailyAvgView.vue";
-import CategoryAvgView from "../components/menus/stats/CategoryAvgView.vue";
+import DailyAvgView from "../views/stats/DailyAvgView.vue";
+import CategoryAvgView from "../views/stats/CategoryAvgView.vue";
 import NotFound from "../views/NotFound.vue";
 
 const router = createRouter({
@@ -37,25 +37,25 @@ const router = createRouter({
       component: StatsView,
       children: [
         {
-          path: 'daily',
-          component: DailyAvgView
+          path: "daily",
+          component: DailyAvgView,
         },
         {
-          path: 'category',
-          component: CategoryAvgView
-        }
-      ]
+          path: "category",
+          component: CategoryAvgView,
+        },
+      ],
     },
     {
       path: "/inspect",
       name: "Inspect",
       component: AboutView,
     },
-    { 
-      path: '/:pathMatch(.*)*',
-      name: 'NotFound',
-      component: NotFound 
-    }
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: NotFound,
+    },
   ],
 });
 

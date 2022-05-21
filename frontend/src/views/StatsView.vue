@@ -1,28 +1,34 @@
 <script setup>
 import { ref } from "vue";
 import StatsMenu from "../components/menus/stats/StatsMenu.vue";
-import router from "../router/index"; 
+import router from "../router/index";
 
-const menuChoices = [{name: "Daily Avg.", route: "/stats/daily"}, {name: "Category Avg.", route: "/stats/category"}];
+const menuChoices = [
+  { name: "Daily Avg.", route: "/stats/daily" },
+  { name: "Category Avg.", route: "/stats/category" },
+];
 
-function click_menu(route){
-    router.push(route);
+function click_menu(route) {
+  router.push(route);
 }
 </script>
 
 <template>
-    <main>
-        <h1>Stats</h1>
-        <StatsMenu @menu-item="(route) => click_menu(route)" :choices="menuChoices" />
-        <router-view></router-view>
-    </main>    
+  <main>
+    <h1>Stats</h1>
+    <StatsMenu
+      @menu-item="(route) => click_menu(route)"
+      :choices="menuChoices"
+    />
+    <router-view></router-view>
+  </main>
 </template>
 
 <style scoped>
 main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
