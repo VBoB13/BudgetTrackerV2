@@ -1,5 +1,5 @@
 <script setup>
-import InputField from "./inputs/inputField.vue";
+import InputField from "./inputs/InputField.vue";
 import SubmitButton from "./buttons/SubmitButton.vue";
 
 const emit = defineEmits(['formloginevent']);
