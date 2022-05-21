@@ -17,48 +17,7 @@ router = APIRouter(
 
 @router.get("/get_all", response_model=CategoriesOut)
 async def get_all_categories():
-    output_list = [
-        {
-            "id": 1,
-            "name": "Food",
-            "color": "Green"
-        },
-        {
-            "id": 2,
-            "name": "Rent & Utilities",
-            "color": "Gray"
-        },
-        {
-            "id": 3,
-            "name": "Medical",
-            "color": "Pink"
-        },
-        {
-            "id": 4,
-            "name": "Leisure",
-            "color": "Blue"
-        },
-        {
-            "id": 5,
-            "name": "Travel",
-            "color": "Red"
-        },
-        {
-            "id": 6,
-            "name": "Kitties",
-            "color": "LightBlue"
-        },
-        {
-            "id": 7,
-            "name": "Transportation",
-            "color": "LightYellow"
-        },
-        {
-            "id": 8,
-            "name": "Others",
-            "color": "LightGray"
-        }
-    ]
+    output_list = []
     try:
         sql = Category.get_all()
         results = query_db(sql)
@@ -69,6 +28,48 @@ async def get_all_categories():
         print(Fore.YELLOW, err, Style.RESET_ALL)
         # print_tb(err.__traceback__)
         print("\n", Fore.YELLOW, "Categories:", Style.RESET_ALL)
+        output_list = [
+            {
+                "id": 1,
+                "name": "Food",
+                "color": "Green"
+            },
+            {
+                "id": 2,
+                "name": "Rent & Utilities",
+                "color": "Gray"
+            },
+            {
+                "id": 3,
+                "name": "Medical",
+                "color": "Pink"
+            },
+            {
+                "id": 4,
+                "name": "Leisure",
+                "color": "Blue"
+            },
+            {
+                "id": 5,
+                "name": "Travel",
+                "color": "Red"
+            },
+            {
+                "id": 6,
+                "name": "Kitties",
+                "color": "LightBlue"
+            },
+            {
+                "id": 7,
+                "name": "Transportation",
+                "color": "LightYellow"
+            },
+            {
+                "id": 8,
+                "name": "Others",
+                "color": "LightGray"
+            }
+        ]
         pprint(output_list)
         return {"categories": output_list}
 

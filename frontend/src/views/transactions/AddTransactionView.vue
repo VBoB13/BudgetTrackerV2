@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUpdated, reactive, computed } from "vue";
+import { onMounted, reactive, computed } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 
 import InputField from "../../components/forms/inputs/InputField.vue";
@@ -25,12 +25,10 @@ async function update_transaction(data) {
 
 async function get_all_categories() {
   const reqObj = new RequestHandler("http://0.0.0.0:8000/categories/get_all");
-  await reqObj
-    .sendRequest()
-    .then((data) => {
-      console.log(data.categories);
-      state.category_choices = data.categories;
-    });
+  await reqObj.sendRequest().then((data) => {
+    console.log(data.categories);
+    state.category_choices = data.categories;
+  });
 }
 
 async function check_transaction_queue() {
@@ -51,31 +49,34 @@ function add_transaction() {
   }
   const data = Object.fromEntries(finalFormData);
   let req_obj = new RequestHandler(
-      "http://0.0.0.0:8000/transactions/add",
-      "POST"
+    "http://0.0.0.0:8000/transactions/add",
+    "POST"
   );
   req_obj.reqConf.data = data;
   req_obj
-      .sendRequest()
-      .then((response_data) => update_transaction(response_data.transaction)).catch(err=>{    
+    .sendRequest()
+    .then((response_data) => update_transaction(response_data.transaction))
+    .catch((err) => {
       console.log("Save data to DB: FAILED!");
+      console.log(`Reason: ${err}`);
       console.log("Saving to temp. file...");
       let req_obj = new RequestHandler(
-          "http://0.0.0.0:8000/transactions/add_temp",
-          "POST"
+        "http://0.0.0.0:8000/transactions/add_temp",
+        "POST"
       );
       req_obj.reqConf.data = data;
       req_obj
-          .sendRequest()
-          .then((response_data) => {
-              update_transaction(response_data.transaction);
-              check_transaction_queue();
-          }).catch(err => {
-              state.transaction = {};
-              console.log(`Unable to save to temp .json file!`);
-              console.error(err);
-          });
-      });
+        .sendRequest()
+        .then((response_data) => {
+          update_transaction(response_data.transaction);
+          check_transaction_queue();
+        })
+        .catch((err) => {
+          state.transaction = {};
+          console.log(`Unable to save to temp .json file!`);
+          console.error(err);
+        });
+    });
 }
 
 const checkbox_props = {
