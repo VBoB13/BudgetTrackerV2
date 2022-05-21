@@ -43,7 +43,8 @@ class Transaction(object):
             self.date: datetime.date = kwargs.pop("date", None)
             self.amount: float or int = kwargs.pop("amount", None)
             self.currency = kwargs.pop("currency", None)
-            self.category: Category = kwargs.pop("category", None)
+            self.category: Category = self._fetch_category(
+                kwargs.pop("category", None))
             self.user: User = kwargs.pop("user", None)
             self.store: Store = kwargs.pop("store", None)
             self.comment: str = kwargs.pop("comment", None)
@@ -122,8 +123,7 @@ class Transaction(object):
                 st.s_name ASC;
         """.format((TODAY - datetime.timedelta(days=30)).strftime("%Y-%m-%d"))
 
-    @overload
-    def add_transaction(self):
+    def add_transaction_unit(self):
         return """
             INSERT INTO "TRANSACTIONS"
             (t_date, amount, currency, category_id, user_id, store_id, comment)

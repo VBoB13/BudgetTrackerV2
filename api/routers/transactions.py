@@ -141,10 +141,24 @@ if __name__ == "__main__":
         with open(pwd + "/fake_data.json", "r") as json_file:
             data = json.load(json_file)
 
-        for transaction in transaction_gen(data):
-            # query_db(transaction.add_transaction(), insert=True)
-            print(transaction)
+        if len(data["transactions"]) > 0:
+            for transaction in transaction_gen(data):
+                query_db(transaction.add_transaction_unit(), insert=True)
+        else:
+            raise Exception("No temp. data to transfer!")
 
     except Exception as err:
         print(Fore.RED, err, Style.RESET_ALL)
         print_tb(err.__traceback__)
+
+    else:
+        data.clear()
+        try:
+            with open(pwd + "/fake_data.json", "w") as json_file:
+                json_file.write(json.dump(data))
+        except Exception as err:
+            print(Fore.RED, "Unable to clear fake_data.json of data!", Style.RESET_ALL)
+            print(err)
+            print_tb(err.__traceback__)
+        else:
+            print(Fore.GREEN, "SUCCESS!", Style.RESET_ALL)
