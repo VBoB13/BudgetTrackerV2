@@ -35,8 +35,10 @@ const props = defineProps({
     <label :for="props.id ?? props.name">
       {{
         props.id
-          ? `${props.id[6]}`.toUpperCase() + `${props.id}`.slice(7).replace("_", " ")
-          : `${props.name[6]}`.toUpperCase() + `${props.name}`.slice(7).replace("_", " ")
+          ? `${props.id[6]}`.toUpperCase() +
+            `${props.id}`.slice(7).replace("_", " ")
+          : `${props.name[6]}`.toUpperCase() +
+            `${props.name}`.slice(7).replace("_", " ")
       }}
     </label>
     <br />
