@@ -71,12 +71,9 @@ class Transaction(object):
         category = None
         try:
             category = Category(query_db(sql))
-        except ControllerError as err:
-            raise TransactionsError(
-                "Could not retrieve category data from database!") from err
-        except CategoriesError as err:
-            raise TransactionsError(
-                "Could not convert category data into Category object!") from err
+        except Exception as err:
+            print(err)
+            return cat_name
 
         return category
 
