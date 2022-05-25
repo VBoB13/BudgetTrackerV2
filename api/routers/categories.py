@@ -66,6 +66,11 @@ async def get_all_categories():
             },
             {
                 "id": 8,
+                "name": "Debt",
+                "color": "DarkRed"
+            },
+            {
+                "id": 9,
                 "name": "Others",
                 "color": "LightGray"
             }
