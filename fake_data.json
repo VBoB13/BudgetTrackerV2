@@ -71,6 +71,42 @@
             "user": 1,
             "store": "Other",
             "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-24",
+            "amount": 130.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-24",
+            "amount": 129.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-25",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-25",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Breakfast"
         }
     ]
 }
