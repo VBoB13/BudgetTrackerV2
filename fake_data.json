@@ -107,6 +107,24 @@
             "user": 4,
             "store": "Other",
             "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-25",
+            "amount": 415.0,
+            "currency": "NTD",
+            "category": "Travel",
+            "user": 1,
+            "store": "Other",
+            "comment": "ESTA"
+        },
+        {
+            "date": "2022-05-25",
+            "amount": 4032.0,
+            "currency": "NTD",
+            "category": "Debt",
+            "user": 1,
+            "store": "CSN",
+            "comment": "Student loan"
         }
     ]
 }
