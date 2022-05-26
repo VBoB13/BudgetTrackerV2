@@ -125,6 +125,69 @@
             "user": 1,
             "store": "CSN",
             "comment": "Student loan"
+        },
+        {
+            "date": "2022-05-25",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Gonguan Thai Fried Rice",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-25",
+            "amount": 200.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "The Shack",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-25",
+            "amount": 200.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "The Shack",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-26",
+            "amount": 200.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "The Shack",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-26",
+            "amount": 200.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "The Shack",
+            "comment": "Dinner"
+        },
+        {
+            "date": "2022-05-26",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-26",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Gonguan Thai Fried Rice",
+            "comment": "Lunch"
         }
     ]
 }
