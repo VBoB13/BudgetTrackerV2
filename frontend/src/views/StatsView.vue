@@ -7,17 +7,12 @@ const menuChoices = [
   { name: "Daily Avg.", route: "/stats/daily" },
   { name: "Category Avg.", route: "/stats/category" },
 ];
-
-function click_menu(route) {
-  router.push(route);
-}
 </script>
 
 <template>
   <main>
     <h1>Stats</h1>
     <StatsMenu
-      @menu-item="(route) => click_menu(route)"
       :choices="menuChoices"
     />
     <router-view></router-view>

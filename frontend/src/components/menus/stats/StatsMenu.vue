@@ -6,8 +6,6 @@ const props = defineProps({
         required: true
     }
 });
-
-const emits = defineEmits(['menu-item']);
 </script>
 
 <template>
