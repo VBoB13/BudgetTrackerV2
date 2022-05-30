@@ -305,6 +305,15 @@
             "user": 4,
             "store": "foodpanda",
             "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-30",
+            "amount": 338.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 1,
+            "store": "Chunghwa Telecom",
+            "comment": "Subscription:1m"
         }
     ]
 }
