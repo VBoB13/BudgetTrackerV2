@@ -188,6 +188,105 @@
             "user": 1,
             "store": "Gonguan Thai Fried Rice",
             "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-27",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-27",
+            "amount": 80.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-27",
+            "amount": 80.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Lunch"
+        },
+        {
+            "date": "2022-05-28",
+            "amount": 201.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 1,
+            "store": "Other",
+            "comment": "Bubble Tea"
+        },
+        {
+            "date": "2022-05-28",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-28",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-28",
+            "amount": 310.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Veggies"
+        },
+        {
+            "date": "2022-05-30",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-30",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-29",
+            "amount": 50.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 1,
+            "store": "Other",
+            "comment": "Ice Cream"
+        },
+        {
+            "date": "2022-05-29",
+            "amount": 50.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 4,
+            "store": "Other",
+            "comment": "Ice Cream"
         }
     ]
 }

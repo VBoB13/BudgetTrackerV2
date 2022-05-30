@@ -27,7 +27,6 @@ async def get_all_categories():
         print(Fore.RED, "ERROR:", Style.RESET_ALL)
         print(Fore.YELLOW, err, Style.RESET_ALL)
         # print_tb(err.__traceback__)
-        print("\n", Fore.YELLOW, "Categories:", Style.RESET_ALL)
         output_list = [
             {
                 "id": 1,
@@ -75,11 +74,9 @@ async def get_all_categories():
                 "color": "LightGray"
             }
         ]
-        pprint(output_list)
+
         return {"categories": output_list}
 
-    print("Categories:")
-    pprint(output_list)
     return {"categories": output_list}
 
 
