@@ -18,6 +18,7 @@ router = APIRouter(
 async def get_daily_category_sums(img: StatsImage):
     stats = Stats()
     stats.get_category_sums_per_date()
+    print(img)
     if img.yes:
         graph_bytes = stats.create_bytes_categories(plot="line")
         return StreamingResponse(graph_bytes, media_type="image/png")
