@@ -18,7 +18,7 @@ function login(prev_url=""){
       if (password === user.password){
         state.isAuthenticated = true;
         state.user = user.username;
-        if (prev_url) router.push(`${prev_url}`);
+        if (prev_url) this.$router.push(`${prev_url}`);
       }
       else {
         state.isAuthenticated = false;
