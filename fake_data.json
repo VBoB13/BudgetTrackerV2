@@ -314,6 +314,24 @@
             "user": 1,
             "store": "Chunghwa Telecom",
             "comment": "Subscription:1m"
+        },
+        {
+            "date": "2022-05-31",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "date": "2022-05-31",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
         }
     ]
 }

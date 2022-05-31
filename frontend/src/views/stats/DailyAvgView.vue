@@ -12,7 +12,7 @@ function isImage(data){
 function get_daily_avg_graph(){
   const req_obj = new RequestHandler("http://0.0.0.0:8000/stats/get_daily_category_sum", "POST");
   const yes_data = [["yes", img_yes.value]];
-  req_obj.data = Object.fromEntries(yes_data);
+  req_obj.reqConf.data = Object.fromEntries(yes_data);
   req_obj.sendRequest()
     .then((data) => {
       if (!isImage(data)) throw new Error(`Could not update image!`);

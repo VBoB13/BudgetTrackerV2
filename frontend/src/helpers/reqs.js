@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export function isResponseOK(response) {
-  console.log(response);
   if (response.status >= 200 && response.status <= 299) {
     return new Promise((resolve, reject)=> {
       if (response.data) return resolve(response.data);
@@ -37,7 +36,6 @@ export class RequestHandler {
       axios(this.reqConf)
         .then((response) => {
           if (response.status >= 200 && response.status <= 399) {
-            console.log(response.data);
             resolve(response.data);
           } else {
             if (Object.getOwnPropertyNames(default_response).length === 0)
