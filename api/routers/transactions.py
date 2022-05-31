@@ -25,13 +25,28 @@ async def get_all_Transactions():
         transactions = TransactionList(
             [Transaction(item) for item in query_db(sql)])
     except ControllerError as err:
-        raise HTTPException(
-            500, "Could not retrieve Transactions from database!") from err
+        try:
+            pwd = os.getcwd()
+            data = {}
+
+            with open(pwd + "/fake_data.json", "r") as json_file:
+                data = json.load(json_file)
+
+            return {
+                "transactions": TransactionList([Transaction(**item) for item in data["transactions"]]),
+                "temp": True
+            }
+        except Exception:
+            raise HTTPException(
+                500, "Could not retrieve Transactions from database!") from err
     else:
         df = transactions.generate_df()
         print(df)
 
-    return {"transactions": [transaction for transaction in transactions]}
+    return {
+        "transactions": [transaction for transaction in transactions],
+        "temp": False
+    }
 
 
 @router.post("/add", description="Add a single Transaction to the database.", response_model=TransactionsOut)

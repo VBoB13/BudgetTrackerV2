@@ -23,5 +23,6 @@ section.login {
   border: 1px solid #000000;
   border-radius: 1em;
   margin-top: 2em;
+  width: 50vw;
 }
 </style>

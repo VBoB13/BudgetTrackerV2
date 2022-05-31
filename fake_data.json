@@ -332,6 +332,36 @@
             "user": 1,
             "store": "foodpanda",
             "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-05-31",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Gonguan Thai Fried Rice",
+            "comment": "Lunch"
+        },
+        {
+            "id": -1,
+            "date": "2022-05-31",
+            "amount": 613.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Parking ticket"
+        },
+        {
+            "id": -1,
+            "date": "2022-05-31",
+            "amount": 613.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Parking ticket"
         }
     ]
 }

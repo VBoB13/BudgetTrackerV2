@@ -39,7 +39,7 @@ class Transaction(object):
             self.comment: str = row[7] if row[7] else ""
 
         if kwargs:
-            self.id: int = kwargs.pop("id", None)
+            self.id: int = kwargs.pop("id", -1)
             self.date: datetime.date = kwargs.pop("date", None)
             self.amount: float or int = kwargs.pop("amount", None)
             self.currency = kwargs.pop("currency", None)
@@ -55,7 +55,7 @@ class Transaction(object):
     def __iter__(self):
         if self.id:
             yield "id", self.id
-        yield "date", self.date.strftime("%Y-%m-%d")
+        yield "date", self.date.strftime("%Y-%m-%d") if isinstance(self.date, datetime.date) else self.date
         yield "amount", self.amount
         yield "currency", self.currency
         yield "category", str(self.category)
