@@ -30,5 +30,4 @@ main {
 section.stats :is(h3, h5) {
   text-align: center;
 }
-
 </style>
