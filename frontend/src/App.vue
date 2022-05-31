@@ -34,14 +34,17 @@ function authenticate() {
     username: "w1ck3d",
     password: "13",
   };
-  try {
-    let data = req.sendRequest();
-  } catch (error) {
-    console.error(error);
-    state.isAuthenticated = false;
-    state.user = "";
-    this.$router.push({ name: 'Login'});
-  }
+  req.sendRequest()
+    .then((data) => {
+      state.isAuthenticated = data.isAuthenticated;
+      state.user = data.user
+    })
+    .catch((rej_response) => {
+      console.error(rej_response);
+      state.isAuthenticated = false;
+      state.user = "";
+      this.$router.push({ name: 'Login'});
+    });
 }
 
 onMounted(() => {
