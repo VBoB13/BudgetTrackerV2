@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import StatsMenu from "../components/menus/stats/StatsMenu.vue";
-import router from "../router/index";
+import StatsMenu from "../../components/menus/stats/StatsMenu.vue";
+import router from "../../router/index";
 
 const menuChoices = [
   { name: "Daily Avg.", route: "/stats/daily" },
@@ -26,4 +26,9 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+section.stats :is(h3, h5) {
+  text-align: center;
+}
+
 </style>
