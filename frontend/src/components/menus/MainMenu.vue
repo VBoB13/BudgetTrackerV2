@@ -33,8 +33,6 @@ section.menu {
   border: 1px solid #020050;
   padding: 5px;
   width: 80vw;
-  position: relative;
-  left: 9.5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
