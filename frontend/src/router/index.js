@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import LoginView from "../views/LoginView.vue";
 import AddTransactionView from "../views/transactions/AddTransactionView.vue";
+import InspectTransactions from "../views/transactions/InspectTransactions.vue";
 import StatsView from "../views/stats/StatsView.vue";
 import DailyAvgView from "../views/stats/DailyAvgView.vue";
 import CategoryAvgView from "../views/stats/CategoryAvgView.vue";
@@ -49,7 +50,7 @@ const router = createRouter({
     {
       path: "/inspect",
       name: "Inspect",
-      component: AboutView,
+      component: InspectTransactions,
     },
     {
       path: "/:pathMatch(.*)*",
