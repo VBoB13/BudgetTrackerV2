@@ -158,6 +158,7 @@ onMounted(() => {
       <TransactionDetail
         v-if="state.show_transaction"
         :transaction="state.transaction"
+        :detail_title="`Last Transaction`"
       />
     </div>
   </section>

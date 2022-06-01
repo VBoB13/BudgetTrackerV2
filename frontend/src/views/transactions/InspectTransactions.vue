@@ -17,7 +17,7 @@ function start_edit(transaction, temp) {
 </script>
 
 <template>
-  <h1>Inspect & Edit Transactions</h1>
+  <h1>Inspect Transactions</h1>
   <section class="inspect">
     <TransactionList
       @transactionEdit="(transaction, temp) => start_edit(transaction, temp)"
@@ -25,7 +25,7 @@ function start_edit(transaction, temp) {
     <TransactionDetail
       v-if="transaction_exist"
       :transaction="edit_transaction"
-      v-bind:detail_title="`Marked Transaction`"
+      :detail_title="`Marked Transaction`"
     />
   </section>
 </template>
