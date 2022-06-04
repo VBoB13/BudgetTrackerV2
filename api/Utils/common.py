@@ -5,10 +5,14 @@ from datetime import date, datetime
 from .exceptions import CommonUtilError, ControllerError
 from ..db.controller import query_db
 
+# Dates
+
 
 def str_to_date(s: str) -> date:
     d = datetime.strptime(s, "%Y-%m-%d").date
     return d
+
+# Exchange Rates
 
 
 def get_ntd_from_base_date(base: str, date_obj: date) -> float:
