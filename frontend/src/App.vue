@@ -1,12 +1,13 @@
 <script setup>
 import { reactive, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import NavbarMenu from "./components/menus/NavbarMenu.vue";
 import LoginView from "./views/LoginView.vue";
 import { RequestHandler } from "./helpers/reqs.js";
 import * as user_data from "../../user_data.json";
 
 const router = useRouter();
+const route = useRoute();
 
 const state = reactive({
   isAuthenticated: false,
@@ -21,7 +22,7 @@ function login(prev_url = "") {
       if (password === user.password) {
         state.isAuthenticated = true;
         state.user = user.username;
-        if (prev_url) router.push(`${prev_url}`);
+        if (prev_url) router.push({ name: prev_url });
       } else {
         state.isAuthenticated = false;
         state.user = "";
@@ -46,7 +47,7 @@ function authenticate() {
       console.error(rej_response);
       state.isAuthenticated = false;
       state.user = "";
-      router.push({ name: "Login" });
+      router.push({ name: "Login", query: { prev_url: route.name } });
     });
 }
 
