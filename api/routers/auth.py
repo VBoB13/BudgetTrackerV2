@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Form
+from fastapi import APIRouter, Body, HTTPException, Form
 
 from api.Utils.exceptions import AuthError
 
@@ -53,9 +53,9 @@ async def register(
 
 @router.post("/login", response_model=UserOut)
 async def login(
-    username: str = Form(..., title="Username.",
+    username: str = Body(..., title="Username.",
                          description="The username with which you registered."),
-    password: str = Form(..., title="Password.",
+    password: str = Body(..., title="Password.",
                          description="The password with which you registered.")
 ):
     user = User(username=username, password=encrypt_password(password))
