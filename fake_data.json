@@ -369,6 +369,16 @@
             "user": 4,
             "store": "Other",
             "comment": "Veggies"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-12",
+            "amount": 25015.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 1,
+            "store": "Landlord",
+            "comment": "Rent"
         }
     ]
 }

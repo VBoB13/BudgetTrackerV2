@@ -5,10 +5,6 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const emit = defineEmits(["loginevent"]);
-
-onMounted(() => {
-  console.log(route.params.prev_url);
-});
 </script>
 
 <template>
