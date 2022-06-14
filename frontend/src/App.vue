@@ -71,9 +71,9 @@ onMounted(() => {
 
 <style>
 header {
-  width: 50vw;
-  position: relative;
-  left: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 span.text-code {
   padding: 0.1em;
@@ -82,14 +82,16 @@ span.text-code {
   font-size: 0.9em;
 }
 body {
+  display: grid;
+  grid-template-rows: 40px auto;
   position: relative;
-  height: 120vh;
   background: linear-gradient(
     180deg,
     #afe2ff -8.06%,
     rgba(175, 226, 255, 0) 100%
   );
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  min-height: 100vh;
 }
 
 main {

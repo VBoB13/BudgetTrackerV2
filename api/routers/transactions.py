@@ -24,6 +24,7 @@ async def get_all_transactions():
     try:
         transactions = TransactionList(
             [Transaction(item) for item in query_db(sql)])
+        trans_sum = transactions.get_sum()
     except ControllerError as err:
         try:
             pwd = os.getcwd()
@@ -55,6 +56,7 @@ async def get_all_transactions():
 
     return {
         "transactions": transactions,
+        "sum": trans_sum,
         "temp": False
     }
 

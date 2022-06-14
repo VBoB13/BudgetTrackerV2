@@ -5,6 +5,7 @@ import { RequestHandler } from "../../helpers/reqs";
 const emit = defineEmits(["transactionEdit"]);
 
 const transactions = ref([]);
+const trans_sum = ref(0);
 const temp_data = ref(false);
 
 function get_transactions() {
@@ -14,11 +15,14 @@ function get_transactions() {
   req_obj
     .sendRequest()
     .then((data) => {
+      console.log({ data });
       temp_data.value = data.temp;
       transactions.value = data.transactions;
+      trans_sum.value = data.sum;
     })
     .catch((rej_response) => {
       transactions.value = [];
+      trans_sum.value = 0;
       temp_data.value = false;
     });
 }
@@ -44,6 +48,8 @@ onMounted(() => {
         {{ transaction.currency }}
       </li>
     </ul>
+    <hr />
+    <span class="transaction_sum">Sum: {{ trans_sum }}</span>
   </div>
 </template>
 
