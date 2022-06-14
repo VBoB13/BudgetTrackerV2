@@ -201,12 +201,10 @@ class TransactionList(list):
                 raise TransactionsError(
                     "This list can only contain Transactions!")
 
-    def __iter__(self):
+    def __iter__(self) -> Transaction:
         for transaction in super().__iter__():
-            if isinstance(transaction, Transaction):
-                yield transaction
-                continue
-            raise TransactionsError("Item is not a Transaction instance!")
+            yield transaction
+            continue
 
     def append(self, obj) -> None:
         if isinstance(obj, Transaction):
@@ -219,6 +217,12 @@ class TransactionList(list):
             return super().extend(obj)
         raise TransactionsError(
             "Can't extend any other list than TransactionLists [Transaction], not {}.".format(type(obj).__name__))
+
+    def get_sum(self) -> int:
+        transactions_sum = int(0)
+        for transaction in self.__iter__():
+            transactions_sum += transaction.amount
+        return transactions_sum
 
     def _generate_col_data(self):
         index = []

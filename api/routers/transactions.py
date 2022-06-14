@@ -4,7 +4,7 @@ import os
 from traceback import print_tb
 from fastapi import APIRouter, HTTPException
 
-from colorama import Fore, Style
+from colorama import Back, Fore, Style
 
 from ..objects.transactions import Transaction, TransactionList
 from ..typing.models import TransactionIn, TransactionOut, TransactionsOut
@@ -19,7 +19,7 @@ router = APIRouter(
 
 
 @router.get("/get_all", description="Show all the registered transactions in the database.", response_model=TransactionsOut)
-async def get_all_Transactions():
+async def get_all_transactions():
     sql = Transaction.get_all_transactions()
     try:
         transactions = TransactionList(
@@ -32,8 +32,18 @@ async def get_all_Transactions():
             with open(pwd + "/fake_data.json", "r") as json_file:
                 data = json.load(json_file)
 
+            transactions = TransactionList(
+                [Transaction(**item) for item in data["transactions"]])
+
+            trans_sum = transactions.get_sum()
+
+            if trans_sum > 10000:
+                print(Back.RED, Fore.BLACK,
+                      "More than $10000 worth of transactions in temp!", Style.RESET_ALL)
+
             return {
-                "transactions": TransactionList([Transaction(**item) for item in data["transactions"]]),
+                "transactions": transactions,
+                "sum": trans_sum,
                 "temp": True
             }
         except Exception:
@@ -44,7 +54,7 @@ async def get_all_Transactions():
         print(df)
 
     return {
-        "transactions": [transaction for transaction in transactions],
+        "transactions": transactions,
         "temp": False
     }
 
