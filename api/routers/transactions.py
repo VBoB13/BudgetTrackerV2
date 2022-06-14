@@ -88,6 +88,8 @@ async def add_transaction_temp(transaction: TransactionIn):
         with open(pwd + "/fake_data.json", "r+") as json_file:
             data = json.load(json_file)
             data["transactions"].append(dict(trans))
+            data["transactions"] = sorted(
+                data["transactions"], key=lambda x: x["date"])
 
         with open(pwd + "/fake_data.json", "w") as json_file:
             json.dump(data, json_file, indent=4)
