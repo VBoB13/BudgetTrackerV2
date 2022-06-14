@@ -8,7 +8,7 @@ const emit = defineEmits(["transactionEdit"]);
 const edit_transaction = ref({});
 
 const transaction_exist = computed(() => {
-  return Object.keys(edit_transaction).length > 0;
+  return Object.keys(edit_transaction.value).length > 0;
 });
 
 function start_edit(transaction, temp) {
@@ -22,11 +22,13 @@ function start_edit(transaction, temp) {
     <TransactionList
       @transactionEdit="(transaction, temp) => start_edit(transaction, temp)"
     />
-    <TransactionDetail
-      v-if="transaction_exist"
-      :transaction="edit_transaction"
-      :detail_title="`Marked Transaction`"
-    />
+    <Transition>
+      <TransactionDetail
+        v-if="transaction_exist"
+        :transaction="edit_transaction"
+        :detail_title="`Marked Transaction`"
+      />
+    </Transition>
   </section>
 </template>
 
@@ -35,5 +37,15 @@ section.inspect {
   display: grid;
   grid-template-rows: auto 1fr 1fr;
   grid-template-columns: 1fr 1fr;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
