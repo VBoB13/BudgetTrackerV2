@@ -81,23 +81,27 @@ span.text-code {
   font-family: "Courier New", Courier, monospace;
   font-size: 0.9em;
 }
-body {
+div#app {
   display: grid;
-  grid-template-rows: 40px auto;
-  position: relative;
+  margin: 0px;
+  grid-template-rows: 40px 100%;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   background: linear-gradient(
     180deg,
     #afe2ff -8.06%,
     rgba(175, 226, 255, 0) 100%
   );
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   min-height: 100vh;
+}
+
+body {
+  margin: 0px;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 </style>

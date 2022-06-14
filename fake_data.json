@@ -399,6 +399,16 @@
             "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-14",
+            "amount": 10.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 1,
+            "store": "Other",
+            "comment": "Transfer fee"
         }
     ]
 }
