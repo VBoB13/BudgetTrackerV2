@@ -382,6 +382,26 @@
         },
         {
             "id": -1,
+            "date": "2022-06-13",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Medical",
+            "user": 1,
+            "store": "Other",
+            "comment": "Dentist"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-13",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Medical",
+            "user": 4,
+            "store": "Other",
+            "comment": "Dentist"
+        },
+        {
+            "id": -1,
             "date": "2022-06-14",
             "amount": 67.0,
             "currency": "NTD",

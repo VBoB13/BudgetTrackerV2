@@ -18,6 +18,10 @@ const props = defineProps(["transaction", "detail_title"]);
 </template>
 
 <style scoped>
+dl {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
 dt.detail-title {
   font-weight: bold;
 }
