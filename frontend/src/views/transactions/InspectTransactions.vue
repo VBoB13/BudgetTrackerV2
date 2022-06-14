@@ -32,8 +32,8 @@ function start_edit(transaction, temp) {
 
 <style scoped>
 section.inspect {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 </style>

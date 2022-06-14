@@ -15,7 +15,6 @@ function get_transactions() {
   req_obj
     .sendRequest()
     .then((data) => {
-      console.log({ data });
       temp_data.value = data.temp;
       transactions.value = data.transactions;
       trans_sum.value = data.sum;
@@ -48,8 +47,9 @@ onMounted(() => {
         {{ transaction.currency }}
       </li>
     </ul>
-    <hr />
-    <span class="transaction_sum">Sum: {{ trans_sum }}</span>
+    <span class="transaction_sum"
+      >Sum: <strong>{{ trans_sum }}</strong></span
+    >
   </div>
 </template>
 
@@ -59,5 +59,11 @@ div.item-list {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+
+span.transaction_sum {
+  background-color: #955;
+  padding: 0.5em;
+  border-radius: 1em;
 }
 </style>

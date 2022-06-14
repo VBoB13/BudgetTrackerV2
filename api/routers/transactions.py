@@ -18,7 +18,7 @@ router = APIRouter(
 )
 
 
-@router.get("/get_all", description="Show all the registered transactions in the database.", response_model=TransactionsOut)
+@router.get("/get_all", description="Show all the registered transactions in the database.")
 async def get_all_transactions():
     sql = Transaction.get_all_transactions()
     try:
@@ -41,6 +41,7 @@ async def get_all_transactions():
             if trans_sum > 10000:
                 print(Back.RED, Fore.BLACK,
                       "More than $10000 worth of transactions in temp!", Style.RESET_ALL)
+                print("Sum:", trans_sum)
 
             return {
                 "transactions": transactions,
