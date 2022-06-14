@@ -10,7 +10,10 @@ function isImage(data) {
 }
 
 function get_category_sum_graph() {
-  const req_obj = new RequestHandler("http://0.0.0.0:8000/stats/get_category_sum_ratio", "POST");
+  const req_obj = new RequestHandler(
+    "http://0.0.0.0:8000/stats/get_category_sum_ratio",
+    "POST"
+  );
   const yes_data = [["yes", img_yes.value]];
   req_obj.reqConf.data = Object.fromEntries(yes_data);
   req_obj
@@ -33,7 +36,7 @@ onMounted(() => {
 <template>
   <section class="stats">
     <h3>Category Avg.</h3>
-    <img v-if="img_yes !== false" :src="img" alt="Category avg. graph" />
+    <img v-if="img !== false" :src="img" alt="Category avg. graph" />
     <h5 v-else>No graph yet.</h5>
   </section>
 </template>
