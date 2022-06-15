@@ -7,6 +7,7 @@ const emit = defineEmits(["transactionEdit"]);
 const transactions = ref([]);
 const trans_sum = ref(0);
 const temp_data = ref(false);
+const current_inspection = ref(null);
 
 function get_transactions() {
   const req_obj = new RequestHandler(
@@ -26,6 +27,16 @@ function get_transactions() {
     });
 }
 
+function make_bold(transaction, temp_data, event) {
+  if (current_inspection.value)
+    current_inspection.value.style.fontWeight = "normal";
+  if (event.target !== current_inspection.value) {
+    current_inspection.value = event.target;
+    current_inspection.value.style.fontWeight = "bold";
+  }
+  emit("transactionEdit", transaction, temp_data);
+}
+
 const loaded = computed(() => {
   return transactions.value.length > 0;
 });
@@ -41,7 +52,7 @@ onMounted(() => {
       <li
         v-for="(transaction, index) of transactions"
         :key="index"
-        @mousedown="$emit('transactionEdit', transaction, temp_data)"
+        @mousedown="(event) => make_bold(transaction, temp_data, event)"
       >
         {{ transaction.date }}: {{ transaction.amount }}
         {{ transaction.currency }}
