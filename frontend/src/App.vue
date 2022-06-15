@@ -60,6 +60,7 @@ onMounted(() => {
   <header>
     <NavbarMenu />
   </header>
+  <hr />
   <main>
     <LoginView
       v-if="!state.isAuthenticated"
@@ -84,7 +85,7 @@ span.text-code {
 div#app {
   display: grid;
   margin: 0px;
-  grid-template-rows: 40px 100%;
+  grid-template-rows: 40px 10px 100%;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   background: linear-gradient(
     180deg,
@@ -92,6 +93,10 @@ div#app {
     rgba(175, 226, 255, 0) 100%
   );
   min-height: 100vh;
+}
+
+hr {
+  width: 100%;
 }
 
 body {

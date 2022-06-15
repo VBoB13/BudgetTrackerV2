@@ -12,9 +12,7 @@ const menuChoices = [
 <template>
   <main>
     <h1>Stats</h1>
-    <StatsMenu
-      :choices="menuChoices"
-    />
+    <StatsMenu :choices="menuChoices" />
     <router-view></router-view>
   </main>
 </template>

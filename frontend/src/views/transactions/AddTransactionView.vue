@@ -148,13 +148,13 @@ onMounted(() => {
         <!-- Submit -->
         <SubmitButton />
       </form>
+      <CheckBox @prevTransChecked="checkbox_status" v-bind="checkbox_props" />
       <span class="small"
         >There are <strong>{{ state.transaction_queue }}</strong> transactions
         waiting to be submitted.</span
       >
     </div>
     <div class="last-transaction">
-      <CheckBox @prevTransChecked="checkbox_status" v-bind="checkbox_props" />
       <TransactionDetail
         v-if="state.show_transaction"
         :transaction="state.transaction"
@@ -179,7 +179,7 @@ div.form-add {
   align-items: center;
 }
 div.form-add > form {
-  padding: 1em;
+  padding: 0.5em;
   border: 1px solid #000000;
   border-radius: 1em;
   display: flex;

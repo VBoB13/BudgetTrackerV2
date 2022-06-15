@@ -34,6 +34,11 @@ async def get_all_categories():
                 "color": "Green"
             },
             {
+                "id": 10,
+                "name": "Life",
+                "color": "DarkBlue"
+            },
+            {
                 "id": 2,
                 "name": "Rent & Utilities",
                 "color": "Gray"

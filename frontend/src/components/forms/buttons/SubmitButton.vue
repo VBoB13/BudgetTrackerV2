@@ -1,32 +1,34 @@
 <script setup>
 const props = defineProps({
-    value: {
-        type: String,
-        default: "Submit"
-    },
-    type: {
-        type: String,
-        default: "submit"
-    }
-})
+  value: {
+    type: String,
+    default: "Submit",
+  },
+  type: {
+    type: String,
+    default: "submit",
+  },
+});
 </script>
 
 <template>
-    <p class="submit_p">
-        <input v-bind="props">
-    </p>
+  <p class="submit_p">
+    <input v-bind="props" />
+  </p>
 </template>
 
 <style scoped>
 p.submit_p {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
 }
 
 input {
-    padding: 0.66em;
-    border-radius: 1em;
-    border: 1px solid #000000;
-    cursor: pointer;
+  padding: 0.66em;
+  border-radius: 1em;
+  border: 1px solid #000000;
+  cursor: pointer;
 }
 </style>
