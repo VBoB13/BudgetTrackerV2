@@ -572,6 +572,16 @@
         },
         {
             "id": -1,
+            "date": "2022-06-14",
+            "amount": 29.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 4,
+            "store": "Other",
+            "comment": "Tea"
+        },
+        {
+            "id": -1,
             "date": "2022-06-15",
             "amount": 60.0,
             "currency": "NTD",
@@ -609,6 +619,16 @@
             "user": 1,
             "store": "Other",
             "comment": "Can food:115g*23pcs"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-15",
+            "amount": 110.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 4,
+            "store": "Other",
+            "comment": "Coffee:2pcs"
         }
     ]
 }
