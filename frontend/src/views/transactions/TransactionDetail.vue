@@ -35,8 +35,9 @@ section.transaction-detail-section {
   border: 1px solid #000000;
   border-radius: 1em;
   align-self: center;
-  margin: 2em;
+  margin: 1em;
   padding: 1em;
+  align-self: flex-start;
 }
 .warning {
   color: #fda;

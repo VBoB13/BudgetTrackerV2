@@ -34,9 +34,8 @@ function start_edit(transaction, temp) {
 
 <style scoped>
 section.inspect {
-  display: grid;
-  grid-template-rows: auto 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
 }
 
 .v-enter-active,
