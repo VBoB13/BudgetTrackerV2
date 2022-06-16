@@ -155,11 +155,13 @@ onMounted(() => {
       >
     </div>
     <div class="last-transaction">
-      <TransactionDetail
-        v-if="state.show_transaction"
-        :transaction="state.transaction"
-        :detail_title="`Last Transaction`"
-      />
+      <Transition>
+        <TransactionDetail
+          v-if="state.show_transaction"
+          :transaction="state.transaction"
+          :detail_title="`Last Transaction`"
+        />
+      </Transition>
     </div>
   </section>
 </template>
@@ -195,5 +197,15 @@ div.last-transaction {
   align-content: center;
   align-items: center;
   height: 99vh;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
