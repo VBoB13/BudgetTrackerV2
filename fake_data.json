@@ -649,16 +649,6 @@
             "user": 4,
             "store": "foodpanda",
             "comment": "Lunch"
-        },
-        {
-            "id": -1,
-            "date": "2022-06-16",
-            "amount": 13123213.0,
-            "currency": "NTD",
-            "category": "Rent & Utilities",
-            "user": 1,
-            "store": "Other",
-            "comment": "SO MUCH MONEY"
         }
     ]
 }
