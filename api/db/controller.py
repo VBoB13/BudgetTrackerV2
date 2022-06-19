@@ -10,7 +10,7 @@ connection_str = " ".join('{}={}'.format(key, value)
                           for key, value in budtra_conn.items())
 
 
-def query_db(sql: str, insert=False) -> List[Tuple] or Tuple or bool:
+def query_db(sql: str, insert=False, delete=False) -> List[Tuple] or Tuple or bool:
     results = None
     conn = None
     try:
@@ -47,8 +47,11 @@ def query_db(sql: str, insert=False) -> List[Tuple] or Tuple or bool:
         if conn is not None:
             conn.close()
 
-    if insert:
-        return insert
+    if insert and delete:
+        raise ControllerError(Fore.RED,
+                              "Cannot delete AND insert at the same time!" + Fore.YELLOW + "\nKwargs:\n" + Style.RESET_ALL + "Insert:\t{}\nDelete:\t{}\n").format(insert, delete)
+    if insert or delete:
+        return
     return results
 
 

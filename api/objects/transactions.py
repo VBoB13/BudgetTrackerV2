@@ -1,3 +1,4 @@
+from colorama import Fore, Style
 from typing import Tuple, overload
 import datetime
 import pandas as pd
@@ -235,6 +236,25 @@ class TransactionList(list):
                 tr.category), str(tr.user), str(tr.store), tr.comment])
 
         return index, cols, data
+
+    def delete_all(self) -> None:
+        """
+        Deletes all transaction objects within the list from DB.
+        """
+        transaction_ids = []
+        try:
+            for transaction in self.__iter__():
+                transaction_ids.append(transaction.id)
+            sql = """
+                DELETE FROM "TRANSACTIONS" WHERE id IN ({});
+            """.format(','.join(id_no for id_no in transaction_ids))
+            query_db(sql, delete=True)
+        except Exception as err:
+            raise TransactionsError(
+                "DELETE TRANSACTIONS: Couldn't parse through transactions' IDs!") from err
+        else:
+            print(Fore.YELLOW, "Deleted", Fore.RED, len(transaction_ids),
+                  Fore.YELLOW, "transactions.", Style.RESET_ALL)
 
     def generate_df(self):
         index, cols, data = self._generate_col_data()
