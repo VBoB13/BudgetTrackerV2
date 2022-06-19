@@ -1,9 +1,8 @@
 import axios from "axios";
 
-
 export class RequestHandler {
   constructor(url, method = "GET", contentType = "application/json") {
-    this.url = url;
+    this.url = "http://" + import.meta.env.VITE_BT_HOST + url;
     this.method = method;
     this.contentType = contentType;
     this.reqConf = {

@@ -10,7 +10,7 @@ function isImage(data){
 }
 
 function get_daily_avg_graph(){
-  const req_obj = new RequestHandler("http://0.0.0.0:8000/stats/get_daily_category_sum", "POST");
+  const req_obj = new RequestHandler("/stats/get_daily_category_sum", "POST");
   const yes_data = [["yes", img_yes.value]];
   req_obj.reqConf.data = Object.fromEntries(yes_data);
   req_obj

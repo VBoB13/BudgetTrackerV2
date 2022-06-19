@@ -24,7 +24,7 @@ async function update_transaction(data) {
 }
 
 async function get_all_categories() {
-  const reqObj = new RequestHandler("http://0.0.0.0:8000/categories/get_all");
+  const reqObj = new RequestHandler("/categories/get_all");
   await reqObj.sendRequest().then((data) => {
     console.log(data.categories);
     state.category_choices = data.categories;
@@ -32,9 +32,7 @@ async function get_all_categories() {
 }
 
 async function check_transaction_queue() {
-  let req_obj2 = new RequestHandler(
-    "http://0.0.0.0:8000/transactions/check_temp_to_db"
-  );
+  let req_obj2 = new RequestHandler("/transactions/check_temp_to_db");
   state.transaction_queue = await req_obj2
     .sendRequest()
     .then((data) => data.transactions);
@@ -48,10 +46,7 @@ function add_transaction() {
     finalFormData.push([`${pair[0]}`.slice(6), pair[1]]);
   }
   const data = Object.fromEntries(finalFormData);
-  let req_obj = new RequestHandler(
-    "http://0.0.0.0:8000/transactions/add",
-    "POST"
-  );
+  let req_obj = new RequestHandler("/transactions/add", "POST");
   req_obj.reqConf.data = data;
   req_obj
     .sendRequest()
@@ -60,10 +55,7 @@ function add_transaction() {
       console.log("Save data to DB: FAILED!");
       console.log(`Reason: ${err}`);
       console.log("Saving to temp. file...");
-      let req_obj = new RequestHandler(
-        "http://0.0.0.0:8000/transactions/add_temp",
-        "POST"
-      );
+      let req_obj = new RequestHandler("/transactions/add_temp", "POST");
       req_obj.reqConf.data = data;
       req_obj
         .sendRequest()

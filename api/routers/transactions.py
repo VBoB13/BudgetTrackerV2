@@ -183,6 +183,7 @@ if __name__ == "__main__":
 
     else:
         data.clear()
+        data["transactions"] = []
         try:
             with open(pwd + "/fake_data.json", "w") as json_file:
                 json_file.write(json.dump(data))

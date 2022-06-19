@@ -32,7 +32,7 @@ function login(prev_url = "") {
 }
 
 function authenticate() {
-  let req = new RequestHandler("http://0.0.0.0:8000/auth/login", "POST");
+  let req = new RequestHandler("/auth/login", "POST");
   req.reqConf["data"] = {
     username: "w1ck3d",
     password: "13",

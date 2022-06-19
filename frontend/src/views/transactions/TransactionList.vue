@@ -10,9 +10,7 @@ const temp_data = ref(false);
 const current_inspection = ref(null);
 
 function get_transactions() {
-  const req_obj = new RequestHandler(
-    "http://0.0.0.0:8000/transactions/get_all"
-  );
+  const req_obj = new RequestHandler("/transactions/get_all");
   req_obj
     .sendRequest()
     .then((data) => {

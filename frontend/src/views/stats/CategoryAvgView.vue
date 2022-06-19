@@ -10,10 +10,7 @@ function isImage(data) {
 }
 
 function get_category_sum_graph() {
-  const req_obj = new RequestHandler(
-    "http://0.0.0.0:8000/stats/get_category_sum_ratio",
-    "POST"
-  );
+  const req_obj = new RequestHandler("/stats/get_category_sum_ratio", "POST");
   const yes_data = [["yes", img_yes.value]];
   req_obj.reqConf.data = Object.fromEntries(yes_data);
   req_obj
