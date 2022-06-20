@@ -1,4 +1,6 @@
-from colorama import Fore, Style
+import os
+import json
+from colorama import Fore, Style, Back
 from typing import Tuple, overload
 import datetime
 import pandas as pd
@@ -74,9 +76,10 @@ class Transaction(object):
             category = Category(query_db(sql))
         except Exception as err:
             print(err)
-            return cat_name
 
-        return category
+        if category is not None:
+            return category
+        return cat_name
 
     def _fetch_store(self, store_id: int) -> User:
         sql = Store.get_store_by_id(store_id)
@@ -89,8 +92,9 @@ class Transaction(object):
         except CategoriesError as err:
             raise TransactionsError(
                 "Could not convert user data into user object!") from err
-
-        return store
+        if store is not None:
+            return store
+        return store_id
 
     def _fetch_user(self, user_id: int) -> User:
         sql = User.get_user_by_id(user_id)
@@ -103,8 +107,9 @@ class Transaction(object):
         except CategoriesError as err:
             raise TransactionsError(
                 "Could not convert user data into user object!") from err
-
-        return user
+        if user is not None:
+            return user
+        return user_id
 
     @staticmethod
     def get_all_transactions():
@@ -242,19 +247,42 @@ class TransactionList(list):
         Deletes all transaction objects within the list from DB.
         """
         transaction_ids = []
+        temp_transactions = []
         try:
             for transaction in self.__iter__():
-                transaction_ids.append(transaction.id)
-            sql = """
-                DELETE FROM "TRANSACTIONS" WHERE id IN ({});
-            """.format(','.join(id_no for id_no in transaction_ids))
-            query_db(sql, delete=True)
+                if transaction.id != -1:
+                    transaction_ids.append(transaction.id)
+                    sql = """
+                        DELETE FROM "TRANSACTIONS" WHERE id IN ({});
+                    """.format(','.join(id_no for id_no in transaction_ids))
+                else:
+                    temp_transactions.append(transaction)
+            if len(transaction_ids) > 0:
+                query_db(sql, delete=True)
+            if len(temp_transactions) > 0:
+                pwd = os.getcwd()
+                data = {}
+
+                with open(pwd + "/fake_data.json", "r") as json_file:
+                    data = json.load(json_file)
+                delete_transactions = []
+                for transaction in data["transactions"]:
+                    for transaction_temp in temp_transactions:
+                        if transaction == dict(transaction_temp):
+                            delete_transactions.append(transaction)
+                for delete_transaction in delete_transactions:
+                    data["transactions"].remove(delete_transaction)
+
         except Exception as err:
             raise TransactionsError(
                 "DELETE TRANSACTIONS: Couldn't parse through transactions' IDs!") from err
         else:
+            with open(pwd + "/fake_data.json", "w") as json_file:
+                json.dump(data, json_file, indent=4)
             print(Fore.YELLOW, "Deleted", Fore.RED, len(transaction_ids),
-                  Fore.YELLOW, "transactions.", Style.RESET_ALL)
+                  Fore.YELLOW, "transactions from DB.", Style.RESET_ALL)
+            print(Fore.YELLOW, "Deleted", Back.LIGHTYELLOW_EX, Fore.LIGHTRED_EX, len(
+                delete_transactions), Style.RESET_ALL, Fore.YELLOW, "transactions from temporary file.")
 
     def generate_df(self):
         index, cols, data = self._generate_col_data()

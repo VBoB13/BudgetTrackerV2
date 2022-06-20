@@ -108,3 +108,7 @@ class TransactionIn(BaseModel):
     user_id: int
     store: str
     comment: str
+
+
+class TransactionsIn(BaseModel):
+    transactions: List[TransactionOut]

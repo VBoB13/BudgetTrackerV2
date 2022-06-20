@@ -7,7 +7,7 @@ from fastapi import APIRouter, HTTPException
 from colorama import Back, Fore, Style
 
 from ..objects.transactions import Transaction, TransactionList
-from ..typing.models import TransactionIn, TransactionOut, TransactionsOut
+from ..typing.models import TransactionIn, TransactionOut, TransactionsOut, TransactionsIn
 from ..db.controller import query_db, ControllerError
 
 router = APIRouter(
@@ -157,6 +157,26 @@ async def check_temp_to_db():
         print(err)
         print_tb(err.__traceback__)
         raise HTTPException(500, detail=str(err))
+
+
+@router.post("/delete", description="Delete as many transactions as you want by sending all transaction you want deleted to this endpoint.")
+async def delete_transactions(transactions: TransactionsIn):
+    try:
+        transaction_list = TransactionList(
+            [Transaction(kwargs={
+                "id": transaction.id,
+                "date": transaction.date,
+                "amount": transaction.amount,
+                "currency": transaction.currency,
+                "category": transaction.category,
+                "user": transaction.user,
+                "store": transaction.store,
+                "comment": transaction.comment
+            }) for transaction in transactions.transactions])
+        transaction_list.delete_all()
+    except Exception as err:
+        raise HTTPException(status_code=500, detail="Could not delete all the transactions! Reason:" + str(
+            err)+"\n"+print_tb(err.__traceback__))
 
 
 if __name__ == "__main__":
