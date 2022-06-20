@@ -16,7 +16,6 @@ log.txt
 Pipfile.lock
 env3.*
 env
-.env
 docs_build
 venv
 docs.zip
@@ -29,3 +28,5 @@ archive.zip
 # Personal
 /db/__init__.py
 db/
+*/.env
+.env
