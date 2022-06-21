@@ -1,6 +1,7 @@
 from datetime import datetime, date
 import json
 import os
+from pprint import pprint
 from traceback import print_tb
 from fastapi import APIRouter, HTTPException
 
@@ -162,8 +163,9 @@ async def check_temp_to_db():
 @router.post("/delete", description="Delete as many transactions as you want by sending all transaction you want deleted to this endpoint.")
 async def delete_transactions(transactions: TransactionsIn):
     try:
+        pprint(transactions.transactions)
         transaction_list = TransactionList(
-            [Transaction(kwargs={
+            [Transaction(**{
                 "id": transaction.id,
                 "date": transaction.date,
                 "amount": transaction.amount,

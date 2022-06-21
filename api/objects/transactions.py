@@ -265,13 +265,13 @@ class TransactionList(list):
 
                 with open(pwd + "/fake_data.json", "r") as json_file:
                     data = json.load(json_file)
-                delete_transactions = []
-                for transaction in data["transactions"]:
-                    for transaction_temp in temp_transactions:
-                        if transaction == dict(transaction_temp):
-                            delete_transactions.append(transaction)
-                for delete_transaction in delete_transactions:
-                    data["transactions"].remove(delete_transaction)
+
+                for transaction in temp_transactions:
+                    if dict(transaction) in data["transactions"]:
+                        try:
+                            data["transactions"].remove(dict(transaction))
+                        except Exception:
+                            continue
 
         except Exception as err:
             raise TransactionsError(
@@ -282,7 +282,7 @@ class TransactionList(list):
             print(Fore.YELLOW, "Deleted", Fore.RED, len(transaction_ids),
                   Fore.YELLOW, "transactions from DB.", Style.RESET_ALL)
             print(Fore.YELLOW, "Deleted", Back.LIGHTYELLOW_EX, Fore.LIGHTRED_EX, len(
-                delete_transactions), Style.RESET_ALL, Fore.YELLOW, "transactions from temporary file.")
+                temp_transactions), Style.RESET_ALL, Fore.YELLOW, "transactions from temporary file.")
 
     def generate_df(self):
         index, cols, data = self._generate_col_data()

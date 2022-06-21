@@ -153,42 +153,52 @@
         {
             "id": -1,
             "date": "2022-06-20",
-            "amount": 1337.0,
+            "amount": 67.0,
             "currency": "NTD",
-            "category": "Others",
+            "category": "Food",
             "user": 1,
-            "store": "Other",
-            "comment": "Bonkers!"
+            "store": "foodpanda",
+            "comment": "Breakfast"
         },
         {
             "id": -1,
             "date": "2022-06-20",
-            "amount": 1337.0,
+            "amount": 169.0,
             "currency": "NTD",
-            "category": "Others",
+            "category": "Food",
             "user": 1,
-            "store": "Other",
-            "comment": "Bonkers!"
+            "store": "foodpanda",
+            "comment": "Dinner"
         },
         {
             "id": -1,
             "date": "2022-06-20",
-            "amount": 1337.0,
+            "amount": 168.0,
             "currency": "NTD",
-            "category": "Others",
-            "user": 1,
-            "store": "Other",
-            "comment": "Bonkers!"
+            "category": "Food",
+            "user": 4,
+            "store": "foodpanda",
+            "comment": "Dinner"
         },
         {
             "id": -1,
             "date": "2022-06-20",
-            "amount": 1337.0,
+            "amount": 150.0,
             "currency": "NTD",
-            "category": "Others",
+            "category": "Medical",
             "user": 1,
             "store": "Other",
-            "comment": "Bonkers!"
+            "comment": "Dentist"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-21",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
         }
     ]
 }

@@ -8,6 +8,7 @@ const emit = defineEmits(["transactionEdit"]);
 
 const edit_transaction = ref({});
 const delete_transactions = ref([]);
+const transaction_list_key = ref(true);
 let del_transactions_num = 0;
 
 const transaction_exist = computed(() => {
@@ -39,6 +40,7 @@ function confirm_delete() {
       .then(() => {
         delete_transactions.value = [];
         alert(`Transactions deleted!`);
+        transaction_list_key.value = !transaction_list_key.value;
       })
       .catch((error) => {
         console.error(error);
@@ -67,6 +69,7 @@ function clear_delete_transactions() {
       @transactionDelete="
         (transaction, event) => delete_transaction(transaction, event)
       "
+      :key="transaction_list_key"
     />
     <Transition>
       <TransactionDetail
