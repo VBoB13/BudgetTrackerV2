@@ -1,7 +1,7 @@
 import os
 import json
 from colorama import Fore, Style, Back
-from typing import Tuple, overload
+from typing import Iterator, Tuple, overload
 import datetime
 import pandas as pd
 
@@ -207,7 +207,7 @@ class TransactionList(list):
                 raise TransactionsError(
                     "This list can only contain Transactions!")
 
-    def __iter__(self) -> Transaction:
+    def __iter__(self) -> Iterator[Transaction]:
         for transaction in super().__iter__():
             yield transaction
             continue
