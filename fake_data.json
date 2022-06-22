@@ -219,6 +219,46 @@
             "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-21",
+            "amount": 377.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Dinner"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-21",
+            "amount": 376.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "foodpanda",
+            "comment": "Dinner"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-22",
+            "amount": 67.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-22",
+            "amount": 20.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
         }
     ]
 }
