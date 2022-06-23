@@ -193,12 +193,22 @@
         {
             "id": -1,
             "date": "2022-06-20",
-            "amount": 42.0,
+            "amount": 20.0,
             "currency": "NTD",
             "category": "Food",
             "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-20",
+            "amount": 208.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Mango+Coffee"
         },
         {
             "id": -1,
@@ -289,6 +299,46 @@
             "user": 1,
             "store": "Other",
             "comment": "Bank Fee"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-22",
+            "amount": 1096.0,
+            "currency": "NTD",
+            "category": "Kitties",
+            "user": 1,
+            "store": "Other",
+            "comment": "Litter:11.2kg"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-23",
+            "amount": 65.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-23",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-23",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Gonguan Thai Fried Rice",
+            "comment": "Lunch"
         }
     ]
 }
