@@ -23,7 +23,7 @@ async function update_transaction(data) {
   state.transaction = data;
 }
 
-async function get_all_categories() {
+async function get_categories() {
   const reqObj = new RequestHandler("/categories/get_all");
   await reqObj.sendRequest().then((data) => {
     console.log(data.categories);
@@ -91,7 +91,7 @@ let category_select_props = computed(() => {
 });
 
 onMounted(() => {
-  get_all_categories();
+  get_categories();
   const first_el = document.getElementById("trans_category");
   first_el.focus();
   check_transaction_queue();
