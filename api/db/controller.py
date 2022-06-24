@@ -18,9 +18,7 @@ def query_db(sql: str, insert=False, delete=False) -> List[Tuple] or Tuple or bo
         with conn:
             with conn.cursor() as cur:
                 cur.execute(sql)
-                if insert:
-                    cur.execute("COMMIT")
-                else:
+                if not insert:
                     results = cur.fetchall()
     except CheckViolation as err:
         print(Fore.RED, "\n--- ERROR ---\n")
@@ -42,6 +40,8 @@ def query_db(sql: str, insert=False, delete=False) -> List[Tuple] or Tuple or bo
         print(err, Style.RESET_ALL)
         raise ControllerError(
             "Something went wrong when trying to execute the SQL query!") from err
+    else:
+                cur.execute("COMMIT;")
 
     finally:
         if conn is not None:

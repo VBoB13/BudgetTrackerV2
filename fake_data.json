@@ -339,6 +339,36 @@
             "user": 1,
             "store": "Gonguan Thai Fried Rice",
             "comment": "Lunch"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-24",
+            "amount": 20.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-24",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-24",
+            "amount": 3600.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 1,
+            "store": "Landlord",
+            "comment": "Management fee:6m"
         }
     ]
 }
