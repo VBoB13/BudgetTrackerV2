@@ -76,9 +76,9 @@ onMounted(() => {
 <template>
   <form id="add-trans-form" @submit.prevent="add_transaction">
     <!-- DateField -->
-    <DateField id="trans_date" name="trans_date" />
+    <DateField id="trans_date" name="trans_date" :value="transaction.date" />
     <!-- Category -->
-    <SelectField v-bind="category_select_props" />
+    <SelectField v-bind="category_select_props" :value="transaction.category" />
     <!-- Amount -->
     <InputField
       id="trans_amount"

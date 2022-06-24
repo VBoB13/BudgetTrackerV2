@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
+import TransactionForm from "../../components/forms/TransactionForm.vue";
 
 const edit_val = ref(true);
 
@@ -36,6 +37,9 @@ const props = defineProps(["transaction", "detail_title"]);
         </dt>
         <dd :key="key">{{ value }}</dd>
       </dl>
+    </div>
+    <div v-else>
+      <TransactionForm :transaction="props.transaction" />
     </div>
   </section>
 </template>
