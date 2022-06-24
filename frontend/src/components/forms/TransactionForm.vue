@@ -6,6 +6,44 @@ import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
 import SelectField from "../../components/forms/inputs/SelectField.vue";
 
+async function update_transaction(data) {
+  data = await Promise.resolve(data);
+  state.transaction = data;
+}
+
+function add_transaction() {
+  const transForm = document.getElementById("add-trans-form");
+  const formData = new FormData(transForm);
+  let finalFormData = [];
+  for (var pair of formData.entries()) {
+    finalFormData.push([`${pair[0]}`.slice(6), pair[1]]);
+  }
+  const data = Object.fromEntries(finalFormData);
+  let req_obj = new RequestHandler("/transactions/add", "POST");
+  req_obj.reqConf.data = data;
+  req_obj
+    .sendRequest()
+    .then((response_data) => update_transaction(response_data.transaction))
+    .catch((err) => {
+      console.log("Save data to DB: FAILED!");
+      console.log(`Reason: ${err}`);
+      console.log("Saving to temp. file...");
+      let req_obj = new RequestHandler("/transactions/add_temp", "POST");
+      req_obj.reqConf.data = data;
+      req_obj
+        .sendRequest()
+        .then((response_data) => {
+          update_transaction(response_data.transaction);
+          check_transaction_queue();
+        })
+        .catch((err) => {
+          state.transaction = {};
+          console.log(`Unable to save to temp .json file!`);
+          console.error(err);
+        });
+    });
+}
+
 const state = reactive({
   transaction: {},
   category_choices: [],
@@ -14,7 +52,6 @@ const state = reactive({
 async function get_categories() {
   const reqObj = new RequestHandler("/categories/get_all");
   await reqObj.sendRequest().then((data) => {
-    console.log(data.categories);
     state.category_choices = data.categories;
   });
 }
@@ -30,6 +67,8 @@ let category_select_props = computed(() => {
 
 onMounted(() => {
   get_categories();
+  const first_el = document.getElementById("trans_category");
+  first_el.focus();
 });
 </script>
 

@@ -14,56 +14,11 @@ const state = reactive({
 
 // const category_choices = ref();
 
-async function update_transaction(data) {
-  data = await Promise.resolve(data);
-  state.transaction = data;
-}
-
-async function get_categories() {
-  const reqObj = new RequestHandler("/categories/get_all");
-  await reqObj.sendRequest().then((data) => {
-    state.category_choices = data.categories;
-  });
-}
-
 async function check_transaction_queue() {
   let req_obj2 = new RequestHandler("/transactions/check_temp_to_db");
   state.transaction_queue = await req_obj2
     .sendRequest()
     .then((data) => data.transactions);
-}
-
-function add_transaction() {
-  const transForm = document.getElementById("add-trans-form");
-  const formData = new FormData(transForm);
-  let finalFormData = [];
-  for (var pair of formData.entries()) {
-    finalFormData.push([`${pair[0]}`.slice(6), pair[1]]);
-  }
-  const data = Object.fromEntries(finalFormData);
-  let req_obj = new RequestHandler("/transactions/add", "POST");
-  req_obj.reqConf.data = data;
-  req_obj
-    .sendRequest()
-    .then((response_data) => update_transaction(response_data.transaction))
-    .catch((err) => {
-      console.log("Save data to DB: FAILED!");
-      console.log(`Reason: ${err}`);
-      console.log("Saving to temp. file...");
-      let req_obj = new RequestHandler("/transactions/add_temp", "POST");
-      req_obj.reqConf.data = data;
-      req_obj
-        .sendRequest()
-        .then((response_data) => {
-          update_transaction(response_data.transaction);
-          check_transaction_queue();
-        })
-        .catch((err) => {
-          state.transaction = {};
-          console.log(`Unable to save to temp .json file!`);
-          console.error(err);
-        });
-    });
 }
 
 const checkbox_props = {
@@ -76,19 +31,7 @@ const checkbox_status = () => {
   state.show_transaction = document.getElementById("show_transaction").checked;
 };
 
-let category_select_props = computed(() => {
-  return {
-    id: "trans_category",
-    name: "trans_category",
-    choices: state.category_choices,
-    label: "Category",
-  };
-});
-
 onMounted(() => {
-  get_categories();
-  const first_el = document.getElementById("trans_category");
-  first_el.focus();
   check_transaction_queue();
 });
 </script>
