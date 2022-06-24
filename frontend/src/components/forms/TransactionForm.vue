@@ -40,7 +40,6 @@ function add_transaction() {
           emit("update_trans", response_data.transaction);
         })
         .catch((err) => {
-          state.transaction = {};
           console.log(`Unable to save to temp .json file!`);
           console.error(err);
         });
@@ -48,7 +47,6 @@ function add_transaction() {
 }
 
 const state = reactive({
-  transaction: {},
   category_choices: [],
 });
 

@@ -1,38 +1,56 @@
 <script setup>
 const props = defineProps({
-    id: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    choices: {
-        type: Array,
-        required: true
-    },
-    label: {
-        type: String,
-        required: true
-    },
-    class: {
-        type: String,
-        default: "inputField"
-    }
+  id: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  choices: {
+    type: Array,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  class: {
+    type: String,
+    default: "inputField",
+  },
+  value: {
+    type: String,
+    required: false,
+    default: "",
+  },
 });
+
+const value_exists = () => {
+  if (props.value != "") return true;
+  return false;
+};
 </script>
 
 <template>
-    <section class="inputField">
-        <label :for="props.id">{{ props.label }}</label><br>
-        <select :name="props.name" :id="props.id" :class="props.class">
-            <option value="" selected>-- Please choose a {{ props.label.toLowerCase() }} --</option>
-            <option v-for="(choice, index) of props.choices" :value="choice.name" :key="index">
-                {{ choice.name[0].toUpperCase() + choice.name.slice(1) }}
-            </option>
-        </select>
-    </section>
+  <section class="inputField">
+    <label :for="props.id">{{ props.label }}</label
+    ><br />
+    <select :name="props.name" :id="props.id" :class="props.class">
+      <option value="" :selected="!value_exists">
+        -- Please choose a {{ props.label.toLowerCase() }} --
+      </option>
+      <option
+        v-for="(choice, index) of props.choices"
+        :value="choice.name"
+        :key="index"
+        :selected="value == choice.name"
+      >
+        {{ choice.name[0].toUpperCase() + choice.name.slice(1) }}
+      </option>
+    </select>
+  </section>
 </template>
 
 <style scoped>
