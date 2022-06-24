@@ -6,10 +6,7 @@ import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
 import SelectField from "../../components/forms/inputs/SelectField.vue";
 
-async function update_transaction(data) {
-  data = await Promise.resolve(data);
-  state.transaction = data;
-}
+const emit = defineEmits(["update_trans"]);
 
 function add_transaction() {
   const transForm = document.getElementById("add-trans-form");
@@ -23,7 +20,7 @@ function add_transaction() {
   req_obj.reqConf.data = data;
   req_obj
     .sendRequest()
-    .then((response_data) => update_transaction(response_data.transaction))
+    .then((response_data) => emit("update_trans", response_data.transaction))
     .catch((err) => {
       console.log("Save data to DB: FAILED!");
       console.log(`Reason: ${err}`);
@@ -33,8 +30,7 @@ function add_transaction() {
       req_obj
         .sendRequest()
         .then((response_data) => {
-          update_transaction(response_data.transaction);
-          check_transaction_queue();
+          emit("update_trans", response_data.transaction);
         })
         .catch((err) => {
           state.transaction = {};

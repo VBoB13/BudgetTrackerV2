@@ -9,10 +9,14 @@ const state = reactive({
   transaction: {},
   show_transaction: false,
   transaction_queue: 0,
-  category_choices: [],
 });
 
 // const category_choices = ref();
+
+async function update_transaction(data) {
+  data = await Promise.resolve(data);
+  state.transaction = data;
+}
 
 async function check_transaction_queue() {
   let req_obj2 = new RequestHandler("/transactions/check_temp_to_db");
@@ -40,7 +44,9 @@ onMounted(() => {
   <section class="transactions">
     <div class="form-add">
       <h2>Add Transaction</h2>
-      <TransactionForm />
+      <TransactionForm
+        @update_trans="(transaction) => update_transaction(transaction)"
+      />
       <CheckBox @prevTransChecked="checkbox_status" v-bind="checkbox_props" />
       <span class="small"
         >There are <strong>{{ state.transaction_queue }}</strong> transactions
