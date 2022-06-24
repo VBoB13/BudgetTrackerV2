@@ -10,7 +10,7 @@ export class RequestHandler {
       url: this.url,
       headers: {
         "Content-Type": this.contentType,
-        "Access-Control-Allow-Origin": "127.0.0.1:8000",
+        "Access-Control-Allow-Origin": import.meta.env.VITE_BT_HOST,
       },
       credentials: "same-origin",
       data: {},
