@@ -21,27 +21,31 @@ def query_db(sql: str, insert=False, delete=False) -> List[Tuple] or Tuple or bo
                 if not insert:
                     results = cur.fetchall()
     except CheckViolation as err:
+        cur.execute("ROLLBACK;")
         print(Fore.RED, "\n--- ERROR ---\n")
         print(err, Style.RESET_ALL)
         raise ControllerError("Check contstraint violated!") from err
 
     except ForeignKeyViolation as err:
+        cur.execute("ROLLBACK;")
         print(Fore.RED, "\n--- ERROR ---\n")
         print(err, Style.RESET_ALL)
         raise ControllerError("Foreign key contstraint violated!") from err
 
     except ConnectionFailure as err:
+        cur.execute("ROLLBACK;")
         print(Fore.RED, "\n--- ERROR ---\n")
         print(err, Style.RESET_ALL)
         raise ControllerError("Failed to connect to database!") from err
 
     except Exception as err:
+        cur.execute("ROLLBACK;")
         print(Fore.RED, "\n--- ERROR ---\n")
         print(err, Style.RESET_ALL)
         raise ControllerError(
             "Something went wrong when trying to execute the SQL query!") from err
     else:
-                cur.execute("COMMIT;")
+        cur.execute("COMMIT;")
 
     finally:
         if conn is not None:
