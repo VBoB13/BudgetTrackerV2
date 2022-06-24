@@ -26,7 +26,6 @@ async function update_transaction(data) {
 async function get_categories() {
   const reqObj = new RequestHandler("/categories/get_all");
   await reqObj.sendRequest().then((data) => {
-    console.log(data.categories);
     state.category_choices = data.categories;
   });
 }
