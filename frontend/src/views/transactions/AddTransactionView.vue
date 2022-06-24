@@ -1,13 +1,9 @@
 <script setup>
 import { onMounted, reactive, computed } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
-
-import InputField from "../../components/forms/inputs/InputField.vue";
-import DateField from "../../components/forms/inputs/DateField.vue";
-import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
 import CheckBox from "../../components/forms/inputs/CheckBox.vue";
-import SelectField from "../../components/forms/inputs/SelectField.vue";
 import TransactionDetail from "./TransactionDetail.vue";
+import TransactionForm from "../../components/forms/TransactionForm.vue";
 
 const state = reactive({
   transaction: {},
@@ -101,44 +97,7 @@ onMounted(() => {
   <section class="transactions">
     <div class="form-add">
       <h2>Add Transaction</h2>
-      <form id="add-trans-form" @submit.prevent="add_transaction">
-        <!-- DateField -->
-        <DateField id="trans_date" name="trans_date" />
-        <!-- Category -->
-        <SelectField v-bind="category_select_props" />
-        <!-- Amount -->
-        <InputField
-          id="trans_amount"
-          name="trans_amount"
-          type="number"
-          placeholder="Amount"
-        />
-        <!-- Currency -->
-        <InputField
-          id="trans_currency"
-          name="trans_currency"
-          value="NTD"
-          maxlength="3"
-          placeholder="Currency (3 characters)"
-        />
-        <!-- Store -->
-        <InputField id="trans_store" name="trans_store" placeholder="Store" />
-        <!-- User -->
-        <InputField
-          id="trans_user_id"
-          name="trans_user_id"
-          type="number"
-          placeholder="User ID"
-        />
-        <!-- Comment -->
-        <InputField
-          id="trans_comment"
-          name="trans_comment"
-          placeholder="Comment"
-        />
-        <!-- Submit -->
-        <SubmitButton />
-      </form>
+      <TransactionForm />
       <CheckBox @prevTransChecked="checkbox_status" v-bind="checkbox_props" />
       <span class="small"
         >There are <strong>{{ state.transaction_queue }}</strong> transactions
