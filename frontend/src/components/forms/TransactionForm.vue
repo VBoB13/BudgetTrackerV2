@@ -8,6 +8,13 @@ import SelectField from "../../components/forms/inputs/SelectField.vue";
 
 const emit = defineEmits(["update_trans"]);
 
+const props = defineProps({
+  transaction: {
+    type: Object,
+    required: false,
+  },
+});
+
 function add_transaction() {
   const transForm = document.getElementById("add-trans-form");
   const formData = new FormData(transForm);
