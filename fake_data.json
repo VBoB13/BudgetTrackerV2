@@ -599,6 +599,16 @@
             "user": 1,
             "store": "CSN",
             "comment": "Student loan"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-27",
+            "amount": 1337.0,
+            "currency": "NTD",
+            "category": "Others",
+            "user": 1,
+            "store": "Other",
+            "comment": "Bonkers!"
         }
     ]
 }

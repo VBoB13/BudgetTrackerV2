@@ -29,16 +29,16 @@ function add_transaction() {
   for (var pair of formData.entries()) {
     finalFormData.push([`${pair[0]}`.slice(6), pair[1]]);
   }
-  const data = Object.fromEntries(finalFormData);
   // URL
   let url = "/transactions/add";
   if (props.mode === "edit") {
     url = `/transactions/edit`;
-    data.id = props.transaction?.id;
-    data.old_transaction = props.transaction ?? null;
+    finalFormData.push(["id", props.transaction.id]);
+    finalFormData.push(["old_transaction", props.transaction]);
   }
+  const data = Object.fromEntries(finalFormData);
   let req_obj = new RequestHandler(url, "POST");
-  req_obj.reqConf.data = data;
+  req_obj.reqConf.data = JSON.parse(JSON.stringify(data));
   req_obj
     .sendRequest()
     .then((response_data) => emit("update_trans", response_data.transaction))
@@ -57,6 +57,7 @@ function add_transaction() {
         .catch((err) => {
           console.log(`Unable to save to temp .json file!`);
           console.error(err);
+          console.log({ data });
         });
     });
 }
@@ -135,7 +136,7 @@ onMounted(() => {
       name="trans_user_id"
       type="number"
       placeholder="User ID"
-      :value="props.transaction?.user ?? ''"
+      :value="props.transaction?.user ?? 1"
     />
     <!-- Comment -->
     <InputField

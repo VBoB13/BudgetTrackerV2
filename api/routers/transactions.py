@@ -183,6 +183,7 @@ async def delete_transactions(transactions: TransactionsIn):
 
 @router.post("/edit", description="Add a Transaction to a temporary file that get its content added to DB later on.")
 async def add_transaction_temp(transaction: TransactionEDIT):
+    pprint(transaction)
     trans = Transaction(
         id=transaction.id,
         date=datetime.strptime(transaction.date, "%Y-%m-%d").date(),

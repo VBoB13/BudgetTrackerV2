@@ -15,6 +15,10 @@ const transaction_exist = computed(() => {
   return Object.keys(edit_transaction.value).length > 0;
 });
 
+const send_transaction = computed(() => {
+  return edit_transaction.value;
+});
+
 const delete_transaction_num = computed(() => {
   del_transactions_num = delete_transactions.value.length;
   return delete_transactions.value.length;
@@ -74,8 +78,8 @@ function clear_delete_transactions() {
     <Transition>
       <TransactionDetail
         v-if="transaction_exist"
-        :transaction="edit_transaction"
-        :detail_title="`Marked Transaction`"
+        :transaction="send_transaction"
+        detail_title="Marked Transaction"
       />
     </Transition>
   </section>

@@ -118,5 +118,5 @@ class TransactionInREAL(TransactionIn):
     id: int
 
 
-class TransactionEDIT(TransactionInREAL):
-    old_transaction: TransactionInREAL
+class TransactionEDIT(TransactionOut):
+    old_transaction: TransactionOut
