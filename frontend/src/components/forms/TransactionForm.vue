@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, reactive, computed } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
+import { TODAY } from "../../helpers/constants";
 import InputField from "../../components/forms/inputs/InputField.vue";
 import DateField from "../../components/forms/inputs/DateField.vue";
 import SubmitButton from "../../components/forms/buttons/SubmitButton.vue";
@@ -52,9 +53,14 @@ const state = reactive({
 
 async function get_categories() {
   const reqObj = new RequestHandler("/categories/get_all");
-  await reqObj.sendRequest().then((data) => {
-    state.category_choices = data.categories;
-  });
+  await reqObj
+    .sendRequest()
+    .then((data) => {
+      state.category_choices = data.categories;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 let category_select_props = computed(() => {
@@ -76,9 +82,16 @@ onMounted(() => {
 <template>
   <form id="add-trans-form" @submit.prevent="add_transaction">
     <!-- DateField -->
-    <DateField id="trans_date" name="trans_date" :value="transaction.date" />
+    <DateField
+      id="trans_date"
+      name="trans_date"
+      :value="props.transaction?.date ?? TODAY"
+    />
     <!-- Category -->
-    <SelectField v-bind="category_select_props" :value="transaction.category" />
+    <SelectField
+      v-bind="category_select_props"
+      :value="props.transaction?.category"
+    />
     <!-- Amount -->
     <InputField
       id="trans_amount"

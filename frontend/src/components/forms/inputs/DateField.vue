@@ -1,49 +1,71 @@
 <script setup>
 const NOW = new Date();
-const MONTH = NOW.getMonth()+1 < 10 ? `0${NOW.getMonth()+1}` : `${NOW.getMonth()+1}`
-const TODAY = `${NOW.getFullYear()}-${MONTH}-${NOW.getDate() < 10 ? '0' + NOW.getDate() : NOW.getDate()}`;
+const MONTH =
+  NOW.getMonth() + 1 < 10 ? `0${NOW.getMonth() + 1}` : `${NOW.getMonth() + 1}`;
+const TODAY = `${NOW.getFullYear()}-${MONTH}-${
+  NOW.getDate() < 10 ? "0" + NOW.getDate() : NOW.getDate()
+}`;
 
 const props = defineProps({
   id: {
     type: String,
-    required: false
+    required: false,
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   value: {
     type: String,
-    default: `${new Date().getFullYear()}-${new Date().getMonth()+1 < 10 ? '0' + `${new Date().getMonth()+1}` : new Date().getMonth()+1}-${new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()}`
+    default: `${new Date().getFullYear()}-${
+      new Date().getMonth() + 1 < 10
+        ? "0" + `${new Date().getMonth() + 1}`
+        : new Date().getMonth() + 1
+    }-${
+      new Date().getDate() < 10
+        ? "0" + new Date().getDate()
+        : new Date().getDate()
+    }`,
   },
   required: {
     type: Boolean,
     default: true,
-    required: false
+    required: false,
   },
   min: {
     type: String,
-    default: "2022-02-22"
+    default: "2022-02-22",
   },
   max: {
     type: String,
-    default: `${new Date().getFullYear()}-${new Date().getMonth()+1 < 10 ? '0' + `${new Date().getMonth()+1}` : new Date().getMonth()+1}-${(new Date().getDate()+3) < 10 ? '0' + (new Date().getDate()+3) : (new Date().getDate()+3)}`
-  }
+    default: `${new Date().getFullYear()}-${
+      new Date().getMonth() + 1 < 10
+        ? "0" + `${new Date().getMonth() + 1}`
+        : new Date().getMonth() + 1
+    }-${
+      new Date().getDate() + 3 < 10
+        ? "0" + (new Date().getDate() + 3)
+        : new Date().getDate() + 3
+    }`,
+  },
 });
-
 </script>
 <template>
   <section class="inputField">
     <label :for="props.id ?? props.name">
-      {{ props.id ? `${props.id[6]}`.toUpperCase() + `${props.id}`.slice(7) : `${props.name[6]}`.toUpperCase() + `${props.name}`.slice(7)}}
+      {{
+        props.id
+          ? `${props.id[6]}`.toUpperCase() + `${props.id}`.slice(7)
+          : `${props.name[6]}`.toUpperCase() + `${props.name}`.slice(7)
+      }}
     </label>
-    <br>
+    <br />
     <input
       :id="props.id ?? ''"
       :name="props.name"
       type="date"
       class="inputField"
-      v-model="TODAY"
+      v-model="props.value"
       :required="props.required ?? false"
       :min="props.min"
       :max="props.max"
