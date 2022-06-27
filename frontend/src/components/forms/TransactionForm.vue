@@ -14,17 +14,30 @@ const props = defineProps({
     type: Object,
     required: false,
   },
+  mode: {
+    type: String,
+    required: false,
+    default: "add",
+  },
 });
 
 function add_transaction() {
   const transForm = document.getElementById("add-trans-form");
+
   const formData = new FormData(transForm);
   let finalFormData = [];
   for (var pair of formData.entries()) {
     finalFormData.push([`${pair[0]}`.slice(6), pair[1]]);
   }
   const data = Object.fromEntries(finalFormData);
-  let req_obj = new RequestHandler("/transactions/add", "POST");
+  // URL
+  let url = "/transactions/add";
+  if (props.mode === "edit") {
+    url = `/transactions/edit`;
+    data.id = props.transaction?.id;
+    data.old_transaction = props.transaction ?? null;
+  }
+  let req_obj = new RequestHandler(url, "POST");
   req_obj.reqConf.data = data;
   req_obj
     .sendRequest()
@@ -33,7 +46,8 @@ function add_transaction() {
       console.log("Save data to DB: FAILED!");
       console.log(`Reason: ${err}`);
       console.log("Saving to temp. file...");
-      let req_obj = new RequestHandler("/transactions/add_temp", "POST");
+      if (props.mode !== "edit") url = "/transactions/add_temp";
+      let req_obj = new RequestHandler(url, "POST");
       req_obj.reqConf.data = data;
       req_obj
         .sendRequest()

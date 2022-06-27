@@ -559,6 +559,46 @@
             "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-27",
+            "amount": 469.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 4,
+            "store": "Chunghwa Telecom",
+            "comment": "Subscription:1m"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-27",
+            "amount": 75.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 1,
+            "store": "Other",
+            "comment": "Dessert"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-27",
+            "amount": 75.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 4,
+            "store": "Other",
+            "comment": "Dessert"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-27",
+            "amount": 3908.0,
+            "currency": "NTD",
+            "category": "Debt",
+            "user": 1,
+            "store": "CSN",
+            "comment": "Student loan"
         }
     ]
 }

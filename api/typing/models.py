@@ -112,3 +112,11 @@ class TransactionIn(BaseModel):
 
 class TransactionsIn(BaseModel):
     transactions: List[TransactionOut]
+
+
+class TransactionInREAL(TransactionIn):
+    id: int
+
+
+class TransactionEDIT(TransactionInREAL):
+    old_transaction: TransactionInREAL

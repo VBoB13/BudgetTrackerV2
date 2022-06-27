@@ -171,6 +171,51 @@ class Transaction(object):
             UPDATE "STASH" SET amount=amount-{} WHERE amount=(SELECT max(amount) FROM "STASH");
         """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment, amount)
 
+    def edit(self, old=None):
+        if self.id != -1:
+            sql = """
+                UPDATE "TRANSACTIONS" SET
+                    t_date='{}',
+                    amount={},
+                    currency='{}',
+                    category_id={},
+                    user_id={},
+                    store_id={},
+                    comment='{}'
+                WHERE id={}
+            """.format(
+                self.date,
+                self.amount,
+                self.currency,
+                self.category,
+                self.user,
+                self.store,
+                self.comment,
+                self.id
+            )
+            query_db(sql, insert=True)
+
+        else:
+            if old is not None:
+                pwd = os.getcwd()
+                data = {}
+                with open(pwd + "/fake_data.json", "r+") as json_file:
+                    data = json.load(json_file)
+                    data_list = list(data["transactions"])
+                    edit_index = data_list.index(old)
+                    data["transactions"][edit_index] = dict(self)
+                    data["transactions"] = sorted(
+                        data["transactions"], key=lambda x: x["date"])
+
+                with open(pwd + "/fake_data.json", "w") as json_file:
+                    json.dump(data, json_file, indent=4)
+
+            else:
+                raise TransactionsError(
+                    "Cannot edit a temporarily registered transaction without knowing its old data!")
+
+        print(Fore.YELLOW, "Successfully edited transaction!", Style.RESET_ALL)
+
     @staticmethod
     def get_transactions_by_date(date: str):
         return """

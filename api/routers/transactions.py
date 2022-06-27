@@ -8,7 +8,7 @@ from fastapi import APIRouter, HTTPException
 from colorama import Back, Fore, Style
 
 from ..objects.transactions import Transaction, TransactionList
-from ..typing.models import TransactionIn, TransactionOut, TransactionsOut, TransactionsIn
+from ..typing.models import TransactionIn, TransactionOut, TransactionsOut, TransactionsIn, TransactionEDIT
 from ..db.controller import query_db, ControllerError
 
 router = APIRouter(
@@ -180,6 +180,31 @@ async def delete_transactions(transactions: TransactionsIn):
         raise HTTPException(status_code=500, detail="Could not delete all the transactions! Reason:" + str(
             err)+"\n"+print_tb(err.__traceback__))
 
+
+@router.post("/edit", description="Add a Transaction to a temporary file that get its content added to DB later on.")
+async def add_transaction_temp(transaction: TransactionEDIT):
+    trans = Transaction(
+        id=transaction.id,
+        date=datetime.strptime(transaction.date, "%Y-%m-%d").date(),
+        amount=transaction.amount,
+        currency=transaction.currency,
+        category=transaction.category,
+        user=transaction.user_id,
+        store=transaction.store,
+        comment=transaction.comment
+    )
+    try:
+        trans.edit(transaction.old_transaction)
+
+    except Exception as err:
+        print(Fore.RED, err, Style.RESET_ALL)
+        print_tb(err.__traceback__)
+    else:
+        print(Fore.GREEN, "Success!", Style.RESET_ALL)
+
+    return {
+        "transaction": trans
+    }
 
 if __name__ == "__main__":
     try:

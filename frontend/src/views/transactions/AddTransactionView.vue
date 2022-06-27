@@ -16,6 +16,7 @@ const state = reactive({
 async function update_transaction(data) {
   data = await Promise.resolve(data);
   state.transaction = data;
+  check_transaction_queue();
 }
 
 async function check_transaction_queue() {
@@ -36,10 +37,6 @@ const checkbox_status = () => {
 };
 
 onMounted(() => {
-  check_transaction_queue();
-});
-
-onUpdated(() => {
   check_transaction_queue();
 });
 </script>

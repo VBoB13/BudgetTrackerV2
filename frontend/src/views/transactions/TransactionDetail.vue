@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import TransactionForm from "../../components/forms/TransactionForm.vue";
 
-const edit_val = ref(true);
+const edit_val = ref(false);
 
 const edit_title = computed(() => {
   if (edit_val.value) return "Cancel edit";
@@ -39,7 +39,7 @@ const props = defineProps(["transaction", "detail_title"]);
       </dl>
     </div>
     <div v-else>
-      <TransactionForm :transaction="props.transaction" />
+      <TransactionForm :transaction="props.transaction" mode="edit" />
     </div>
   </section>
 </template>
