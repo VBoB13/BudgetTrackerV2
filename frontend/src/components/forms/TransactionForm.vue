@@ -98,26 +98,38 @@ onMounted(() => {
       name="trans_amount"
       type="number"
       placeholder="Amount"
+      :value="props.transaction?.amount"
     />
     <!-- Currency -->
     <InputField
       id="trans_currency"
       name="trans_currency"
-      value="NTD"
       maxlength="3"
       placeholder="Currency (3 characters)"
+      :value="props.transaction?.currency ?? 'NTD'"
     />
     <!-- Store -->
-    <InputField id="trans_store" name="trans_store" placeholder="Store" />
+    <InputField
+      id="trans_store"
+      name="trans_store"
+      placeholder="Store"
+      :value="props.transaction?.store ?? ''"
+    />
     <!-- User -->
     <InputField
       id="trans_user_id"
       name="trans_user_id"
       type="number"
       placeholder="User ID"
+      :value="props.transaction?.user ?? ''"
     />
     <!-- Comment -->
-    <InputField id="trans_comment" name="trans_comment" placeholder="Comment" />
+    <InputField
+      id="trans_comment"
+      name="trans_comment"
+      placeholder="Comment"
+      :value="props.transaction?.comment ?? ''"
+    />
     <!-- Submit -->
     <SubmitButton />
   </form>
