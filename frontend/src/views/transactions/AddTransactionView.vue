@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive, computed } from "vue";
+import { onMounted, onUpdated, reactive, computed } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 import CheckBox from "../../components/forms/inputs/CheckBox.vue";
 import TransactionDetail from "./TransactionDetail.vue";
@@ -36,6 +36,10 @@ const checkbox_status = () => {
 };
 
 onMounted(() => {
+  check_transaction_queue();
+});
+
+onUpdated(() => {
   check_transaction_queue();
 });
 </script>
