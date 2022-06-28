@@ -79,6 +79,7 @@ function clear_delete_transactions() {
     <Transition>
       <TransactionDetail
         v-if="transaction_exist"
+        @update_transaction="(transaction) => start_edit(transaction)"
         :transaction="send_transaction"
         detail_title="Marked Transaction"
       />

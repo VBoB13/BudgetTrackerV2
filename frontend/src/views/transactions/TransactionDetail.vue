@@ -2,6 +2,8 @@
 import { ref, computed } from "vue";
 import TransactionForm from "../../components/forms/TransactionForm.vue";
 
+const emit = defineEmits(["update_transaction"]);
+
 const edit_val = ref(false);
 
 const edit_title = computed(() => {
@@ -39,7 +41,11 @@ const props = defineProps(["transaction", "detail_title"]);
       </dl>
     </div>
     <div v-else>
-      <TransactionForm :transaction="props.transaction" mode="edit" />
+      <TransactionForm
+        @update_trans="(transaction) => emit('update_transaction', transaction)"
+        :transaction="props.transaction"
+        mode="edit"
+      />
     </div>
   </section>
 </template>
