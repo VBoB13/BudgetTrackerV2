@@ -195,6 +195,7 @@ async def edit_transaction(transaction: TransactionEDIT):
     )
     try:
         old_transaction = dict(transaction.old_transaction)
+        # TransactionOut datatype has its 'user' key set to type 'str', thus need to convert first.
         old_transaction["user"] = int(old_transaction["user"])
         trans.edit(dict(old_transaction))
 
