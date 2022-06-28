@@ -4,6 +4,7 @@ from colorama import Fore, Style, Back
 from typing import Iterator, Tuple, overload
 import datetime
 import pandas as pd
+from pprint import pprint
 
 
 from ..objects.categories import Category
@@ -202,7 +203,11 @@ class Transaction(object):
                 with open(pwd + "/fake_data.json", "r+") as json_file:
                     data = json.load(json_file)
                     data_list = list(data["transactions"])
-                    edit_index = data_list.index(old)
+
+                    for index, transaction in enumerate(data_list):
+                        if dict(transaction) == dict(old):
+                            edit_index = index
+
                     data["transactions"][edit_index] = dict(self)
                     data["transactions"] = sorted(
                         data["transactions"], key=lambda x: x["date"])

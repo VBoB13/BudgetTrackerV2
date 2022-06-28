@@ -38,7 +38,7 @@ function add_transaction() {
   }
   const data = Object.fromEntries(finalFormData);
   let req_obj = new RequestHandler(url, "POST");
-  req_obj.reqConf.data = JSON.parse(JSON.stringify(data));
+  req_obj.reqConf.data = data;
   req_obj
     .sendRequest()
     .then((response_data) => emit("update_trans", response_data.transaction))

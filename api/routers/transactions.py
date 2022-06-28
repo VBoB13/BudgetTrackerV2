@@ -181,9 +181,8 @@ async def delete_transactions(transactions: TransactionsIn):
             err)+"\n"+print_tb(err.__traceback__))
 
 
-@router.post("/edit", description="Add a Transaction to a temporary file that get its content added to DB later on.")
-async def add_transaction_temp(transaction: TransactionEDIT):
-    pprint(transaction)
+@router.post("/edit", description="Edit a transaction, be it temporarily saved or from DB.")
+async def edit_transaction(transaction: TransactionEDIT):
     trans = Transaction(
         id=transaction.id,
         date=datetime.strptime(transaction.date, "%Y-%m-%d").date(),
@@ -195,7 +194,9 @@ async def add_transaction_temp(transaction: TransactionEDIT):
         comment=transaction.comment
     )
     try:
-        trans.edit(transaction.old_transaction)
+        old_transaction = dict(transaction.old_transaction)
+        old_transaction["user"] = int(old_transaction["user"])
+        trans.edit(dict(old_transaction))
 
     except Exception as err:
         print(Fore.RED, err, Style.RESET_ALL)

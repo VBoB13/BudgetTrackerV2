@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, toRaw, isProxy } from "vue";
 import TransactionList from "./TransactionList.vue";
 import TransactionDetail from "./TransactionDetail.vue";
 import { RequestHandler } from "../../helpers/reqs";
@@ -16,6 +16,7 @@ const transaction_exist = computed(() => {
 });
 
 const send_transaction = computed(() => {
+  if (isProxy(send_transaction)) return toRaw(edit_transaction.value);
   return edit_transaction.value;
 });
 

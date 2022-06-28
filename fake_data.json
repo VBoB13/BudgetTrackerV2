@@ -599,6 +599,56 @@
             "user": 1,
             "store": "CSN",
             "comment": "Student loan"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-27",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 1,
+            "store": "Other",
+            "comment": "Dessert"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-27",
+            "amount": 271.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 4,
+            "store": "foodpanda",
+            "comment": "Bubble Tea"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-27",
+            "amount": 4290.0,
+            "currency": "NTD",
+            "category": "Kitties",
+            "user": 1,
+            "store": "Other",
+            "comment": "Food:30days"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-28",
+            "amount": 70.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "Other",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-28",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
         }
     ]
 }

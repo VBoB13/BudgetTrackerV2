@@ -1,14 +1,25 @@
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+from fastapi import FastAPI, Request, status
+from fastapi.middleware.cors import CORSMiddleware
+import logging
 import uvicorn
 import sys
-
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
 from .routers import auth, categories, stores, transactions, subscriptions, stats, incomes
 
 sys.dont_write_bytecode = True
 
 app = FastAPI()
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    exc_str = f'{exc}'.replace('\n', ' ').replace('   ', ' ')
+    logging.error(f"{request}: {exc_str}")
+    content = {'status_code': 10422, 'message': exc_str, 'data': None}
+    return JSONResponse(content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
 
 origins = [
     "http://localhost:3000",
