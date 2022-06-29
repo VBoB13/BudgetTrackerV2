@@ -1,7 +1,8 @@
 <script setup>
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, toRaw, isProxy } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 import CheckBox from "../../components/forms/inputs/CheckBox.vue";
+import Chart from "chart.js/auto";
 
 const img_yes = ref(true);
 const img = ref(false);
@@ -24,7 +25,7 @@ const checkbox_props = {
 };
 
 function toggle_img() {
-  img_yes.value = document.getElementById("image_check").checked;
+  state.img_yes = document.getElementById("image_check").checked;
 }
 
 function get_category_sum_graph() {
@@ -35,7 +36,10 @@ function get_category_sum_graph() {
     .sendRequest()
     .then((data) => {
       if (state.img_yes) state.img = `data:image/png;base64,` + data;
-      else state.received_data = data;
+      else {
+        state.received_data = data;
+        console.log(toRaw(state.received_data));
+      }
     })
     .catch((error) => {
       console.error(error);
@@ -53,8 +57,12 @@ onMounted(() => {
 <template>
   <section class="stats">
     <h3>Category Avg.</h3>
-    <img v-if="img !== false" :src="img" alt="Category avg. graph" />
+    <img
+      v-if="state.img !== false"
+      :src="state.img"
+      alt="Category avg. graph"
+    />
     <h5 v-else>No graph yet.</h5>
-    <CheckBox v-bind="checkbox_props" />
+    <CheckBox v-bind="checkbox_props" @box-checked="toggle_img" />
   </section>
 </template>

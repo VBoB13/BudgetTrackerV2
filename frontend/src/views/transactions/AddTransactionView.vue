@@ -48,7 +48,7 @@ onMounted(() => {
       <TransactionForm
         @update_trans="(transaction) => update_transaction(transaction)"
       />
-      <CheckBox @prevTransChecked="checkbox_status" v-bind="checkbox_props" />
+      <CheckBox @boxChecked="checkbox_status" v-bind="checkbox_props" />
       <span class="small"
         >There are <strong>{{ state.transaction_queue }}</strong> transactions
         waiting to be submitted.</span
