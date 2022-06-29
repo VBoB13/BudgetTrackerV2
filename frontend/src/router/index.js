@@ -39,10 +39,12 @@ const router = createRouter({
       children: [
         {
           path: "daily",
+          name: "DailyAvgs",
           component: DailyAvgView,
         },
         {
           path: "category",
+          name: "CategorySums",
           component: CategoryAvgView,
         },
       ],
