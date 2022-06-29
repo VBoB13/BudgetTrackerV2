@@ -1,13 +1,20 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 import CheckBox from "../../components/forms/inputs/CheckBox.vue";
 
 const img_yes = ref(true);
 const img = ref(false);
+const received_data = ref([]);
+
+const state = reactive({
+  img_yes: false,
+  img: false,
+  received_data: [],
+});
 
 function isImage(data) {
-  return data.length > 0;
+  return !Array.isArray(data);
 }
 
 const checkbox_props = {
@@ -22,17 +29,19 @@ function toggle_img() {
 
 function get_category_sum_graph() {
   const req_obj = new RequestHandler("/stats/get_category_sum_ratio", "POST");
-  const yes_data = [["yes", img_yes.value]];
+  const yes_data = [["yes", state.img_yes]];
   req_obj.reqConf.data = Object.fromEntries(yes_data);
   req_obj
     .sendRequest()
     .then((data) => {
-      if (!isImage(data)) throw new Error(`Could not update image!`);
-      img.value = `data:image/png;base64,` + data;
+      if (state.img_yes) state.img = `data:image/png;base64,` + data;
+      else state.received_data = data;
     })
     .catch((error) => {
       console.error(error);
-      if (img.value !== false) img.value = false;
+      state.img = false;
+      state.img_yes = false;
+      state.received_data = [];
     });
 }
 

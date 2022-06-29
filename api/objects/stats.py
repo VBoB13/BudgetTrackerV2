@@ -1,14 +1,17 @@
 from datetime import date, timedelta
 from calendar import monthrange
+import json
 from traceback import print_tb
 from typing import List, Tuple
 from decimal import Decimal
 from pprint import pprint
+from colorama import Fore, Style
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import io
+import os
 
 from ..Utils.exceptions import StatsError
 from ..objects.categories import Category
@@ -57,9 +60,37 @@ class Stats(object):
             TODAY.strftime("%Y-%m-%d"), ONE_MONTH_AGO.strftime("%Y-%m-%d"))
         try:
             results = query_db(sql)
-        except ControllerError as err:
-            raise StatsError(
-                "Something went wrong when querying the database!") from err
+        except Exception as err:
+            try:
+                pwd = os.getcwd()
+                data = dict()
+
+                with open(pwd + "/fake_data.json", "r") as json_file:
+                    data = json.load(json_file)
+
+                if data != dict():
+                    category_data = dict()
+                    # PROCESS TEMP. DATA INTO SAME FORMAT AS DB DATA:
+                    # [[Category, Amount], [Category, Amount] ... ]
+                    for transaction in data["transactions"]:
+                        if transaction["category"] not in category_data.keys():
+                            category_data[transaction["category"]
+                                          ] = transaction["amount"]
+                        else:
+                            category_data[transaction["category"]
+                                          ] += transaction["amount"]
+                    else:
+                        results = [(key, value)
+                                   for key, value in category_data.items()]
+                        print(
+                            Fore.YELLOW, "Not able to access DB - using temp. data!", Style.RESET_ALL)
+                        pprint(results, indent=2)
+
+            except Exception as err:
+                print(err)
+                print_tb(err.__traceback__)
+                raise StatsError(
+                    "Something went wrong when querying the database!") from err
 
         return results
 
