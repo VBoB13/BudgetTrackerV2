@@ -30,3 +30,5 @@ archive.zip
 db/
 */.env
 .env
+*/package-lock.json
+package-lock.json
