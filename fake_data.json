@@ -649,6 +649,66 @@
             "user": 4,
             "store": "Jinghua Breakfast Store",
             "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-28",
+            "amount": 150.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Other",
+            "comment": "Veggies"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-28",
+            "amount": 100.0,
+            "currency": "NTD",
+            "category": "Kitties",
+            "user": 1,
+            "store": "Other",
+            "comment": "Vet(Mud)-Bum"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-28",
+            "amount": 388.0,
+            "currency": "NTD",
+            "category": "Rent & Utilities",
+            "user": 1,
+            "store": "Other",
+            "comment": "Water:2m"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-29",
+            "amount": 148.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-29",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-29",
+            "amount": 799.0,
+            "currency": "NTD",
+            "category": "Transportation",
+            "user": 1,
+            "store": "Gogoro",
+            "comment": "Subscription:1m"
         }
     ]
 }
