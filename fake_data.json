@@ -709,6 +709,56 @@
             "user": 1,
             "store": "Gogoro",
             "comment": "Subscription:1m"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-29",
+            "amount": 630.0,
+            "currency": "NTD",
+            "category": "Life",
+            "user": 1,
+            "store": "Other",
+            "comment": "Haircut"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-29",
+            "amount": 630.0,
+            "currency": "NTD",
+            "category": "Life",
+            "user": 4,
+            "store": "Other",
+            "comment": "Haircut"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-29",
+            "amount": 50.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 1,
+            "store": "Subway",
+            "comment": "Cookies:3pcs"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-30",
+            "amount": 42.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Jinghua Breakfast Store",
+            "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-30",
+            "amount": 70.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 1,
+            "store": "foodpanda",
+            "comment": "Breakfast"
         }
     ]
 }
