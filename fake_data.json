@@ -759,6 +759,36 @@
             "user": 1,
             "store": "foodpanda",
             "comment": "Breakfast"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-30",
+            "amount": 1290.0,
+            "currency": "NTD",
+            "category": "Life",
+            "user": 1,
+            "store": "Other",
+            "comment": "Shoes"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-30",
+            "amount": 60.0,
+            "currency": "NTD",
+            "category": "Leisure",
+            "user": 4,
+            "store": "Family Mart",
+            "comment": "Coffee"
+        },
+        {
+            "id": -1,
+            "date": "2022-06-30",
+            "amount": 50.0,
+            "currency": "NTD",
+            "category": "Food",
+            "user": 4,
+            "store": "Family Mart",
+            "comment": "Fruit"
         }
     ]
 }

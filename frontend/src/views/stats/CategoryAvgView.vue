@@ -32,7 +32,14 @@ onMounted(() => {
 
 <template>
   <section class="stats">
-    <h3>Category Avg.</h3>
     <Chart v-if="state.data_loaded" :data="toRaw(state.received_data)" />
   </section>
 </template>
+
+<style scoped>
+section.stats {
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 0.5em;
+}
+</style>
