@@ -33,13 +33,10 @@ async def get_daily_category_sums(img: StatsImage):
 
 
 @router.post("/get_category_sum_ratio", description="Shows a piechart of how much the sum for each category is.")
-async def get_category_sum_ratio(img: StatsImage):
+async def get_category_sum_ratio():
     try:
         stats = Stats()
         stats.get_category_sums()
-        if img.yes:
-            graph_bytes = stats.create_bytes_categories(plot="pie")
-            return StreamingResponse(graph_bytes, media_type="image/png")
         return json.loads(stats.df.to_json())
     except Exception as err:
         print(Fore.RED, Back.LIGHTYELLOW_EX, err, Style.RESET_ALL)
