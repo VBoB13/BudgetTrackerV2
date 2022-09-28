@@ -23,10 +23,11 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 origins = [
     "http://localhost:3000",
-    "localhost:3000",
-    "127.0.0.1:3000",
-    "192.168.1.110:3000",
-    "192.168.1.105:3000"
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://192.168.1.110:3000",
+    "http://192.168.1.108:3000",
+    "http://192.168.1.105:3000"
 ]
 
 app.add_middleware(

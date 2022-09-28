@@ -2,7 +2,7 @@ import axios from "axios";
 
 export class RequestHandler {
   constructor(url, method = "GET", contentType = "application/json") {
-    this.url = "http://" + import.meta.env.VITE_BT_HOST + url;
+    this.url = "http://" + import.meta.env.VITE_BT_HOST_BACKEND + url;
     this.method = method;
     this.contentType = contentType;
     this.reqConf = {
@@ -10,7 +10,8 @@ export class RequestHandler {
       url: this.url,
       headers: {
         "Content-Type": this.contentType,
-        "Access-Control-Allow-Origin": import.meta.env.VITE_BT_HOST,
+        "Access-Control-Allow-Origin":
+          "http://" + import.meta.env.VITE_BT_HOST_FRONTEND,
       },
       credentials: "same-origin",
       data: {},
