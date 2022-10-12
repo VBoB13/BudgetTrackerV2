@@ -133,13 +133,22 @@ async def temp_to_db():
             data = json.load(json_file)
 
         for transaction in transaction_gen(data):
-            # query_db(transaction.add_transaction(), insert=True)
+            query_db(transaction.add_transaction_unit(), insert=True)
             print(transaction)
 
     except Exception as err:
         print(Fore.RED, err, Style.RESET_ALL)
         print_tb(err.__traceback__)
         raise HTTPException(500, detail=str(err))
+
+    else:
+        with open(pwd + '/fake_data.json', 'w+') as json_file:
+            json.dump({"transactions": []}, json_file, indent=4)
+        print("Temp. transactions saved", Fore.GREEN,
+              "successfully!", Fore.RESET)
+        return {
+            "success": True
+        }
 
 
 @router.get("/check_temp_to_db", description="This endpoint returns the amount of transactions that are awaiting to be transferred from file to DB.")

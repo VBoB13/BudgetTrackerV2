@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUpdated, reactive, computed } from "vue";
+import { onMounted, onUpdated, reactive } from "vue";
 import { RequestHandler } from "../../helpers/reqs";
 import CheckBox from "../../components/forms/inputs/CheckBox.vue";
 import TransactionDetail from "./TransactionDetail.vue";
@@ -20,10 +20,21 @@ async function update_transaction(data) {
 }
 
 async function check_transaction_queue() {
-  let req_obj2 = new RequestHandler("/transactions/check_temp_to_db");
-  state.transaction_queue = await req_obj2
+  let req_obj = new RequestHandler("/transactions/check_temp_to_db");
+  state.transaction_queue = await req_obj
     .sendRequest()
     .then((data) => data.transactions);
+}
+
+async function temp_to_db() {
+  let req_obj = new RequestHandler("/transactions/temp_to_db", "POST");
+  let save_success = await req_obj.sendRequest().then((data) => data.success);
+  if (save_success) {
+    alert("Transactions saved successfully!");
+    await check_transaction_queue();
+  } else {
+    alert("Transactions save FAILED!");
+  }
 }
 
 const checkbox_props = {
@@ -51,7 +62,8 @@ onMounted(() => {
       <CheckBox @boxChecked="checkbox_status" v-bind="checkbox_props" />
       <span class="small"
         >There are <strong>{{ state.transaction_queue }}</strong> transactions
-        waiting to be submitted.</span
+        waiting
+        <i class="temp_to_db" v-on:click="temp_to_db">to be submitted.</i></span
       >
     </div>
     <div class="last-transaction">
@@ -97,6 +109,11 @@ div.last-transaction {
   align-content: center;
   align-items: center;
   height: 99vh;
+}
+
+i.temp_to_db {
+  cursor: pointer;
+  color: blue;
 }
 
 .v-enter-active,
