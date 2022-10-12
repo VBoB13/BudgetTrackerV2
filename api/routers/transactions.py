@@ -134,7 +134,6 @@ async def temp_to_db():
 
         for transaction in transaction_gen(data):
             query_db(transaction.add_transaction_unit(), insert=True)
-            print(transaction)
 
     except Exception as err:
         print(Fore.RED, err, Style.RESET_ALL)
