@@ -169,7 +169,9 @@ class Transaction(object):
                 current_colors = CategoryList.get_all_category_colors()
                 for index, color in enumerate(CATEGORY_COLORS):
                     if color not in current_colors:
-                        Category.add_category(category, color)
+                        query_db(Category.add_category(category, color), True)
+                        category = Category(
+                            query_db(Category.get_category_by_name(category))).name
                         break
                     if index == len(CATEGORY_COLORS)-1:
                         raise CategoriesError(
@@ -178,9 +180,9 @@ class Transaction(object):
             except CategoriesError as err:
                 raise TransactionsError(
                     "Could not get a new color for the new category '{}'!".format(category)) from err
-        else:
-            raise CategoriesError(
-                "Category '{}' already exists!".format(category))
+            except Exception as err:
+                raise TransactionsError(
+                    "Could not save the new category into database!") from err
 
         return """
             INSERT INTO "TRANSACTIONS"
