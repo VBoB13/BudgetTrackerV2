@@ -7,13 +7,13 @@ import pandas as pd
 from pprint import pprint
 
 
-from ..objects.categories import Category
+from ..objects.categories import Category, CategoryList
 from ..objects.users import User
 from ..objects.stores import Store
 from ..Utils.exceptions import TransactionsError, ControllerError, CategoriesError
 from ..Utils.common import str_to_date
 from ..db.controller import query_db
-from . import TODAY
+from . import TODAY, CATEGORY_COLORS
 
 
 class Transaction(object):
@@ -161,6 +161,27 @@ class Transaction(object):
             raise TransactionsError(
                 "Could not convert the sent date into datetime.date object!") from err
 
+        # Check whether the category exists.
+        # We try to add it if it doesn't
+        if not Transaction().check_for_category(category):
+            # First, we have to get some new color
+            try:
+                current_colors = CategoryList.get_all_category_colors()
+                for index, color in enumerate(CATEGORY_COLORS):
+                    if color not in current_colors:
+                        Category.add_category(category, color)
+                        break
+                    if index == len(CATEGORY_COLORS)-1:
+                        raise CategoriesError(
+                            "No more colors to choose from!\nAdd more in CATEGORY_COLORS (api.objects.__init__).")
+
+            except CategoriesError as err:
+                raise TransactionsError(
+                    "Could not get a new color for the new category '{}'!".format(category)) from err
+        else:
+            raise CategoriesError(
+                "Category '{}' already exists!".format(category))
+
         return """
             INSERT INTO "TRANSACTIONS"
             (t_date, amount, currency, category_id, user_id, store_id, comment)
@@ -171,6 +192,10 @@ class Transaction(object):
                     '{}');
             UPDATE "STASH" SET amount=amount-{} WHERE amount=(SELECT max(amount) FROM "STASH");
         """.format(new_date.strftime("%Y-%m-%d"), amount, currency, category, user_id, store_name, comment, amount)
+
+    def check_for_category(self, category: str) -> bool:
+        category = self._fetch_category(category)
+        return isinstance(category, Category)
 
     def edit(self, old=None):
         if self.id != -1:

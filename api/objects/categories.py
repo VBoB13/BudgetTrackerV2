@@ -1,4 +1,7 @@
+from typing import List, Iterator
+
 from ..Utils.exceptions import CategoriesError
+from ..db.controller import query_db
 
 
 class Category(object):
@@ -71,8 +74,38 @@ class Category(object):
         """.format(cat_id)
 
     @staticmethod
-    def get_category_by_name(cat_name: int) -> str:
+    def get_category_by_name(cat_name: str) -> str:
         return """
             SELECT * FROM "CATEGORIES"
             WHERE name='{}'
         """.format(cat_name)
+
+
+class CategoryList(list):
+    def __init__(self, input_list: List[Category]):
+        """
+        Takes a list of Category data objects and creates a
+        list of python Category objects.
+        """
+        try:
+            for object in input_list:
+                self.append(object)
+        except CategoriesError as err:
+            raise CategoriesError(
+                "At least one of these aren't... right? RIGHT?!\n{}".format(
+                    f"{type(object).__name__}\n" for object in input_list))
+
+    def __iter__(self) -> Iterator[Category]:
+        return super().__iter__()
+
+    def append(self, object: Category):
+        if not isinstance(object, Category):
+            raise CategoriesError(
+                "Try adding only Category objects to Category lists...")
+        super().append(object)
+
+    @staticmethod
+    def get_all_category_colors() -> List[str]:
+        obj = CategoryList([Category(object)
+                           for object in query_db(Category.get_all())])
+        return [obj.color for obj in obj]
